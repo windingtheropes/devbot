@@ -72,12 +72,28 @@ const cmds = {
                 command.channel.send('*D=*')
                 break;
             case 'funne?':
-                command.channel.send('no.')
+                if(getRandom(1,1000) == getRandom(1,1000))
+                {
+                    command.channel.send("maybe.")
+                }
+                else if(getRandom(1,1000000) == getRandom(1,1000000))
+                {
+                    command.channel.send("yes.")
+                }
+                else
+                {
+                    command.channel.send("no.")
+                }
                 break;
         }
         
     }
 
+    function getRandom(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     
     
 
