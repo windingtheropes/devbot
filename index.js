@@ -39,7 +39,6 @@ const cmds = {
     {
         let rootCommand = command.content.substr(1).split(" ")[0].toLowerCase();
         let args = command.content.substr(1).split(" ").slice(1); 
-        console.log(`root command: '${rootCommand}' full command: '${command}' args: '${args}'`)
         switch(rootCommand)
         {
             //Modular Commands

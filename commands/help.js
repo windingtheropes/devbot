@@ -6,10 +6,10 @@ function help(args, command)
     const helloHelp = 'Say hello! Usage `!hello`';
         const jokeHelp =  'Laugh very loud because the jokes are very funny. Usage `!joke`';
         const randomHelp = 'Generates a random number between two numbers. Usage `!random 1 10`';
-        const calcHelp = 'Calculate command. Usage `!calc [operation] [numbers]`' + ' \n __**Operations:**__ \n `multiply`, `divide`, `add`, `subtract`';
+        const calcHelp = 'Calculate command. Usage `!calc [operation] [numbers]`' + ' \n __**Operations:**__ \n`multiply`, `divide`, `add`, `subtract`';
         const helpHelp = 'Get this help message. `!help`';
-        const channelHelp = 'WORK IN PROGRESS `!help`';
-
+        const channelHelp = 'Channel command. Currently, the only supported method is `create`. The name cannot have spaces. Usage `!channel [method] [type] [name]` \n__**Methods**__\n`create`\n__**Types**__\n`text` ,`voice`';
+        const statsHelp = 'Stats command. Get various Discord statistics. Accepts one argument: selector, to get a specific statistic rather than the whole list. You can also append a Discord ID as the selector to get the date. Usage `!stats [selector]` \n__**Selectors**__\n`uptime` Get bot uptime\n`startdate` Get bot start date\n`messageid` Get the ID of the message you sent to trigger the command\n`messagedate` Get the message creation date\n`accountid/userid/myid` Get your Discord ID\n`accountdate/userdate` Get your Discord account creation date\n`serverid` Get the ID of the server you sent the command from\n`serverdate` Get the server creation date\n`channelid` Get the ID of the channel you sent the command from\n`channeldate` Get the channel creation date';
         if (args.length == 0)
         {
             const genericHelp = new Discord.MessageEmbed()
@@ -84,6 +84,15 @@ function help(args, command)
                     .setDescription(channelHelp)
         
                     command.channel.send(channelHelpEmbed);
+                    break;  
+            case "stats":
+                    const statsHelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#0099ff')
+                    .setTitle('Specific Command Help')
+                    .setAuthor('devbot')
+                    .setDescription(statsHelp)
+        
+                    command.channel.send(statsHelpEmbed);
                     break;            
     
                 default:

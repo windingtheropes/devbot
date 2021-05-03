@@ -97,7 +97,28 @@ function stats(args, command, startTime)
                 .addField(`${command.channel.name} creation date `, statistics.channel_creation_date, false)
 
                 command.channel.send(embed);
-                break;    
+                break;  
+
+            default:
+                try
+                {
+                    if(parseInt(args[0]))
+                    {
+                        let IDtoConvert = Number(args[0])
+                        command.channel.send((new Date((IDtoConvert / 4194304) + 1420070400000)).toString())
+                        
+                    }
+                    else
+                    {
+                        command.channel.send("The statistic was not recognized. Make sure it's a valid statistic, or enter a Discord ID which you'd like to get the date from.")
+                    }
+                   let id 
+                }
+                catch
+                {
+
+                }
+                break;  
                 
             
         }
