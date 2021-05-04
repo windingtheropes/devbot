@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const getRandom = require('./get_random')
 module.exports = random 
 
 function random(args, command)
@@ -13,9 +14,4 @@ function random(args, command)
        {
            command.channel.send("Please provide **two** numbers as a range for the random number to be generated within.")
        }
-    }
-    function getRandom(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }

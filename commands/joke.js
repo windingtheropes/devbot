@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const getRandom = require('./get_random')
 module.exports = joke
 
 function joke(command)
