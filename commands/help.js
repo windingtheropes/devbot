@@ -10,6 +10,8 @@ function help(args, command)
         const helpHelp = 'Get this help message. `!help`';
         const channelHelp = 'Channel command. Currently, the only supported method is `create`. The name cannot have spaces. Usage `!channel [method] [type] [name]` \n__**Methods**__\n`create`\n__**Types**__\n`text` ,`voice`';
         const statsHelp = 'Stats command. Get various Discord statistics. Accepts one argument: selector, to get a specific statistic rather than the whole list. You can also append a Discord ID as the selector to get the date. Usage `!stats [selector]` \n__**Selectors**__\n`uptime` Get bot uptime\n`startdate` Get bot start date\n`messageid` Get the ID of the message you sent to trigger the command\n`messagedate` Get the message creation date\n`accountid/userid/myid` Get your Discord ID\n`accountdate/userdate` Get your Discord account creation date\n`serverid` Get the ID of the server you sent the command from\n`serverdate` Get the server creation date\n`channelid` Get the ID of the channel you sent the command from\n`channeldate` Get the channel creation date';
+        const pollHelp = 'Poll command. Start a simple yes/no poll! The accepted argument is the question, it can have spaces. Usage `!poll [question]`';
+
         if (args.length == 0)
         {
             const genericHelp = new Discord.MessageEmbed()
@@ -24,6 +26,7 @@ function help(args, command)
                 .addField('!help',"Help command." , false)
                 .addField('!channel',"Discord channel command." , false)
                 .addField('!stats',"Bot, server, message and user stats." , false)
+                .addField('!poll',"Simple poll command." , false)
                 
     
     
@@ -94,6 +97,15 @@ function help(args, command)
                     .setDescription(statsHelp)
         
                     command.channel.send(statsHelpEmbed);
+                    break;  
+            case "poll":
+                    const pollHelpEmbed = new Discord.MessageEmbed()
+                    .setColor('#0099ff')
+                    .setTitle('Specific Command Help')
+                    .setAuthor('devbot')
+                    .setDescription(pollHelp)
+        
+                    command.channel.send(pollHelpEmbed);
                     break;            
     
                 default:
