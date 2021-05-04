@@ -58,8 +58,18 @@ function calc(args, command) {
                     return
                 }
                 let res = 0
+                let running = false
                 args.forEach((value) => {
-                    res = res - parseFloat(value)
+                    if(!running)
+                    {
+                        running = true
+                        res = parseFloat(value)
+                    }
+                    else
+                    {
+                        res = res - parseFloat(value)
+                    }
+                    
                 })
                 command.channel.send("The result of " + args + " is " + "`" + res.toString() + "`")
                 break;

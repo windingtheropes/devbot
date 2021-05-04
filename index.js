@@ -87,6 +87,9 @@ try{
                     command.channel.send("no.")
                 }
                 break;
+
+            //Testing commands
+           
         }
         
     }

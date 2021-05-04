@@ -8,6 +8,7 @@ function poll(args, command)
     args.forEach(element => {
         message = message + " " + element
     });
+    
     command.channel.send(message).then(function(sentMessage) {
         sentMessage.react('👍')
         sentMessage.react('👎')
