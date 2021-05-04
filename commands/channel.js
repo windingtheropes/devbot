@@ -3,7 +3,7 @@ module.exports = channel
 
 function channel(args, command)
     {
-        if(command.channel.guild.id === '739521173116682281' || command.channel.guild.id === '838763020313296946')
+        if(command.channel.guild.id === '739521173116682281')
         {
             
             let method
@@ -53,8 +53,7 @@ function channel(args, command)
         }
         else
         {
-            command.channel.send("This command is only enabled in testing servers right now.")
-            
+            command.channel.send('Commanand unavailable in this server.')
         
         }
         

@@ -62,7 +62,7 @@ const cmds = {
                 joke(command)
                 break;
             case 'channel':
-                channel(args, channel)
+                channel(args, command)
                 break;
 
             //Simple response commands
