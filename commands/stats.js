@@ -112,7 +112,6 @@ function stats(args, command, startTime)
                     {
                         command.channel.send("The statistic was not recognized. Make sure it's a valid statistic, or enter a Discord ID which you'd like to get the date from.")
                     }
-                   let id 
                 }
                 catch
                 {

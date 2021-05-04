@@ -9,15 +9,15 @@ const calc = require('./commands/calc');
 const random = require('./commands/random');
 const joke = require('./commands/joke');
 const channel = require('./commands/channel');
+const getRandom = require('./commands/get_random');
+const poll = require('./commands/poll');
 
 var prefix = config.prefix;
 let msg
 let botCache = {}
 let startedAt = Date.now()
-const cmds = {
-    
-}
 
+try{
     client.on('ready', () => {
         console.log('Client ready.');
         client.guilds.cache.forEach(guild => {
@@ -64,6 +64,9 @@ const cmds = {
             case 'channel':
                 channel(args, command)
                 break;
+            case 'poll':
+                poll(args, command)
+                break;
 
             //Simple response commands
 
@@ -88,15 +91,14 @@ const cmds = {
         
     }
 
-    function getRandom(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
     
     
 
     
     client.login(config.token)
     
-    
+}
+catch
+{
+    console.log("There was an error.")
+}

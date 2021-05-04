@@ -23,6 +23,7 @@ function help(args, command)
                 .addField('!calc', "Calculate the numbers." , false)
                 .addField('!help',"Help command." , false)
                 .addField('!channel',"Discord channel command." , false)
+                .addField('!stats',"Bot, server, message and user stats." , false)
                 
     
     
