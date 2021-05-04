@@ -18,7 +18,8 @@ function stats(args, command, startTime)
         "server_id": command.channel.guild.id,
         "server_creation_date": new Date((command.channel.guild.id / 4194304) + 1420070400000),
         "channel_id": command.channel.id,
-        "channel_creation_date": new Date((command.channel.id / 4194304) + 1420070400000)
+        "channel_creation_date": new Date((command.channel.id / 4194304) + 1420070400000),
+        "latency": `${Date.now() - command.createdTimestamp}ms.`
     }
     var statsEmbed
     if(args[0])
@@ -98,6 +99,14 @@ function stats(args, command, startTime)
 
                 command.channel.send(embed);
                 break;  
+            case 'ping':
+            case 'latency':
+                embed
+                .setDescription('Bot stats')
+                .addField(`Latency`, statistics.latency, false)
+
+                command.channel.send(embed);
+                break;  
 
             default:
                 try
@@ -139,6 +148,7 @@ function stats(args, command, startTime)
                 .addField("Server Creation Date", statistics.server_creation_date, false)
                 .addField("Channel ID", statistics.channel_id, false)
                 .addField("Channel Creation Date", statistics.channel_creation_date, false)
+                .addField("Latency", statistics.latency, false)
             
     
             command.channel.send(statsEmbed);
