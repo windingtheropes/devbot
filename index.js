@@ -87,6 +87,9 @@ try{
                     command.channel.send("no.")
                 }
                 break;
+            case 'ping':
+                command.channel.send(`:ping_pong: Pong! Latency: ${Date.now() - command.createdTimestamp}ms.`)
+                break;
 
             //Testing commands
            
