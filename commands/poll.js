@@ -4,18 +4,17 @@ module.exports = poll
 function poll(args, command)
 {   
     //command.delete()
-    //let message = ""
+    //let message = ''
     //args.forEach(element => {
-    //    message = message + " " + element
+    //    message = `${message} ${element}`
     //});
-
     let stage = 0 //1 = message 2+ = items
     let emojiStage = 0 //1 = emoji 2 = deff
     let items = []
     let message = ''
     let tempmsg = ''
     let tempemoji = ''
-    let at2 = false
+    let enabled = true
     try
     {
     
@@ -26,6 +25,7 @@ function poll(args, command)
                 args.forEach(element =>{
                     if(element === '||'){
                         stage = stage + 1
+                        
                     }
                     else
                     {
@@ -35,8 +35,10 @@ function poll(args, command)
                         }
                         else if(stage >= 2)
                         {
+                                
+                                    emojiStage = emojiStage + 1
+                                
                             
-                                emojiStage = emojiStage + 1
                             
                             
                             if(emojiStage === 1){
@@ -47,10 +49,14 @@ function poll(args, command)
                             {
                                 
                                 //issue: emoji deff cant have spaces..   
+                                
                                 tempmsg = `${tempmsg} ${element}`
+                                emojiStage = emojiStage + 1
                                 items.push([tempemoji, tempmsg])
                                 emojiStage = 0
                                 tempmsg =''
+                                
+                                
                             }
                             
                         }
