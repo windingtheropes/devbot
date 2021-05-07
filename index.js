@@ -12,6 +12,7 @@ const channel = require('./commands/channel');
 const getRandom = require('./commands/get_random');
 const poll = require('./commands/poll');
 
+
 var prefix = config.prefix;
 let msg
 let botCache = {}
