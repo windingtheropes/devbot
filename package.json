@@ -19,5 +19,6 @@
   "dependencies": {
     "discord.js": "^12.5.3"
   },
-  "description": ""
+  "description": "```\r {\r \"prefix\":\"!\",\r \"token\":\"BOT-TOKEN-GOES-HERE\"\r }\r ```",
+  "devDependencies": {}
 }
