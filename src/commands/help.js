@@ -10,7 +10,7 @@ function help(args, command)
         const helpHelp = 'Get this help message. `!help`';
         const channelHelp = 'Channel command. Currently, the only supported method is `create`. The name cannot have spaces. Usage `!channel [method] [type] [name]` \n__**Methods**__\n`create`\n__**Types**__\n`text` ,`voice`';
         const statsHelp = 'Stats command. Get various Discord statistics. Accepts one argument: selector, to get a specific statistic rather than the whole list. You can also append a Discord ID as the selector to get the date. Usage `!stats [selector]` \n__**Selectors**__\n`uptime` Get bot uptime\n`startdate` Get bot start date\n`messageid` Get the ID of the message you sent to trigger the command\n`messagedate` Get the message creation date\n`accountid/userid/myid` Get your Discord ID\n`accountdate/userdate` Get your Discord account creation date\n`serverid` Get the ID of the server you sent the command from\n`serverdate` Get the server creation date\n`channelid` Get the ID of the channel you sent the command from\n`channeldate` Get the channel creation date\n``latency/ping` Get the bot latency (ping)';
-        const pollHelp = 'Poll command. Start a simple yes/no poll! The accepted argument is the question, it can have spaces. Usage `!poll [question]`';
+        const pollHelp = 'Poll command. Start a poll. Usage `!poll [type] [message] [deffinitions]` \n__**Types**__\n`yesno` Start a simple yes or no poll, only accepts message argument.\n`multiple` Start a more advanced poll, with unlimited options. Accepts message, and emoji deffinitions for each option, each separated with `;;`.\n__**Examples**__\n__yes/no poll__\n`!poll yesno Do you like trains?`\n__multiple options poll__\n`!poll multiple ;; Which emoji is better? ;; :smile: smile ;; :cry: cry ;; :rofl: rofl ;;`';
 
         if (args.length == 0)
         {
@@ -26,7 +26,7 @@ function help(args, command)
                 .addField('!help',"Help command." , false)
                 .addField('!channel',"Discord channel command." , false)
                 .addField('!stats',"Bot, server, message and user stats." , false)
-                .addField('!poll',"Simple poll command." , false)
+                .addField('!poll',"Start a poll." , false)
                 
     
     

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const client = new Discord.Client()
-const config = require('./config.json')
+const Client = new Discord.Client()
+const {prefix, token} = require('./config.json')
 
 const help = require('./commands/help')
 const stats = require('./commands/stats');
@@ -13,22 +13,15 @@ const getRandom = require('./commands/get_random');
 const poll = require('./commands/poll');
 
 
-var prefix = config.prefix;
-let msg
-let botCache = {}
 let startedAt = Date.now()
 
 try{
-    client.on('ready', () => {
+    Client.on('ready', () => {
         console.log('Client ready.');
-        client.guilds.cache.forEach(guild => {
-            botCache[guild.id] = {}
-          })
-        
     })
     
-    client.on('message', (message) => {
-        if (message.author == client.user) { 
+    Client.on('message', (message) => {
+        if (message.author == Client.user) { 
             return
         }
         if (message.content.startsWith(prefix)) {
@@ -91,8 +84,6 @@ try{
             case 'ping':
                 command.channel.send(`:ping_pong: Pong! Latency: ${Date.now() - command.createdTimestamp}ms.`)
                 break;
-
-            //Testing commands
            
         }
         
@@ -102,7 +93,7 @@ try{
     
 
     
-    client.login(config.token)
+    Client.login(token)
     
 }
 catch

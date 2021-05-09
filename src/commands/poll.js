@@ -8,15 +8,14 @@ function poll(args, command)
     //args.forEach(element => {
     //    message = `${message} ${element}`
     //});
-    let stage = 0 //1 = message 2+ = items
-    let emojiStage = 0 //1 = emoji 2 = deff
-    let items = []
-    let message = ''
-    let temp = 
-    {
-        message,
-        emoji
-    }
+
+    var stage = 0 //1 = message 2+ = items
+    var emojiStage = 0 //1 = emoji 2 = deff
+    var items = []
+    var message = ''
+    
+    var tempMsg = ''
+    var tempEmoji = ''
     
     try
     {
@@ -26,9 +25,20 @@ function poll(args, command)
                 args.splice(0,1)
 
                 args.forEach(element =>{
-                    if(element === '//'){
+                    if(element === ';;'){
                         stage = stage + 1
-                        
+                        //some things that werent here before
+                        if(stage >= 2)
+                        {
+                            if(emojiStage >= 2)
+                            {
+                                items.push([tempEmoji, tempMsg])
+                                tempMsg = ''
+                                //tempEmoji = ''
+                                emojiStage = 0
+                            }
+                            
+                        }
                     }
                     else
                     {
@@ -40,30 +50,37 @@ function poll(args, command)
                         {
                                 
                             emojiStage = emojiStage + 1
-                                
                             
-                            
-                
                             if(emojiStage === 1){
-                                temp.emoji = element
-                               
+
+                                tempEmoji = element
+                
                             }
-                            else if(emojiStage === 2)
-                            {
+                            else if(emojiStage >= 2)
+                                {
                                 
                                 //issue: emoji deff cant have spaces..   
                                 
-                                temp.message = `${tempmsg} ${element}`
-                                emojiStage = emojiStage + 1
-                                items.push([temp.emoji, temp.message])
-                                emojiStage = 0
-                                temp.message = ''
-                                
+                                tempMsg = `${tempMsg} ${element}`
+                                //items.push([tempEmoji, tempMsg])
                                 
                             }
+                           // else if(emojiStage === 2)
+                            //{
+                                
+                            //    //issue: emoji deff cant have spaces..   
+                                
+                           //     tempMsg = `${tempMsg} ${element}`
+                          //      emojiStage = emojiStage + 1
+                          //      items.push([tempEmoji, tempMsg])
+                           //     emojiStage = 0
+                           //     tempMsg = ''
+                                
+                                
+                          //  }
                             
                         }
-                        console.log(items)
+                        
                     }
                 });
                 
