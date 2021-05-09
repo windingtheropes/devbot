@@ -1,1 +1,1 @@
-screen -d -m node index.js
+screen -d -m node src/index.js
