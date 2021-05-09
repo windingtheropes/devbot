@@ -14,7 +14,7 @@ function poll(args, command)
     let message = ''
     let tempmsg = ''
     let tempemoji = ''
-    let enabled = true
+    
     try
     {
     

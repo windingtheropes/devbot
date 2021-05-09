@@ -9,17 +9,17 @@ function stats(args, command, startTime)
                 .setAuthor('devbot')
                 
     var statistics = {
-        "uptime": Math.abs(((((startTime-Date.now())/1000)/60)/60)) + " hours",
-        "start_date": new Date(startTime),
-        "message_id": command.id,
-        "message_send_date": new Date((command.id / 4194304) + 1420070400000),
-        "sender_id": command.author.id,
-        "sender_account_creation_date": new Date((command.author.id / 4194304) + 1420070400000),
-        "server_id": command.channel.guild.id,
-        "server_creation_date": new Date((command.channel.guild.id / 4194304) + 1420070400000),
-        "channel_id": command.channel.id,
-        "channel_creation_date": new Date((command.channel.id / 4194304) + 1420070400000),
-        "latency": `${Date.now() - command.createdTimestamp}ms.`
+        uptime: Math.abs(((((startTime-Date.now())/1000)/60)/60)) + " hours",
+        start_date: new Date(startTime),
+        message_id: command.id,
+        message_send_date: new Date((command.id / 4194304) + 1420070400000),
+        sender_id: command.author.id,
+        sender_account_creation_date: new Date((command.author.id / 4194304) + 1420070400000),
+        server_id: command.channel.guild.id,
+        server_creation_date: new Date((command.channel.guild.id / 4194304) + 1420070400000),
+        channel_id: command.channel.id,
+        channel_creation_date: new Date((command.channel.id / 4194304) + 1420070400000),
+        latency: `${Date.now() - command.createdTimestamp}ms.`
     }
     var statsEmbed
     if(args[0])
