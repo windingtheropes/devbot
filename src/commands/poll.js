@@ -12,8 +12,11 @@ function poll(args, command)
     let emojiStage = 0 //1 = emoji 2 = deff
     let items = []
     let message = ''
-    let tempmsg = ''
-    let tempemoji = ''
+    let temp = 
+    {
+        message,
+        emoji
+    }
     
     try
     {
@@ -23,7 +26,7 @@ function poll(args, command)
                 args.splice(0,1)
 
                 args.forEach(element =>{
-                    if(element === '||'){
+                    if(element === '//'){
                         stage = stage + 1
                         
                     }
@@ -36,13 +39,13 @@ function poll(args, command)
                         else if(stage >= 2)
                         {
                                 
-                                    emojiStage = emojiStage + 1
+                            emojiStage = emojiStage + 1
                                 
                             
                             
-                            
+                
                             if(emojiStage === 1){
-                                tempemoji = element
+                                temp.emoji = element
                                
                             }
                             else if(emojiStage === 2)
@@ -50,11 +53,11 @@ function poll(args, command)
                                 
                                 //issue: emoji deff cant have spaces..   
                                 
-                                tempmsg = `${tempmsg} ${element}`
+                                temp.message = `${tempmsg} ${element}`
                                 emojiStage = emojiStage + 1
-                                items.push([tempemoji, tempmsg])
+                                items.push([temp.emoji, temp.message])
                                 emojiStage = 0
-                                tempmsg =''
+                                temp.message = ''
                                 
                                 
                             }
