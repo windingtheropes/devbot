@@ -4,14 +4,91 @@ module.exports = poll
 // Command: !poll multiple ;; Question goes here ;; :thumbs_up: Option 1 ;; :thumbs_down: Option 2 ;; :custom_emoji: Option 3 ;;
 
 var stage = 0 // 1 = Question
-// 2+ = Emojis and Deffinitions
+             // 2+ = Emojis and Deffinitions
 var emojiStage = 0 // 1 = Emoji
-	 // 2+ = Deffinition 
+	              // 2+ = Deffinition 
 var items = []
-var message = ''
+var question = ''
 
 var tempMsg = ''
 var tempEmoji = ''
+
+function parse(args, command, type)
+{
+	switch(type)
+	{
+		case 'multiple':
+			args.forEach(element =>
+				{
+					if (element === ';;')
+					{
+						stage = stage + 1
+	
+						if (stage >= 2)
+						{
+							if (emojiStage >= 2)
+							{
+								if(tempEmoji === '' || tempEmoji === ' ' || tempMsg === '' || tempMsg === ' ')
+								{
+									command.channel.send("There can't be empty values.")
+								}
+								items.push([tempEmoji, tempMsg])
+								tempMsg = ''
+								emojiStage = 0
+							}
+	
+						}
+					}
+					else
+					{
+						if (stage === 1)
+						{
+							if(element === '' || element === ' ')
+								{
+									command.channel.send("The question can't be empty")
+									return 1;
+								}
+							question = `${question} ${element}`
+							console.log(args)
+						}
+						else if (stage >= 2)
+						{
+	
+							emojiStage = emojiStage + 1
+	
+							if (emojiStage === 1)
+							{
+								if(element === '' || element === ' ')
+								{
+									command.channel.send("The emoji can't be empty")
+									return 1;
+								}
+								tempEmoji = element
+	
+							}
+							else if (emojiStage >= 2)
+							{
+								if(element === '' || element === ' ')
+								{
+									command.channel.send("The description can't be empty")
+									return 1;
+								}
+								tempMsg = `${tempMsg} ${element}`
+							}
+	
+						}
+	
+					}
+				});
+			break;
+		case 'yesno':
+			break;
+		default:
+			console.log('why');
+			return 1;
+			break;		
+	}
+}
 
 function poll(args, command)
 {
@@ -23,56 +100,13 @@ function poll(args, command)
 		case 'multiple':
 			args.splice(0, 1)
 
-			args.forEach(element =>
-			{
-				if (element === ';;')
-				{
-					stage = stage + 1
-
-					if (stage >= 2)
-					{
-						if (emojiStage >= 2)
-						{
-							items.push([tempEmoji, tempMsg])
-							tempMsg = ''
-							emojiStage = 0
-						}
-
-					}
-				}
-				else
-				{
-					if (stage === 1)
-					{
-						message = `${message} ${element}`
-						console.log(args)
-					}
-					else if (stage >= 2)
-					{
-
-						emojiStage = emojiStage + 1
-
-						if (emojiStage === 1)
-						{
-
-							tempEmoji = element
-
-						}
-						else if (emojiStage >= 2)
-						{
-							tempMsg = `${tempMsg} ${element}`
-						}
-
-					}
-
-				}
-			});
+			parse(args, command, 'multiple')
 
 			items.forEach(element =>
 			{
-				message = `${message} \n${element[0]}: ${element[1]}`
+				question = `${question} \n${element[0]}: ${element[1]}`
 			})
-			command.channel.send(message).then(function (sentMessage)
+			command.channel.send(question).then(function (sentMessage)
 			{
 				items.forEach(element =>
 				{
@@ -86,9 +120,9 @@ function poll(args, command)
 			args.splice(0, 1)
 			args.forEach(element =>
 			{
-				message = `${message} ${element}`
+				question = `${question} ${element}`
 			})
-			command.channel.send(message).then(function (sentMessage)
+			command.channel.send(question).then(function (sentMessage)
 			{
 				sentMessage.react('👍')
 				sentMessage.react('👎')
