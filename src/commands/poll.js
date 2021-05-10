@@ -1,21 +1,20 @@
 const Discord = require('discord.js')
 module.exports = poll
 
+// Command: !poll multiple ;; Question goes here ;; :thumbs_up: Option 1 ;; :thumbs_down: Option 2 ;; :custom_emoji: Option 3 ;;
+
+var stage = 0 // 1 = Question
+// 2+ = Emojis and Deffinitions
+var emojiStage = 0 // 1 = Emoji
+	 // 2+ = Deffinition 
+var items = []
+var message = ''
+
+var tempMsg = ''
+var tempEmoji = ''
+
 function poll(args, command)
 {
-
-    // Command: !poll multiple ;; Question goes here ;; :thumbs_up: Option 1 ;; :thumbs_down: Option 2 ;; :custom_emoji: Option 3 ;;
-
-	var stage = 0 // 1 = Question
-                  // 2+ = Emojis and Deffinitions
-	var emojiStage = 0 // 1 = Emoji
-                       // 2+ = Deffinition 
-	var items = []
-	var message = ''
-
-	var tempMsg = ''
-	var tempEmoji = ''
-
 	try
 	{
 
