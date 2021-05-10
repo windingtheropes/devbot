@@ -46,7 +46,6 @@ function poll(args, command)
 					if (stage === 1)
 					{
 						message = `${message} ${element}`
-						console.log(args)
 					}
 					else if (stage >= 2)
 					{
