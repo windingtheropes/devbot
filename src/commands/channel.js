@@ -60,7 +60,7 @@ function channel(args, command)
         }
         else
         {
-            command.channel.send("Insufficient permissions.")
+            command.channel.send("You have insufficient permissions to operate this command.")
         }
             
         }
