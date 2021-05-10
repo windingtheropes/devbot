@@ -4,7 +4,13 @@ module.exports = channel
 function channel(args, command)
     {
 
-        if(command.member.hasPermission('MANAGE_CHANNELS'))
+        if(!(command.member.guild.me.hasPermission('MANAGE_CHANNELS')))
+        {
+            command.channel.send("devbot has insufficient permissions.")
+        }
+        else
+        {
+            if(command.member.hasPermission('MANAGE_CHANNELS'))
         {
             let method
             let type
@@ -57,6 +63,8 @@ function channel(args, command)
             command.channel.send("Insufficient permissions.")
         }
             
+        }
+        
             
         
         
