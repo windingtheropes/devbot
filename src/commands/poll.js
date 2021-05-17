@@ -3,136 +3,139 @@ module.exports = poll
 
 // Command: !poll multiple ;; Question goes here ;; :thumbs_up: Option 1 ;; :thumbs_down: Option 2 ;; :custom_emoji: Option 3 ;;
 
-var stage = 0 // 1 = Question
-             // 2+ = Emojis and Deffinitions
-var emojiStage = 0 // 1 = Emoji
-	              // 2+ = Deffinition 
-var items = []
-var question = ''
-
-var tempMsg = ''
-var tempEmoji = ''
+var data = 
+{
+	items: [],
+	msg : '', 
+	emoji : '',
+	eStage : 0, 
+	stage : 0,  
+	question : '' // The question asked by the bot
+}
 
 function parse(args, command, type)
 {
-	switch(type)
-	{
-		case 'multiple':
-			args.forEach(element =>
-				{
-					if (element === ';;')
-					{
-						stage = stage + 1
 	
-						if (stage >= 2)
-						{
-							if (emojiStage >= 2)
-							{
-								if(tempEmoji === '' || tempEmoji === ' ' || tempMsg === '' || tempMsg === ' ')
-								{
-									command.channel.send("There can't be empty values.")
-								}
-								items.push([tempEmoji, tempMsg])
-								tempMsg = ''
-								emojiStage = 0
-							}
-	
-						}
-					}
-					else
-					{
-						if (stage === 1)
-						{
-							if(element === '' || element === ' ')
-								{
-									command.channel.send("The question can't be empty")
-									return 1;
-								}
-							question = `${question} ${element}`
-							console.log(args)
-						}
-						else if (stage >= 2)
-						{
-	
-							emojiStage = emojiStage + 1
-	
-							if (emojiStage === 1)
-							{
-								if(element === '' || element === ' ')
-								{
-									command.channel.send("The emoji can't be empty")
-									return 1;
-								}
-								tempEmoji = element
-	
-							}
-							else if (emojiStage >= 2)
-							{
-								if(element === '' || element === ' ')
-								{
-									command.channel.send("The description can't be empty")
-									return 1;
-								}
-								tempMsg = `${tempMsg} ${element}`
-							}
-	
-						}
-	
-					}
-				});
-			break;
-		case 'yesno':
-			break;
-		default:
-			console.log('why');
-			return 1;
-			break;		
-	}
-}
-
-function poll(args, command)
-{
 	try
 	{
 
-		switch (args[0])
+		switch (type)
 		{
 		case 'multiple':
 			args.splice(0, 1)
 
-			parse(args, command, 'multiple')
-
-			items.forEach(element =>
+			args.forEach(element =>
 			{
-				question = `${question} \n${element[0]}: ${element[1]}`
-			})
-			command.channel.send(question).then(function (sentMessage)
-			{
-				items.forEach(element =>
+				if (element === ';;')
 				{
-					sentMessage.react(element[0])
-				})
-				command.delete()
+					data.stage = data.stage + 1
+
+					if (data.stage >= 2)
+					{
+						if (data.eStage >= 2)
+						{
+							data.items.push([data.emoji, data.msg])
+							data.msg = ''
+							data.eStage = 0
+						}
+
+					}
+				}
+				else
+				{
+					if (data.stage === 1)
+					{
+						data.question = `${data.question} ${element}`
+						console.log(args)
+					}
+					else if (data.stage >= 2)
+					{
+
+						data.eStage = data.eStage + 1
+
+						if (data.eStage === 1)
+						{
+
+							data.emoji = element
+
+						}
+						else if (data.eStage >= 2)
+						{
+							data.msg = `${data.msg} ${element}`
+						}
+
+					}
+
+				}
 			});
+
+
+			data.items.forEach(element =>
+			{
+				data.question = `${data.question} \n${element[0]}: ${element[1]}`
+			})
+			
 			break;
 
 		case 'yesno':
 			args.splice(0, 1)
 			args.forEach(element =>
 			{
-				question = `${question} ${element}`
+				data.question = `${data.question} ${element}`
 			})
-			command.channel.send(question).then(function (sentMessage)
-			{
-				sentMessage.react('👍')
-				sentMessage.react('👎')
-				command.delete()
-			});
+			
 			break;
 		default:
 			command.channel.send('Please provide a valid poll type.')
 			break;
 		}
+	}
+	catch
+	{
+
+	}
+}
+
+
+function poll(args, command)
+{
+	
+	try
+	{
+		switch(args[0])
+		{
+			case 'multiple':
+				if(!parse(args, command, 'multiple'))
+				{	
+					command.channel.send(data.question).then(function (sentMessage)
+					{
+						data.items.forEach(element =>
+						{
+							sentMessage.react(element[0])
+						})
+						command.delete()
+					});
+				}
+				break;
+			case 'yesno':
+				if(!parse(args, command, 'yesno'))
+				{
+					command.channel.send(data.question).then(function (sentMessage)
+					{
+						sentMessage.react('👍')
+						sentMessage.react('👎')
+						command.delete()
+					});
+				}
+
+				break;
+			default:
+				command.channel.send('Internal error.')
+				break;	
+		}
+
+		
+
 	}
 	catch
 	{
