@@ -6,15 +6,17 @@ module.exports = poll
 var embed
 var eCounts = {}
 var eCounts2 =[]
-var data = 
-{
-	items: [],
-	msg : '', 
-	emoji : '',
-	eStage : 0, 
-	stage : 0,  
-	question : '' // The question asked by the bot
-}
+var data =   
+	{
+		items: [],
+		temp: {
+			emoij: '',
+			msg: ''
+		},
+		eStage : 0, 
+		stage : 0,  
+		question : ''
+	}
 
 function resetData()
 {
@@ -30,8 +32,10 @@ function resetData()
 	data = // Reset Data
 	{
 		items: [],
-		msg : '', 
-		emoji : '',
+		temp: {
+			emoij: '',
+			msg: ''
+		},
 		eStage : 0, 
 		stage : 0,  
 		question : ''
@@ -59,8 +63,8 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 					{
 						if (data.eStage >= 2)
 						{
-							data.items.push([data.emoji, data.msg])
-							data.msg = ''
+							data.items.push([data.temp.emoji, data.temp.msg])
+							data.temp.msg = ''
 							data.eStage = 0
 						}
 
@@ -81,12 +85,12 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 						if (data.eStage === 1)
 						{
 
-							data.emoji = element
+							data.temp.emoji = element
 
 						}
 						else if (data.eStage >= 2)
 						{
-							data.msg = `${data.msg} ${element}`
+							data.temp.msg = `${data.temp.msg} ${element}`
 						}
 
 					}
@@ -150,9 +154,8 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 		{
 			
 		}
-
+		
 	}
-
 
 function poll(args, command)
 {
@@ -161,11 +164,11 @@ function poll(args, command)
 		switch(args[0])
 		{
 			case 'multiple':
-				console.log(data.items)
+				
 				if(!parse(args, command, 'multiple'))
 				{	
-					embed
-					.addField('Question', data.question, false)
+					console.log(data.items[0][0])
+					embed.addField('Question', data.question, false)
 					command.channel.send(embed).then(function (sentMessage)
 					{
 						data.items.forEach(emoji => {
