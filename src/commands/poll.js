@@ -13,11 +13,9 @@ var data =
 	question : '' // The question asked by the bot
 }
 
-function reset()
+function resetData()
 {
 	data = {} // Clear data
-
-	console.log(data)
 
 	data = // Reset Data
 	{
@@ -29,7 +27,6 @@ function reset()
 	question : ''
 	}
 
-	console.log(data) 
 }
 
 function parse(args, command, type) // Returns nothing if no error, returns true with an error
@@ -124,7 +121,7 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 
 function poll(args, command)
 {
-	reset()
+	resetData()
 	try
 	{
 		switch(args[0])
@@ -174,5 +171,5 @@ function poll(args, command)
 	{
 
 	}
-	reset()
+	resetData()
 }
