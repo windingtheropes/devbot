@@ -13,14 +13,23 @@ var data =
 	question : '' // The question asked by the bot
 }
 
-function init()
+function reset()
 {
-	data.items = []
-	data.msg = ''
-	data.emoji = ''
-	eStage = 0
-	stage = 0
-	question = ''
+	data = {} // Clear data
+
+	console.log(data)
+
+	data = // Reset Data
+	{
+	items: [],
+	msg : '', 
+	emoji : '',
+	eStage : 0, 
+	stage : 0,  
+	question : ''
+	}
+
+	console.log(data) 
 }
 
 function parse(args, command, type)
@@ -115,7 +124,7 @@ function parse(args, command, type)
 
 function poll(args, command)
 {
-	init()
+	reset()
 	try
 	{
 		switch(args[0])
@@ -165,5 +174,5 @@ function poll(args, command)
 	{
 
 	}
-
+	reset()
 }
