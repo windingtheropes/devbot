@@ -3,6 +3,7 @@ module.exports = poll
 
 // Command: !poll multiple ;; Question goes here ;; :thumbs_up: Option 1 ;; :thumbs_down: Option 2 ;; :custom_emoji: Option 3 ;;
 
+var eCounts = {}
 var data = 
 {
 	items: [],
@@ -111,6 +112,18 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 			command.channel.send("Incomplete command.")
 			return true;
 		}
+		data.items.forEach(element => {
+			if(!eCounts[element[0]])
+			{
+				eCounts[element[0]] = 1
+			}
+			else
+			{
+				eCounts[element[0]] = eCounts[element[0]] + 1
+			}
+		})
+		console.log(eCounts)
+		
 	}
 	catch
 	{
@@ -160,7 +173,7 @@ function poll(args, command)
 
 				break;
 			default:
-				command.channel.send('Internal error.')
+				
 				break;	
 		}
 
