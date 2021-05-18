@@ -32,7 +32,7 @@ function reset()
 	console.log(data) 
 }
 
-function parse(args, command, type)
+function parse(args, command, type) // Returns nothing if no error, returns true with an error
 {
 	
 	try
@@ -109,15 +109,15 @@ function parse(args, command, type)
 			break;
 		}
 		
-		if(data.stage === 1)
+		if(data.stage <= 1)
 		{
-			command.channel.send("sorry but no")
+			command.channel.send("Incomplete command.")
 			return true;
 		}
 	}
 	catch
 	{
-
+		return true;
 	}
 }
 
