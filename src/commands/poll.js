@@ -167,12 +167,12 @@ function poll(args, command)
 				
 				if(!parse(args, command, 'multiple'))
 				{	
-					console.log(data.items[0][0])
 					embed.addField('Question', data.question, false)
 					command.channel.send(embed).then(function (sentMessage)
 					{
-						data.items.forEach(emoji => {
-							sentMessage.react(emoji[0])
+						data.items.forEach(element =>
+						{
+							sentMessage.react(element[0])
 						})
 						command.delete()
 					});
@@ -186,7 +186,7 @@ function poll(args, command)
 				if(!parse(args, command, 'yesno'))
 				{
 					embed
-                	.addField('Question', data.question, false)
+                	.addField('Question', data.question, false)				
 					command.channel.send(embed).then(function (sentMessage)
 					{
 						sentMessage.react('👍')
@@ -206,6 +206,4 @@ function poll(args, command)
 				break;	
 		}
 
-		
-		resetData()
 	}
