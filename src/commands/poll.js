@@ -13,6 +13,16 @@ var data =
 	question : '' // The question asked by the bot
 }
 
+function init()
+{
+	data.items = []
+	data.msg = ''
+	data.emoji = ''
+	eStage = 0
+	stage = 0
+	question = ''
+}
+
 function parse(args, command, type)
 {
 	
@@ -89,6 +99,12 @@ function parse(args, command, type)
 			command.channel.send('Please provide a valid poll type.')
 			break;
 		}
+		
+		if(data.stage === 1)
+		{
+			command.channel.send("sorry but no")
+			return true;
+		}
 	}
 	catch
 	{
@@ -99,7 +115,7 @@ function parse(args, command, type)
 
 function poll(args, command)
 {
-	
+	init()
 	try
 	{
 		switch(args[0])
@@ -116,6 +132,10 @@ function poll(args, command)
 						command.delete()
 					});
 				}
+				else
+				{
+					command.channel.send("There was an error.")
+				}
 				break;
 			case 'yesno':
 				if(!parse(args, command, 'yesno'))
@@ -126,6 +146,10 @@ function poll(args, command)
 						sentMessage.react('👎')
 						command.delete()
 					});
+				}
+				else
+				{
+					command.channel.send("There was an error.")
 				}
 
 				break;
