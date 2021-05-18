@@ -3,7 +3,9 @@ module.exports = poll
 
 // Command: !poll multiple ;; Question goes here ;; :thumbs_up: Option 1 ;; :thumbs_down: Option 2 ;; :custom_emoji: Option 3 ;;
 
+var embed
 var eCounts = {}
+var eCounts2 =[]
 var data = 
 {
 	items: [],
@@ -16,16 +18,23 @@ var data =
 
 function resetData()
 {
+	embed = null
+	embed = new Discord.MessageEmbed()
+	embed
+	.setColor('#0099ff')
+    .setTitle('Poll')
+	.setAuthor('devbot')
 	data = {} // Clear data
-
+	eCounts = {}
+	eCounts2 = []
 	data = // Reset Data
 	{
-	items: [],
-	msg : '', 
-	emoji : '',
-	eStage : 0, 
-	stage : 0,  
-	question : ''
+		items: [],
+		msg : '', 
+		emoji : '',
+		eStage : 0, 
+		stage : 0,  
+		question : ''
 	}
 
 }
@@ -33,8 +42,7 @@ function resetData()
 function parse(args, command, type) // Returns nothing if no error, returns true with an error
 {
 	
-	try
-	{
+	resetData()
 
 		switch (type)
 		{
@@ -63,7 +71,7 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 					if (data.stage === 1)
 					{
 						data.question = `${data.question} ${element}`
-						console.log(args)
+			
 					}
 					else if (data.stage >= 2)
 					{
@@ -103,11 +111,14 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 			
 			break;
 		default:
-			command.channel.send('Please provide a valid poll type.')
+			
 			break;
 		}
 		
-		if(data.stage <= 1)
+
+		if(type === 'multiple')
+		{
+			if(data.stage <= 1)
 		{
 			command.channel.send("Incomplete command.")
 			return true;
@@ -122,31 +133,43 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 				eCounts[element[0]] = eCounts[element[0]] + 1
 			}
 		})
-		console.log(eCounts)
-		
+
+		data.items.forEach(element => {
+			if(!eCounts2[element[0]])
+			{
+				eCounts2.push(element[0])
+			}
+			else if(eCounts2[element[0]])
+			{
+				command.channel.send("Duplicate emoji detected.")
+				return true;
+			}
+		})
+		}
+		else
+		{
+			
+		}
+
 	}
-	catch
-	{
-		return true;
-	}
-}
 
 
 function poll(args, command)
 {
 	resetData()
-	try
-	{
+	
 		switch(args[0])
 		{
 			case 'multiple':
+				console.log(data.items)
 				if(!parse(args, command, 'multiple'))
 				{	
-					command.channel.send(data.question).then(function (sentMessage)
+					embed
+					.addField('Question', data.question, false)
+					command.channel.send(embed).then(function (sentMessage)
 					{
-						data.items.forEach(element =>
-						{
-							sentMessage.react(element[0])
+						data.items.forEach(emoji => {
+							sentMessage.react(emoji[0])
 						})
 						command.delete()
 					});
@@ -159,12 +182,15 @@ function poll(args, command)
 			case 'yesno':
 				if(!parse(args, command, 'yesno'))
 				{
-					command.channel.send(data.question).then(function (sentMessage)
+					embed
+                	.addField('Question', data.question, false)
+					command.channel.send(embed).then(function (sentMessage)
 					{
 						sentMessage.react('👍')
 						sentMessage.react('👎')
 						command.delete()
 					});
+					
 				}
 				else
 				{
@@ -173,16 +199,10 @@ function poll(args, command)
 
 				break;
 			default:
-				
+				command.channel.send("Please provide a proper poll type.")
 				break;	
 		}
 
 		
-
+		resetData()
 	}
-	catch
-	{
-
-	}
-	resetData()
-}
