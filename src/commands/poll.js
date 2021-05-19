@@ -74,8 +74,9 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 				{
 					if (data.stage === 1)
 					{
+
 						data.question = `${data.question} ${element}`
-						
+
 					}
 					else if (data.stage >= 2)
 					{

@@ -1,3 +1,4 @@
+![devbot logo](https://user-images.githubusercontent.com/17016045/117669802-4b723d00-b175-11eb-9661-a6eb2f4e6e7d.png)
 # devbot
 devbot is a Discord bot with various features.
 # license
