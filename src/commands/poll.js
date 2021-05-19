@@ -15,9 +15,10 @@ var data =
 		stage : 0,  
 		question : ''
 	}
-
+var emojiCounts = []
 function resetData()
 {
+	emojiCounts = []
 	embed = null
 	embed = new Discord.MessageEmbed()
 	embed
@@ -131,6 +132,18 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 		{
 			
 		}
+
+		data.items.forEach(emoji => {
+			if(emojiCounts[emoji[0]])
+			{
+				emojiCounts.push(emoji[0])
+			}
+			else
+			{
+				command.channel.send("Duplicate emoji detected.")
+				return true;
+			}
+		})
 		
 	}
 
