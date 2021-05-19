@@ -8,7 +8,7 @@ function random(args, command)
        {
             var num1 = args[0];
             var num2 = args[1];
-            command.channel.send("`"+getRandom(num1,num2).toString()+"`")
+            command.channel.send(`${getRandom(num1,num2).toString()}`)
        } 
        else
        {
