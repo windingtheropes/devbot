@@ -75,7 +75,7 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 					if (data.stage === 1)
 					{
 						data.question = `${data.question} ${element}`
-			
+						
 					}
 					else if (data.stage >= 2)
 					{
@@ -133,20 +133,24 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 		{
 			
 		}
-
+		let dupe = false
 		data.items.forEach(emoji => {
-			if(emojiCounts[emoji[0]])
+			if(emojiCounts.indexOf(emoji[0]) > -1)
 			{
-				emojiCounts.push(emoji[0])
+				command.channel.send("Duplicate emoji detected.")
+				dupe = true
 			}
 			else
 			{
-				command.channel.send("Duplicate emoji detected.")
-				return true;
+				emojiCounts.push(emoji[0])
 			}
 		})
+		if(dupe)
+		{
+			return true;
+		}
 	}
-	catch
+	catch(error)
 	{
 		return true;
 	}
@@ -162,7 +166,7 @@ function poll(args, command)
 		{
 			case 'multiple':
 				
-				if(!parse(args, command, 'multiple'))
+				if(parse(args, command, 'multiple') != true)
 				{	
 					embed.addField('Question', data.question, false)
 					command.channel.send(embed).then(function (sentMessage)
@@ -176,11 +180,11 @@ function poll(args, command)
 				}
 				else
 				{
-					command.channel.send("There was an error.")
+					errorMsg(command, 'multiple')
 				}
 				break;
 			case 'yesno':
-				if(!parse(args, command, 'yesno'))
+				if(parse(args, command, 'yesno') != true)
 				{
 					embed
                 	.addField('Question', data.question, false)				
@@ -194,18 +198,34 @@ function poll(args, command)
 				}
 				else
 				{
-					command.channel.send("There was an error.")
+					errorMsg(command, 'yesno')
 				}
 
 				break;
 			default:
-				command.channel.send("Please provide a proper poll type.")
+				errorMsg(command)
 				break;	
 		}
 		}
 		catch
 		{
-			command.channel.send("Internal error.")
+			errorMsg(command)
 		}
 
+	}
+
+	function errorMsg(command, type)
+	{
+		switch(type)
+		{
+			case 'multiple':
+				command.channel.send("There was an error. Make sure that you have the following in the proper poll format: a poll type, a question, and at least one option [`:emoji: option`]. Make sure the emojis you are using are available to the bot. Make sure there are no duplicate options as emojis, they will not work. For more help with the command, type `!help poll`")
+				break;
+			case 'yesno':
+				command.channel.send("There was an error. Make sure you have a poll type and a question")
+				break;
+			default:
+				command.channel.send("There was an erorr. Make sure you have a valid poll type and the proper syntax.")
+				break;
+		}
 	}
