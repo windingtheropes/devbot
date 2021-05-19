@@ -3,6 +3,6 @@ a command for bot operators to set downtime dates to notify members in advance o
 
 `
 {
-"operators":['0000000000000000','0000000000000']
+"operators":["0000000000000000"]
 }
 `
