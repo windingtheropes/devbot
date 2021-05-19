@@ -11,6 +11,7 @@ const joke = require('./commands/joke');
 const channel = require('./commands/channel');
 const getRandom = require('./commands/get_random');
 const poll = require('./commands/poll');
+const downtime = require('./commands/downtime');
 
 
 let startedAt = Date.now()
@@ -60,6 +61,9 @@ try{
                 break;
             case 'poll':
                 poll(args, command)
+                break;
+            case 'downtime':
+                downtime(args, command)
                 break;
 
             //Simple response commands
