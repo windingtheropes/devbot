@@ -46,7 +46,8 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 {
 	
 	resetData()
-
+	try
+	{
 		switch (type)
 		{
 		case 'multiple':
@@ -144,14 +145,20 @@ function parse(args, command, type) // Returns nothing if no error, returns true
 				return true;
 			}
 		})
+	}
+	catch
+	{
+		return true;
+	}
 		
 	}
 
 function poll(args, command)
 {
 	resetData()
-	
-		switch(args[0])
+		try
+		{
+			switch(args[0])
 		{
 			case 'multiple':
 				
@@ -194,6 +201,11 @@ function poll(args, command)
 			default:
 				command.channel.send("Please provide a proper poll type.")
 				break;	
+		}
+		}
+		catch
+		{
+			command.channel.send("Internal error.")
 		}
 
 	}
