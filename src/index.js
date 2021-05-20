@@ -63,7 +63,26 @@ try{
                 poll(args, command)
                 break;
             case 'downtime':
-                downtime(args, command)
+                let res = downtime(args, command)
+                
+                if(!(res === 'error'))
+                {
+                    Client.user.setPresence({
+                        status: res[1],
+                        activity: {
+                            name: 'downtime at ' + res[0],
+                            type: 'PLAYING',
+                        }
+                    })
+                    
+                    
+                }
+                else
+                {
+                    command.channel.send("There was an error")
+                }
+                
+               
                 break;
 
             //Simple response commands
