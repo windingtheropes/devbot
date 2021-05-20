@@ -11,7 +11,7 @@ const joke = require('./commands/joke');
 const channel = require('./commands/channel');
 const getRandom = require('./commands/get_random');
 const poll = require('./commands/poll');
-const downtime = require('./commands/downtime');
+const setstatus = require('./commands/setstatus');
 
 
 let startedAt = Date.now()
@@ -39,7 +39,7 @@ try{
             //Modular Commands
         
             case 'help':
-                help(args, command)
+                help(args, command, Client)
                 break;
             case 'stats':
                 stats(args, command, startedAt)
@@ -62,27 +62,8 @@ try{
             case 'poll':
                 poll(args, command)
                 break;
-            case 'downtime':
-                let res = downtime(args, command, Client)
-                
-                if(!(res === 'error'))
-                {
-                    Client.user.setPresence({
-                        status: res[1],
-                        activity: {
-                            name: 'downtime at ' + res[0],
-                            type: 'PLAYING',
-                        }
-                    })
-                    
-                    
-                }
-                else
-                {
-                    command.channel.send("There was an error")
-                }
-                
-               
+            case 'setstatus':
+                setstatus(args, command, client)
                 break;
 
             //Simple response commands
