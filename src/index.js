@@ -63,7 +63,7 @@ try{
                 poll(args, command)
                 break;
             case 'downtime':
-                let res = downtime(args, command)
+                let res = downtime(args, command, Client)
                 
                 if(!(res === 'error'))
                 {
