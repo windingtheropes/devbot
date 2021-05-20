@@ -6,12 +6,14 @@ this project is licensed under the BSD 3-Clause License. please read the full li
 # prerequisites
 if you want to host devbot yourself, you need a method of doing so, as well as your own Discord application. Go to https://discord.com/developers/applications to create an application. if you're planning on hosting devbot, you'll need to include a config.json file.
 ## config.json
-config.json is located in the src/ folder
-### format for config.json file
+config.json is located in the src/ folder of devbot.
+### format
 the config.json file contains sensitive and variable bot information, as such, is ignored in commits and must be added manually by the user. 
-#### fields
+### fields
 the config.json file contains the following:
 token: the bot token, get it from https://discord.com/developers/applications/APP-ID-GOES-HERE/bot > Token > Copy
+prefix: the bot prefix, currently a constant value, not server variable (to be changed in the future)
+operators: an array of User ID strings that are bot operators. These users gain special access to special bot commands, such as the downtime command. Only give this access to people you trust.
 
 ```
 {
