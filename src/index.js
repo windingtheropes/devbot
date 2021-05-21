@@ -11,6 +11,7 @@ const joke = require('./commands/joke');
 const channel = require('./commands/channel');
 const getRandom = require('./commands/get_random');
 const poll = require('./commands/poll');
+const setstatus = require('./commands/setstatus');
 
 
 let startedAt = Date.now()
@@ -38,7 +39,7 @@ try{
             //Modular Commands
         
             case 'help':
-                help(args, command)
+                help(args, command, Client)
                 break;
             case 'stats':
                 stats(args, command, startedAt)
@@ -60,6 +61,9 @@ try{
                 break;
             case 'poll':
                 poll(args, command)
+                break;
+            case 'setstatus':
+                setstatus(args, command, Client)
                 break;
 
             //Simple response commands
