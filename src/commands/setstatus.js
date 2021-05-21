@@ -22,6 +22,7 @@ function reset()
 }
 function setstatus(args, command, client)
 {
+	command.delete()
 	reset()
     if(operators.indexOf(command.author.id) > -1)
 	{
@@ -81,27 +82,31 @@ function parse(args, command, client)
 		{
 			if(!open && element.startsWith('"'))
 			{
-				element = element.substring(1)
-				textStatus = `${element}`
-				open = true
+				if(element.endsWith('"'))
+				{
+					element = element.substring(1)
+					element = element.slice(0, -1)
+					textStatus = `${element}`
+					return updateStatus([type, status, textStatus], client)
+				}
+				else
+				{
+					element = element.substring(1)
+					textStatus = `${element}`
+					open = true
+				}
+
 			}
 			else if(open && !element.startsWith('"') && !element.endsWith('"'))
 			{	
 				textStatus = `${textStatus} ${element}`
 			}
-			if(open && element.endsWith('"'))
+			else if(open && element.endsWith('"'))
 			{	
-				if(stage == 3)
-				{
-					element = element.slice(0, -1)
-					return updateStatus([type, status, textStatus], client)
-				}
-				else
-				{
 					element = element.slice(0, -1)
 					textStatus = `${textStatus} ${element}`
 					return updateStatus([type, status, textStatus], client)
-				}
+				
 				
 			}
 			
@@ -112,6 +117,7 @@ function parse(args, command, client)
 function updateStatus(data, client){
 	switch(data[0])
 	{
+		
 		case 'clear':
 			client.user.setPresence({ status: 'online', activity: null })
 			break;
