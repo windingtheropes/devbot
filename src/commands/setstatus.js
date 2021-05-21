@@ -112,6 +112,11 @@ function parse(args, command, client)
 			
 		}
 	});
+
+	if(stage <= 2)
+	{
+		return true;
+	}
 }
 
 function updateStatus(data, client){
