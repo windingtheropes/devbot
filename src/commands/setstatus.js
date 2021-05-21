@@ -119,7 +119,13 @@ function updateStatus(data, client){
 	{
 		
 		case 'clear':
-			client.user.setPresence({ status: 'online', activity: null })
+			client.user.setPresence({
+				status: 'online',
+				activity: {
+					name: '',
+					type: 'PLAYING',
+				}
+			})
 			break;
 		case 'watching':
 		case 'listening':
