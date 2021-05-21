@@ -63,7 +63,7 @@ try{
                 poll(args, command)
                 break;
             case 'setstatus':
-                setstatus(args, command, client)
+                setstatus(args, command, Client)
                 break;
 
             //Simple response commands
