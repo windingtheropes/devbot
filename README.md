@@ -24,3 +24,5 @@ operators: an array of User ID strings that are bot operators. These users gain 
 "operators": ["OPERATOR-USER-ID-GOES-HERE","OPERATOR-USER-ID-GOES-HERE"]
 }
 ```
+# devbot public
+devbot is publicly available as a Discord bot. invite it to your server using this link: 
