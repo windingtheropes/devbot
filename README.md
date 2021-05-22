@@ -25,4 +25,13 @@ operators: an array of User ID strings that are bot operators. These users gain 
 }
 ```
 # devbot public
-devbot is publicly available as a Discord bot. invite it to your server using this link: 
+devbot is publicly available as a Discord bot. invite it to your server using this link: https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot
+Devbot is still in early stages. If devbot is unresponsive after the execution of a command, please start an issue and repeat the steps which got you to unresponsiveness. There is a chance that the bot crashed. 
+
+Add an issue here or see other bugs here:
+https://github.com/windingtheropes/devbot/issues
+
+## devbot status
+Here is a manually edited status to inform you of the bot's state:
+
+STATUS: OFFLINE
