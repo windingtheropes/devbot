@@ -16,13 +16,18 @@ const setstatus = require('./commands/setstatus');
 
 let startedAt = Date.now()
 
-try{
+try
+{
     Client.on('ready', () => {
         console.log('Client ready.');
     })
     
     Client.on('message', (message) => {
         if (message.author == Client.user) { 
+            return
+        }
+        if (message.channel.type === 'dm')
+        {
             return
         }
         if (message.content.startsWith(prefix)) {
