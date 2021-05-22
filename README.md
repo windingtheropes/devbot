@@ -6,10 +6,9 @@ this project is licensed under the BSD 3-Clause License. please read the full li
 # prerequisites
 if you want to host devbot yourself, it's highly recommended that you use a stable release from [RELEASES](https://github.com/windingtheropes/devbot/releases). To host, you need a method of doing so, as well as your own Discord application. Go to https://discord.com/developers/applications to create an application. if you're planning on hosting devbot, you'll need to include a config.json file.
 ## node js and npm
-node.js and npm are required to run devbot. after downloading and extracting a release or cloning the source code, navigate to the directory and run 
-`npm install`
-then run
-`node index.js` to start the bot.
+node.js and npm are required to run devbot. download node.js [here](https://nodejs.org/en/).
+after downloading and extracting devbot a release or cloning the source code, navigate to the directory where you extracted/cloned the code and run `npm install`
+run `node index.js` to start the bot.
 ## config.json
 config.json is located in the src/ folder of devbot.
 ### format
