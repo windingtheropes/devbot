@@ -5,6 +5,9 @@ const client = new Discord.Client()
 
 const {token} = require('./config.json')
 const mongo = require('./mongo')
+
+client.startTime = Date.now()
+
 client.on('ready', async () => {
   console.log('Devbot client is ready.')
    
