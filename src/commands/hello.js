@@ -1,15 +1,9 @@
-const Discord = require('discord.js')
-const getRandom = require('./get_random')
-module.exports = hello
-
-function hello(command)
-    {
-        let rand = getRandom(1,3);
-    
-        let greetings = {
-            1:"yo yo yo",
-            2:"hello!",
-            3:"ello."
-        }
-        command.channel.send(greetings[rand])
-    }
+const getRandom = require('../utils/getRandom')
+module.exports = {
+    commands: ['hello'],
+    callback: (message, arguments, text) => {
+        const responses = ['hello', 'yo', 'ello', 'bonjour', 'allo allo allo']
+        let random = getRandom(0, responses.length-1)
+        message.channel.send(responses[random])
+    },
+}

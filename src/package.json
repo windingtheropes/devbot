@@ -4,7 +4,8 @@
   "description": "devbot",
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "mongoose": "^5.13.2"
   },
   "devDependencies": {},
   "scripts": {
