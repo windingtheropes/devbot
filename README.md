@@ -17,15 +17,15 @@ the config.json file contains sensitive and variable bot information, as such, i
 the config.json file contains the following:
 token: the bot token, get it from https://discord.com/developers/applications/APP-ID-GOES-HERE/bot > Token > Copy
 prefix: the bot prefix, currently a constant value, not server variable (to be changed in the future)
-operators: an array of User ID strings that are bot operators. These users gain special access to special bot commands, such as the downtime command. Only give this access to people you trust.
 
 ```
 {
 "token":"BOT-TOKEN-GOES-HERE",
 "prefix":"BOT-PREFIX-GOES-HERE",
-"operators": ["OPERATOR-USER-ID-GOES-HERE","OPERATOR-USER-ID-GOES-HERE"]
 }
 ```
 # devbot public
 devbot is publicly available as a Discord bot. [invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
 Devbot is still in early stages of development. If devbot is unresponsive after the execution of a command, please start an issue and repeat the steps which got you to unresponsiveness so we can work on fixing the issue. view and create [issues](https://github.com/windingtheropes/devbot/issues).
+
+Devbot also doesn't have a stable hosting solution, so there are no guarantees of long term support.
