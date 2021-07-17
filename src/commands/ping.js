@@ -1,8 +1,6 @@
 module.exports = {
     commands: ['ping', 'latency'],
-    callback: (message, arguments, text) => {
-        message.channel.send(`:ping_pong: Pong!`).then((m) => {
-            m.edit(`:ping_pong: Pong!\n**Latency:** ${m.createdTimestamp - message.createdTimestamp}ms`)
-        })
+    callback: (message, arguments, text, client) => {
+        message.channel.send(`:ping_pong: Pong!\n**Discord API Latency:** ${client.ws.ping}ms`)
     },
 }

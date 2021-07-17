@@ -3,14 +3,15 @@ const fs = require('fs')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
-const {token} = require('./config.json')
+const {token} = require('./config/config.json')
 const mongo = require('./mongo')
+const messageListener = require('./message-listener')
 
-client.startTime = Date.now()
+client.startTime = +new Date
 
 client.on('ready', async () => {
   console.log('Devbot client is ready.')
-   
+
   await mongo().then(mongoose => {
     try {
       console.log("Connected to mongo.")
@@ -40,6 +41,8 @@ client.on('ready', async () => {
   readCommands('commands')
 
   commandBase.listen(client)
+
+  messageListener.listen(client)
 })
 
 client.login(token)

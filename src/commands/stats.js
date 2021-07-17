@@ -1,5 +1,9 @@
 const Discord = require('discord.js')
 
+
+Object = require('../utils/object')
+
+
 module.exports = {
     commands: ['stats'],
     
@@ -13,107 +17,81 @@ module.exports = {
     var statistics = {
         uptime: {
             aliases : ['uptime'], 
-            type : 'bot',
+            type : 'Bot',
             title : 'Uptime',
             value : Math.abs(((((client.startTime-Date.now())/1000)/60)/60)) + " hours"},
         start_date: {
             aliases : ['startdate', 'starttime', 'started'], 
-            type : 'bot',
+            type : 'Bot',
             title : 'Start Date',
             value : new Date(client.startTime)},
         sender_id: {
             aliases : ['accountid', 'userid', 'myid'], 
-            type : 'user',
+            type : 'User',
             title : `User ID for ${command.author.username} (id ${command.author.id})`,
             value : command.author.id},
         sender_account_creation_date: {
             aliases : ['accountdate', 'userdate'], 
-            type : 'user',
+            type : 'User',
             title : `Account creation date for ${command.author.username} (id ${command.author.id})`,
             value : new Date((command.author.id / 4194304) + 1420070400000)},
         server_id: {
             aliases : ['serverid'], 
-            type : 'server',
-            title : `User ID for ${command.author.username} (id ${command.author.id})`,
+            type : 'Server',
+            title : `User ID for ${command.author.username}`,
             value : command.channel.guild.id},
         server_creation_date: {
             aliases : ['serverdate'], 
-            type : 'user',
-            title : `Account creation date for ${command.author.username} (id ${command.author.id})`,
+            type : 'Server',
+            title : `${command.channel.guild.name} creation date`,
             value : new Date((command.channel.guild.id / 4194304) + 1420070400000)},
         channel_id: {
             aliases : ['channelid'], 
-            type : 'server',
-            title : `Channel ID`,
-            value : `${command.channel.name} channel ID`,
+            type : 'Server',
+            title : `#${command.channel.name} ID`,
+            value : command.channel.id},
         channel_creation_date: {
             aliases : ['channeldate'], 
-            type : 'user',
-            title : `${command.channel.name} channel creation date `,
+            type : 'Server',
+            title : `#${command.channel.name} channel creation date `,
             value : new Date((command.channel.id / 4194304) + 1420070400000)},
         latency: {
-            aliases : ['ping', 'latency'], 
-            type : 'user',
-            title : `Bot Ping`,
-            value : `${client.ws.ping}ms.`}},
+            aliases: ['ping', 'latency'],
+            type: 'Bot',
+            title: 'Discord API Latency',
+            value: `${client.ws.ping}ms`
+        }
         
     }
+
+    var statisticsDictionary = ['uptime', 'start_date', 'sender_id', 'sender_account_creation_date', 'server_id', 'server_creation_date', 'channel_id', 'channel_creation_date', 'latency']
+
     var statsEmbed
     if(args[0])
     {
+        let handled = false
         var embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setTitle('Stats')
                 .setAuthor('devbot')
-        Object.keys(statistics).forEach(key => {
-            let stat = statistics[key]
+        Object.forEach(statistics, (stat) => {
             stat.aliases.forEach(alias => {
-                
-                if(args[0] == alias)
-                {
-                    let description
-                    switch(stat.type)
-                    {
-                        case 'bot':
-                            description = "Bot stats"
-                            break;
-                        case 'server':
-                            description = "Server stats"
-                            break;
-                        case 'user':
-                            description = "User stats"
-                            break;
-                    }
+                if(args[0].toLowerCase() == alias){
                     embed
-                        .setDescription(description)
+                        .setDescription(`${stat.type} stats`)
                         .addField(stat.title, stat.value, false)
-                    
                     command.channel.send(embed);
+                    handled = true
                     return
-
                 }
             })
-
-        });
-        //so its not in the aliases list
-        try
+        })
+        if(!(handled))
         {
-            if(parseInt(args[0]))
-            {
-                let IDtoConvert = Number(args[0])
-                command.channel.send((new Date((IDtoConvert / 4194304) + 1420070400000)).toString())
-                return
-            }
-            else
-            {
-                command.channel.send("The statistic was not recognized. Make sure it's a valid statistic, or enter a Discord ID which you'd like to get the date from.")
-                return
-            }
-        }
-        catch
-        {
+            command.channel.send("The statistic was not recognized.")
             return
         }
+        
     }
     else
     {
@@ -121,12 +99,11 @@ module.exports = {
                 .setColor('#0099ff')
                 .setTitle('Stats')
                 .setAuthor('devbot')
-                .setDescription('Server, message, user, and bot stats.')
+                .setDescription('Server, user, and bot stats.')
 
-                Object.keys(statistics).forEach(key => {
-                    let stat = statistics[key]
+                Object.forEach(statistics, (stat) => {
                     statsEmbed.addField(stat.title, stat.value, false)
-                });
+                })
             
             command.channel.send(statsEmbed);
     }      
