@@ -1,6 +1,6 @@
 # changelog
 
-## 1.1
+## 1.1 (in progress)
 rewrite majority of commands and functionality
 ## 1.0.1.1
 disable commands in direct messages
