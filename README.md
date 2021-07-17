@@ -1,8 +1,8 @@
 ![devbot logo](https://user-images.githubusercontent.com/17016045/117669802-4b723d00-b175-11eb-9661-a6eb2f4e6e7d.png)
 # devbot 
-devbot is a Discord bot with various features. see the update changelog at [CHANGELOG.MD](CHANGELOG.MD).
+devbot is a Discord bot with various features. see the update changelog at [CHANGELOG.MD](https://github.com/alacriware/devbot/blob/canary/CHANGELOG.md).
 # license
-this project is licensed under the BSD 3-Clause License. please read the full license in [LICENSE](https://github.com/windingtheropes/devbot/edit/main/LICENSE)
+this project is licensed under the BSD 3-Clause License. please read the full license in [LICENSE](https://github.com/alacriware/devbot/blob/canary/LICENSE)
 # prerequisites
 if you want to host devbot yourself, it's highly recommended that you use a stable release from [RELEASES](https://github.com/windingtheropes/devbot/releases). To host, you need a method of doing so, as well as your own Discord application. Go to https://discord.com/developers/applications to create an application. if you're planning on hosting devbot, you'll need to include a config.json file.
 ## node js and npm
