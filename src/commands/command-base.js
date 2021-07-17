@@ -23,7 +23,8 @@ module.exports = (options) => {
 
 module.exports.listen = (client) => {
   client.on('message', (message) => {
-      const content = message.content
+    
+      const { member, content, guild, author } = message 
 
       // Split on any number of spaces
       const arguments = content.split(/[ ]+/)
@@ -42,7 +43,7 @@ module.exports.listen = (client) => {
           } = command
 
           //Don't reply to a message sent by the bot
-          if (message.author == client.user) {
+          if (author == client.user) {
               return
           }
 
