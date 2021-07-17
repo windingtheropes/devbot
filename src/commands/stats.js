@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-
+const {version} = require('../config/config.json')
 
 Object = require('../utils/object')
 
@@ -74,6 +74,7 @@ module.exports = {
                 .setColor('#0099ff')
                 .setTitle('Stats')
                 .setAuthor('devbot')
+                .setFooter(`version ${version}`);
         Object.forEach(statistics, (stat) => {
             stat.aliases.forEach(alias => {
                 if(args[0].toLowerCase() == alias){
@@ -100,7 +101,7 @@ module.exports = {
                 .setTitle('Stats')
                 .setAuthor('devbot')
                 .setDescription('Server, user, and bot stats.')
-
+                .setFooter(`version ${version}`);
                 Object.forEach(statistics, (stat) => {
                     statsEmbed.addField(stat.title, stat.value, false)
                 })
