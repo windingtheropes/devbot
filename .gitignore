@@ -1,6 +1,6 @@
-src/config.json
 src/node_modules/
 LICENSE
 README.md
 CHANGELOG.md
 .vscode/
+src/config
