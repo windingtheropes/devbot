@@ -19,6 +19,7 @@ module.exports = (options) => {
           commands
       }
   }
+  console.log(`Registered command ${commands}.`)
 }
 
 module.exports.listen = (client) => {

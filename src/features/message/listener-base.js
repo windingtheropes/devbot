@@ -2,6 +2,7 @@ const allMessageListeners = []
   
   module.exports = (callback) => {
        allMessageListeners.push(callback)
+       console.log("Registered new message listener.")
   }
   
   module.exports.listen = (client) => {

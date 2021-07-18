@@ -3,8 +3,11 @@ const fs = require('fs')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
-const {token} = require('./config/config.json')
+const arrayFind = require('./utils/arrayFind')
+
+const {token, version} = require('./config/config.json')
 const mongo = require('./utils/mongo')
+console = require('./utils/consoleBatchLog')
 
 //command base
 
@@ -19,7 +22,8 @@ const listenerBase = require(`./features/message/${listenerBaseFile}`)
 client.startTime = +new Date
 
 client.on('ready', async () => {
-  console.log('Devbot client is ready.')
+  
+  console.batchLog([`devbot client is ready`, `Version ${version}`, `Created by windingtheropes\n`])
 
   await mongo().then(mongoose => {
     try {
@@ -75,10 +79,9 @@ function commandsImport()
 function listenersImport()
 {
   //dynamically import commands
-
+  const blacklist = ['wordLists']
   const readListeners = (dir) => {
     const files = fs.readdirSync(path.join(__dirname, dir))
-
     for (const file of files) {
         const stat = fs.lstatSync(path.join(__dirname, dir, file))
 

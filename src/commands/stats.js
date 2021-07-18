@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const {version} = require('../config/config.json')
 
-Object = require('../utils/object')
+Object = require('../utils/objectForEach')
 
 
 module.exports = {
