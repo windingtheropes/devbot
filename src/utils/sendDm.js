@@ -1,4 +1,4 @@
-module.exports = (author, content) => {
-     author.send(content)
+module.exports = (member, content) => {
+     member.send(content)
 }
 

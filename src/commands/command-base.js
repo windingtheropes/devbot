@@ -23,7 +23,7 @@ module.exports = (options) => {
 }
 
 module.exports.listen = (client) => {
-  client.on('message', (message) => {
+  client.on('message', async (message) => {
     
       const { member, content, guild, author } = message 
 
