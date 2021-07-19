@@ -1,4 +1,5 @@
-const sendDm = require('../../utils/sendDm')
+const kick = require('../../utils/kick')
+const stringToBool = require('../../utils/stringToBool')
 module.exports = {
     commands: 'kick',
     callback: (message, args, text, client) => {
@@ -17,13 +18,27 @@ module.exports = {
             { 
                 targetId = target.substring(3).slice(0, -1)
             }
+            else
+            { 
+                return
+            }
             if(target)
             {
                 var reason
                 
+                var sendMessage = true
                 if(args[1])
                 {
-                    text = text.replace(args[0], '').substring(1)
+                    sendMessage = stringToBool(args[1])
+                    if(!(sendMessage == true || sendMessage == false))
+                    {
+                        return message.reply("Send message must be a boolean (true or false).")
+                    }
+                }
+
+                if(args[2])
+                {
+                    text = text.replace(args[0], '').replace(args[1], '').substring(2)
                     if(text)
                     {
                         if(text.length > 512)
@@ -41,7 +56,8 @@ module.exports = {
                      return message.reply("You cannot ban a user who has kick permissions or admin.")
                 }
                 
-                targetMember.kick(reason)
+                kick(message.channel.guild, targetMember, sendMessage, reason)
+               
                 return message.reply(`Kicked ${userToKickMention} for ${(reason || 'no reason')}.`)
             }
             else

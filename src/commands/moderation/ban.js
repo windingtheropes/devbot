@@ -1,3 +1,5 @@
+const ban = require('../../utils/ban')
+const stringToBool = require('../../utils/stringToBool')
 module.exports = {
     commands: 'ban',
     callback: (message, args, text, client) => {
@@ -18,11 +20,21 @@ module.exports = {
             }
             if(target)
             {
-                var reason
-                var days
+                var sendMessage = true
                 if(args[1])
                 {
-                        switch(args[1])
+                    sendMessage = stringToBool(args[1])
+                    if(!(sendMessage == true || sendMessage == false))
+                    {
+                        return message.reply("Send message must be a boolean (true or false).")
+                    }
+                }
+
+                var reason
+                var days
+                if(args[2])
+                {
+                        switch(args[2])
                         {
                             case '0':
                                 message.reply("Will not delete any messages from user.")
@@ -37,7 +49,7 @@ module.exports = {
                                 message.reply("Will not delete any messages from user.")
                                 break;
                         }
-                        text = text.replace(args[0], '').replace(args[1], '').substring(1)
+                        text = text.replace(args[0], '').replace(args[1], '').replace(args[2], '').substring(2)
                         if(text)
                         {
                             if(text.length > 512)
@@ -55,7 +67,8 @@ module.exports = {
                      return message.reply("You cannot ban a user who has ban permissions or admin.")
                 }
                 
-                targetMember.ban({ reason: reason, days: days})
+                ban(message.channel.guild, targetMember, sendMessage, {reason: reason, days: days})
+                
                 return message.reply(`Banned ${userToBanMention} for ${(reason || 'no reason')} and deleted ${(days || 0)} days' worth of messages from this user.`)
             }
             else
