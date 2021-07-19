@@ -20,7 +20,7 @@ module.exports = {
             }
             if(target)
             {
-                var sendMessage = true
+                var sendMessage = false
                 if(args[1])
                 {
                     sendMessage = stringToBool(args[1])

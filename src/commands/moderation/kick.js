@@ -26,7 +26,7 @@ module.exports = {
             {
                 var reason
                 
-                var sendMessage = true
+                var sendMessage = false
                 if(args[1])
                 {
                     sendMessage = stringToBool(args[1])
