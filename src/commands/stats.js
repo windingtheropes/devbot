@@ -64,8 +64,6 @@ module.exports = {
         
     }
 
-    var statisticsDictionary = ['uptime', 'start_date', 'sender_id', 'sender_account_creation_date', 'server_id', 'server_creation_date', 'channel_id', 'channel_creation_date', 'latency']
-
     var statsEmbed
     if(args[0])
     {
