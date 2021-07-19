@@ -14,7 +14,7 @@ config.json is located in the src/ folder of devbot.
 ### format
 the config.json file contains sensitive and variable bot information, as such, is ignored in commits and must be added manually by the user. 
 ### fields
-the config.json file contains the following:
+the config.json file contains the following:\
 token: the bot token, get it from https://discord.com/developers/applications/APP-ID-GOES-HERE/bot > Token > Copy\
 prefix: the bot prefix, currently a constant value, not server variable (to be changed in the future)\
 operators: users who have access to internal bot commands, like setstatus. Only give this permission to people you trust.\
