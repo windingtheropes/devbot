@@ -38,9 +38,10 @@ module.exports.listen = (client) => {
           if (!command) {
               return
           }
-          const {
+          var {
               callback,
-              dmsEnabled = false
+              dmsEnabled = false,
+              dmsOnly = false
           } = command
 
           //Don't reply to a message sent by the bot
@@ -48,9 +49,21 @@ module.exports.listen = (client) => {
               return
           }
 
+          //Make sure it makes logical sense
+          if(!dmsEnabled && dmsOnly == true)
+          {
+              dmsEnabled = true
+          }  
           //Check [and take neccesary action] if the command is available in direct messages
-          if (message.channel.type === 'dm' && dmsEnabled == false) {
+          if (!message.guild && dmsEnabled == false) {
               return
+          }
+          //Check if the command is direct messages only
+          if (message.guild && dmsOnly == true)
+          {
+              message.delete()
+              message.reply("This command is only available in direct messages.")
+              return 
           }
 
           callback(message, arguments, arguments.join(' '), client)
