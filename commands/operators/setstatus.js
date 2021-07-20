@@ -1,6 +1,9 @@
-const {
-    operators
-} = require('../../config/config.json')
+var operators
+try {
+    operators = require('../../config/config.json').operators
+} catch {
+    operators = process.env.DEVBOT_CANARY_OPERATORS.split(',')
+}
 module.exports = {
     dmsOnly: true,
     commands: 'setstatus',
