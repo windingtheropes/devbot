@@ -92,9 +92,6 @@ module.exports.listen = (client) => {
           if (author == client.user) {
               return
           }
-          
-          //Permissions check
-          //soonTM
 
           //Make sure it makes logical sense
           if(!dmsEnabled && dmsOnly == true)
