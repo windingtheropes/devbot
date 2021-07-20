@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const Discord = require('discord.js')
 const client = new Discord.Client()
+
 const {version} = require('./version.json')
 // const mongo = require('./utils/mongo')
 console = require('./utils/consoleBatchLog')
@@ -30,8 +31,6 @@ client.on('ready', async () => {
     }
   })
 
- 
-
   // await mongo().then(mongoose => {
   //   try {
   //     console.log("Connected to mongo.")
@@ -40,14 +39,6 @@ client.on('ready', async () => {
   //   }
   // })
 
-  const { MongoClient } = require('mongodb');
-  const uri = "mongodb+srv://dbUser:<password>@devbotcanary.sm18e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-  });
   //dynamic imports
 
   //commands
