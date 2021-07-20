@@ -11,9 +11,7 @@
     "node": "14.15.4"
   },
   "devDependencies": {},
-  "scripts": {
-    "start": "node index.js"
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC"
