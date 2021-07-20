@@ -32,13 +32,13 @@ client.on('ready', async () => {
 
  
 
-  await mongo().then(mongoose => {
-    try {
-      console.log("Connected to mongo.")
-    } finally {
-      mongoose.connection.close()
-    }
-  })
+  // await mongo().then(mongoose => {
+  //   try {
+  //     console.log("Connected to mongo.")
+  //   } finally {
+  //     mongoose.connection.close()
+  //   }
+  // })
 
   const { MongoClient } = require('mongodb');
   const uri = "mongodb+srv://dbUser:<password>@devbotcanary.sm18e.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
