@@ -2,10 +2,9 @@ const path = require('path')
 const fs = require('fs')
 const Discord = require('discord.js')
 const client = new Discord.Client()
+const {version} = require('./version.json')
 
-const arrayFind = require('./utils/arrayFind')
-
-const {token, version} = require('./config/config.json')
+const {token} = require('./config/config.json')
 const mongo = require('./utils/mongo')
 console = require('./utils/consoleBatchLog')
 
@@ -24,6 +23,14 @@ client.startTime = +new Date
 client.on('ready', async () => {
   
   console.batchLog([`devbot client is ready`, `Version ${version}`, `Created by windingtheropes\n`])
+
+  client.user.setPresence({
+    status: 'online',
+    activity: {
+        name: `version ${version} — created by windingtheropes`,
+        type: 'PLAYING'
+    }
+  })
 
   // await mongo().then(mongoose => {
   //   try {

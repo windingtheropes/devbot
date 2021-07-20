@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const {version} = require('../config/config.json')
+const {version} = require('../version.json')
 
 Object = require('../utils/objectForEach')
 
@@ -28,17 +28,17 @@ module.exports = {
         sender_id: {
             aliases : ['accountid', 'userid', 'myid'], 
             type : 'User',
-            title : `User ID for ${command.author.username} (id ${command.author.id})`,
+            title : `User ID for ${command.author.username}`,
             value : command.author.id},
         sender_account_creation_date: {
             aliases : ['accountdate', 'userdate'], 
             type : 'User',
-            title : `Account creation date for ${command.author.username} (id ${command.author.id})`,
+            title : `Account creation date for ${command.author.username}`,
             value : new Date((command.author.id / 4194304) + 1420070400000)},
         server_id: {
             aliases : ['serverid'], 
             type : 'Server',
-            title : `User ID for ${command.author.username}`,
+            title : `Server ID for ${command.guild.name}`,
             value : command.channel.guild.id},
         server_creation_date: {
             aliases : ['serverdate'], 
@@ -63,8 +63,6 @@ module.exports = {
         }
         
     }
-
-    var statisticsDictionary = ['uptime', 'start_date', 'sender_id', 'sender_account_creation_date', 'server_id', 'server_creation_date', 'channel_id', 'channel_creation_date', 'latency']
 
     var statsEmbed
     if(args[0])
