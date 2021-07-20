@@ -25,13 +25,13 @@ client.on('ready', async () => {
   
   console.batchLog([`devbot client is ready`, `Version ${version}`, `Created by windingtheropes\n`])
 
-  await mongo().then(mongoose => {
-    try {
-      console.log("Connected to mongo.")
-    } finally {
-      mongoose.connection.close()
-    }
-  })
+  // await mongo().then(mongoose => {
+  //   try {
+  //     console.log("Connected to mongo.")
+  //   } finally {
+  //     mongoose.connection.close()
+  //   }
+  // })
 
   //dynamic imports
 
