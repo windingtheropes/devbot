@@ -1,6 +1,13 @@
 const Discord = require('discord.js')
 module.exports = calc 
-const { prefix } = require('../config.json')
+var prefix
+try{
+    prefix = require('./config.json').prefix
+}
+catch
+{
+    prefix = process.env.DEVBOT_RELEASE_PREFIX
+}
 function calc(args, command) {
     try
     {

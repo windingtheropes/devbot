@@ -1,6 +1,11 @@
 const Discord = require('discord.js')
 
-const {operators} = require('../config.json')
+var operators
+try {
+    operators = require('../../config/config.json').operators
+} catch {
+    operators = process.env.DEVBOT_RELEASE_OPERATORS.split(',')
+}
 module.exports = setstatus
 var stage = 0
 var type = ''
