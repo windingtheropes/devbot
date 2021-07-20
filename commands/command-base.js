@@ -1,6 +1,10 @@
-const {
-  prefix
-} = require('../config/config.json')
+var prefix
+
+try {
+    prefix = require('../config/config.json').prefix
+} catch {
+    prefix = process.env.DEVBOT_CANARY_PREFIX
+}
 
 const validPermissions = [
 "CREATE_INSTANT_INVITE",

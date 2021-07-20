@@ -3,9 +3,7 @@ const fs = require('fs')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const {version} = require('./version.json')
-
-const {token} = require('./config/config.json')
-const mongo = require('./utils/mongo')
+// const mongo = require('./utils/mongo')
 console = require('./utils/consoleBatchLog')
 
 //command base
@@ -104,4 +102,11 @@ function listenersImport()
   readListeners('features/message')
 }
 
-client.login(token)
+try
+{
+  client.login(require('./config/config.json').token)
+}
+catch
+{
+  client.login(process.env.DEVBOT_CANARY_TOKEN)
+}
