@@ -1,8 +1,19 @@
 const mongoose = require("mongoose");
 
-const { mongoPath } = require('../config/config.json')
+var mongoPath
+
+try {
+    mongoPath = require('../config/config.json').mongoPath
+}
+catch
+{
+    mongoPath = process.env.DISCORD_CANARY_MONGOPATH
+}
 
 module.exports = async() => {
-    await mongoose.connect(mongoPath, { useNewUrlParser: true, useUnifiedTopology: true })
+    await mongoose.connect(mongoPath, {  
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
     return mongoose
 }
