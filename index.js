@@ -1,122 +1,120 @@
-const Discord = require('discord.js');
-const Client = new Discord.Client()
-var prefix
-var token
+const path = require('path')
+const fs = require('fs')
+const Discord = require('discord.js')
+const client = new Discord.Client()
 
-try{
-    prefix = require('./config.json').prefix
-    token = require('./config.json').token
-}
-catch
+const {version} = require('./version.json')
+const mongo = require('./utils/mongo')
+console = require('./utils/consoleBatchLog')
+
+//command base
+
+const commandBaseFile = 'command-base.js'
+const commandBase = require(`./commands/${commandBaseFile}`)
+
+//listener base
+
+const listenerBaseFile = 'listener-base.js'
+const listenerBase = require(`./features/message/${listenerBaseFile}`)
+
+client.startTime = +new Date
+
+client.on('ready', async () => {
+  
+  console.batchLog([`devbot client is ready`, `Version ${version}`, `Created by windingtheropes\n`])
+
+  client.user.setPresence({
+    status: 'online',
+    activity: {
+        name: `version ${version} — created by windingtheropes`,
+        type: 'PLAYING'
+    }
+  })
+
+  await mongo().then(mongoose => {
+    try {
+       console.log("Connected to mongo.")
+     } 
+     catch
+     {
+       console.log("Error connecting to mongo.")
+     }
+     finally {
+       mongoose.connection.close()
+     }
+   })
+
+   commandBase.loadPrefixes(client)
+
+  //dynamic imports
+
+  //commands
+
+  commandsImport()
+
+  //listeners
+
+  listenersImport()
+
+  //start the command message listener
+
+  commandBase.listen(client)
+
+  //start the secondary message listener
+
+  listenerBase.listen(client)
+
+})
+
+function commandsImport()
 {
-    prefix = process.env.DEVBOT_RELEASE_PREFIX
-    token = process.env.DEVBOT_RELEASE_TOKEN
+  //dynamically import commands
+
+  const readCommands = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir))
+
+    for (const file of files) {
+        const stat = fs.lstatSync(path.join(__dirname, dir, file))
+
+        if (stat.isDirectory()) {
+            readCommands(path.join(dir, file))
+        } else if (file !== commandBaseFile) {
+            const option = require(path.join(__dirname, dir, file))
+            commandBase(option)
+        }
+    }
 }
 
-const help = require('./commands/help')
-const stats = require('./commands/stats');
-const hello = require('./commands/hello');
-const calc = require('./commands/calc');
-const random = require('./commands/random');
-const joke = require('./commands/joke');
-const channel = require('./commands/channel');
-const getRandom = require('./commands/get_random');
-const poll = require('./commands/poll');
-const setstatus = require('./commands/setstatus');
+  readCommands('commands')
+}
 
 
-let startedAt = Date.now()
+function listenersImport()
+{
+  //dynamically import commands
+  const blacklist = ['wordLists']
+  const readListeners = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir))
+    for (const file of files) {
+        const stat = fs.lstatSync(path.join(__dirname, dir, file))
+
+        if (stat.isDirectory()) {
+            readListeners(path.join(dir, file))
+        } else if (file !== listenerBaseFile) {
+            const callback = require(path.join(__dirname, dir, file))
+            listenerBase(callback)
+        }
+    }
+}
+
+  readListeners('features/message')
+}
 
 try
 {
-    Client.on('ready', () => {
-        console.log('Client ready.');
-    })
-    
-    Client.on('message', (message) => {
-        if (message.author == Client.user) { 
-            return
-        }
-        if (message.channel.type === 'dm')
-        {
-            return
-        }
-        if (message.content.startsWith(prefix)) {
-            commandHandler(message)
-        }
-    })
-   
-    function commandHandler(command)
-    {
-        let rootCommand = command.content.substr(1).split(" ")[0].toLowerCase();
-        let args = command.content.substr(1).split(" ").slice(1); 
-        switch(rootCommand)
-        {
-            //Modular Commands
-        
-            case 'help':
-                help(args, command, Client)
-                break;
-            case 'stats':
-                stats(args, command, startedAt)
-                break;
-            case 'hello':
-                hello(command)
-                break;
-            case 'calc':
-                calc(args, command)
-                break;
-            case 'random':
-                random(args, command)
-                break;
-            case 'joke':
-                joke(command)
-                break;
-            case 'channel':
-                channel(args, command)
-                break;
-            case 'poll':
-                poll(args, command)
-                break;
-            case 'setstatus':
-                setstatus(args, command, Client)
-                break;
-
-            //Simple response commands
-
-            case 'devbotsucksandshouldgoaway':
-                command.channel.send('*D=*')
-                break;
-            case 'funne?':
-                if(getRandom(1,1000) == getRandom(1,1000))
-                {
-                    command.channel.send("maybe.")
-                }
-                else if(getRandom(1,1000000) == getRandom(1,1000000))
-                {
-                    command.channel.send("yes.")
-                }
-                else
-                {
-                    command.channel.send("no.")
-                }
-                break;
-            case 'ping':
-                command.channel.send(`:ping_pong: Pong! Latency: ${Date.now() - command.createdTimestamp}ms.`)
-                break;
-           
-        }
-        
-    }
-
-    
-    
-
-    
-    Client.login(token)
-    
+  client.login(require('./config/config.json').token)
 }
 catch
 {
-    console.log("There was an error.")
+  client.login(process.env.DEVBOT_TOKEN)
 }
