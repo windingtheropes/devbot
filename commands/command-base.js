@@ -53,7 +53,7 @@ const validatePermissions = (permissions) => {
   }
 
 const allCommands = {}
-
+const commandsList = []
 module.exports = (options) => {
   let {
       commands,
@@ -63,6 +63,7 @@ module.exports = (options) => {
   if (typeof commands === 'string') {
       commands = [commands]
   }
+
 
 
   if (permissions.length) {
@@ -78,13 +79,12 @@ module.exports = (options) => {
         commands,
         permissions
     }
-    }
+  }
   console.log(`Registered command ${commands}.`)
 }
 
 module.exports.listen = (client) => {
   client.on('message', async (message) => {
-
       var loadedPrefix
       const { member, content, guild, author } = message 
     
@@ -105,9 +105,9 @@ module.exports.listen = (client) => {
 
       // Remove the command which is the first index
       const name = arguments.shift().toLowerCase()
-
       if (name.startsWith(prefix)) {
           const command = allCommands[name.replace(prefix, '')]
+         
           if (!command) {
               return
           }
@@ -115,9 +115,10 @@ module.exports.listen = (client) => {
           let {
               commandName, 
               description,
-              expectedArgs,
+              usage,
               minArgs = 0,
               maxArgs = null,
+              listed = true,
               permissions = null,
               permissionError = 'You do not have permission to execute this command.',
               dmsEnabled = false,
@@ -160,7 +161,8 @@ module.exports.listen = (client) => {
               return 
           }
 
-          callback(message, arguments, arguments.join(' '), client)
+          callback(message, arguments, arguments.join(' '), client, prefix, allCommands)
+         
 
       }
 

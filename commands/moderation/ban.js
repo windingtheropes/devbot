@@ -2,6 +2,8 @@ const ban = require('../../utils/ban')
 const stringToBool = require('../../utils/stringToBool')
 module.exports = {
     permissions: ['BAN_MEMBERS'],
+    description: 'Ban a member of the server. Requires the user executing the command to have the ban members permission. Cannot ban another user with the ban members permission.',
+    usage: '<usermention> [senddm - true/false] [delete x days of messages - 0/1/7] [reason]',
     commands: 'ban',
     callback: (message, args, text, client) => {
         const { member, mentions } = message

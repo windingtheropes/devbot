@@ -12,6 +12,7 @@ catch
 
 module.exports = async() => {
     await mongoose.connect(mongoPath, {  
+        useFindAndModify: false,
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
