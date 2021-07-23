@@ -116,5 +116,5 @@ try
 }
 catch
 {
-  client.login(process.env.DEVBOT_CANARY_TOKEN)
+  client.login(process.env.DEVBOT_TOKEN)
 }

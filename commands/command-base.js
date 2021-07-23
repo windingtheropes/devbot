@@ -7,7 +7,7 @@ const guildPrefixes = {} // Guild {'guildId'}
 try {
     globalPrefix = require('../config/config.json').prefix
 } catch {
-    globalPrefix = process.env.DEVBOT_CANARY_PREFIX
+    globalPrefix = process.env.DEVBOT_PREFIX
 }
 
 const validatePermissions = (permissions) => {

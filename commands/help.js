@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 
 module.exports = {
     commands: 'help',
+    description: "Get help for using devbot. To get specific command help, add one of the command's aliases as the first argument. For generic help, run the command without any arguments.",
+    usage: "[command]",
     callback: (message, args, text, client, prefix, allCommands) => {
         let commandName
         if(args[0])
@@ -15,14 +17,14 @@ module.exports = {
             
             if(command)
             {   
-                if(command.description && command.usage)
+                if(command.description)
                 {
                     const helpEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
                         .setTitle('Command help')
                         .setAuthor('devbot')
                         .setDescription(command.description)
-                        .addField('Usage', `${prefix}${commandName} ${command.usage}`, false)
+                        .addField('Usage', `${prefix}${commandName} ${command.usage || ''}`, false)
                         .addField('Aliases', command.commands)
                     message.channel.send(helpEmbed)
                 }

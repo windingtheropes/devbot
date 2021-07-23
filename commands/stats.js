@@ -6,7 +6,8 @@ Object = require('../utils/objectForEach')
 
 module.exports = {
     commands: ['stats'],
-    
+    description: 'Bot, server and user stats. To get a specific statistic, you can specify it as the first argument.',
+    usage: '[statistic]',
     callback: (command, args, text, client) => {
         
     var embed = new Discord.MessageEmbed()
