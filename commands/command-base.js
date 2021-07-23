@@ -72,10 +72,18 @@ module.exports.listen = (client) => {
   client.on('message', async (message) => {
 
 
-      loadPrefixes(client)
       const { member, content, guild, author } = message 
 
-     const prefix = guildPrefixes[guild.id] || globalPrefix
+      loadPrefixes(client)
+      const prefix = guildPrefixes[guild.id] || globalPrefix
+      if(!guild)
+      {
+        prefix = globalPrefix
+      }
+
+     
+
+    
 
       // Split on any number of spaces
       const arguments = content.split(/[ ]+/)
