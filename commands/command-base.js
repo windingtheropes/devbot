@@ -1,9 +1,12 @@
-var prefix
+var globalPrefix
+const mongo = require('../utils/mongo');
+const commandPrefixSchema = require('../schemas/command-prefix-schema')
+const guildPrefixes = {} // Guild {'guildId'}
 
 try {
-    prefix = require('../config/config.json').prefix
+    globalPrefix = require('../config/config.json').prefix
 } catch {
-    prefix = process.env.DEVBOT_CANARY_PREFIX
+    globalPrefix = process.env.DEVBOT_CANARY_PREFIX
 }
 
 const validPermissions = [
@@ -67,8 +70,12 @@ module.exports = (options) => {
 
 module.exports.listen = (client) => {
   client.on('message', async (message) => {
-    
+
+
+      loadPrefixes(client)
       const { member, content, guild, author } = message 
+
+     const prefix = guildPrefixes[guild.id] || globalPrefix
 
       // Split on any number of spaces
       const arguments = content.split(/[ ]+/)
@@ -118,4 +125,32 @@ module.exports.listen = (client) => {
 
 
   })
+}
+
+module.exports.loadPrefixes = loadPrefixes
+
+async function loadPrefixes(client){
+    await mongo().then(async mongoose => {
+        try {
+            for (const guild of client.guilds.cache)
+            {
+                const guildId = guild[1].id
+
+                const result = await commandPrefixSchema.findOne({_id: guildId})
+
+                if (result){
+
+                    guildPrefixes[guildId] = result.prefix
+    
+                } else {
+    
+                    guildPrefixes[guildId] = globalPrefix
+    
+                }
+
+            }
+        } finally {
+            mongoose.connection.close()
+        }
+    })
 }

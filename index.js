@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const {version} = require('./version.json')
-// const mongo = require('./utils/mongo')
+const mongo = require('./utils/mongo')
 console = require('./utils/consoleBatchLog')
 
 //command base
@@ -31,13 +31,20 @@ client.on('ready', async () => {
     }
   })
 
-  // await mongo().then(mongoose => {
-  //   try {
-  //     console.log("Connected to mongo.")
-  //   } finally {
-  //     mongoose.connection.close()
-  //   }
-  // })
+  await mongo().then(mongoose => {
+    try {
+       console.log("Connected to mongo.")
+     } 
+     catch
+     {
+       console.log("Error connecting to mongo.")
+     }
+     finally {
+       mongoose.connection.close()
+     }
+   })
+
+   commandBase.loadPrefixes(client)
 
   //dynamic imports
 
