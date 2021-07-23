@@ -7,7 +7,7 @@ try {
 }
 catch
 {
-    mongoPath = process.env.DISCORD_CANARY_MONGOPATH
+    mongoPath = process.env.DEVBOT_CANARY_MONGOPATH
 }
 
 module.exports = async() => {
