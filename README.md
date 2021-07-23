@@ -12,7 +12,7 @@ run `node index.js` to start the bot.
 ## config.json
 config.json is located in the src/ folder of devbot.
 ### format
-the config.json file contains sensitive and variable bot information, as such, is ignored in commits and must be added manually by the user. 
+the config.json file contains sensitive and variable bot information, as such, is ignored in commits and must be added manually by the user. in the code, process.env is used as an alternative for config.json for official devbot hosting.
 ### fields
 the config.json file contains the following:\
 token: the bot token, get it from https://discord.com/developers/applications/APP-ID-GOES-HERE/bot > Token > Copy\
@@ -29,5 +29,4 @@ mongoPath: the path to your mongo database.
 ```
 # devbot public
 devbot is publicly available as a Discord bot. [invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
-Devbot is still in early stages of development. If devbot is unresponsive after the execution of a command, please start an issue and repeat the steps which got you to unresponsiveness so we can work on fixing the issue. view and create [issues](https://github.com/windingtheropes/devbot/issues).
-due to current hosting limitations, devbot will be offline 8 days a month.
+If devbot is unresponsive after the execution of a command, please start an issue and repeat the steps which got you to unresponsiveness so we can work on fixing the issue. view and create [issues](https://github.com/windingtheropes/devbot/issues).
