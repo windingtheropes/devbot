@@ -18,13 +18,13 @@ the config.json file contains the following:\
 token: the bot token, get it from https://discord.com/developers/applications/APP-ID-GOES-HERE/bot > Token > Copy\
 prefix: the bot prefix, currently a constant value, not server variable (to be changed in the future)\
 operators: users who have access to internal bot commands, like setstatus. Only give this permission to people you trust.\
-mongoPath: the path to your database. should be the same if local, otherwise, provide the connection path there.\
+mongoPath: the path to your mongo database.
 ```
 {
 "token":"BOT-TOKEN-GOES-HERE",
 "prefix":"BOT-PREFIX-GOES-HERE",
 "operators": ["USERIDHERE", "USERIDHERE"],
-"mongoPath": "mongodb://localhost:27017"
+"mongoPath": "mongodb://pathgoes/here"
 }
 ```
 # devbot public
