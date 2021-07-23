@@ -2,6 +2,8 @@ const mongo = require('../utils/mongo')
 const commandPrefixSchema = require('../schemas/command-prefix-schema')
 module.exports = {
     commands: 'prefix',
+    description: 'Bot prefix information. Leave the arguments blank to get the bot prefix, and use the set argument to set it, if you have manage server permissions.',
+    usage: '[method] [prefix]',
     callback: async (message, args, text, client, prefix) => {
         const { member } = message
         if (args[0]) {
