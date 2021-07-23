@@ -71,15 +71,17 @@ module.exports = (options) => {
 module.exports.listen = (client) => {
   client.on('message', async (message) => {
 
-
+      const prefix
       const { member, content, guild, author } = message 
-
-      loadPrefixes(client)
-      const prefix = guildPrefixes[guild.id] || globalPrefix
+    
       if(!guild)
       {
         prefix = globalPrefix
       }
+      
+      loadPrefixes(client)
+      prefix = guildPrefixes[guild.id] || globalPrefix
+      
 
      
 
