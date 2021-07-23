@@ -15,14 +15,14 @@ module.exports = {
             
             if(command)
             {   
-                if(command.description && command.expectedArgs)
+                if(command.description && command.usage)
                 {
                     const helpEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
                         .setTitle('Command help')
                         .setAuthor('devbot')
                         .setDescription(command.description)
-                        .addField('Usage', `${prefix}${commandName} ${command.expectedArgs}`, false)
+                        .addField('Usage', `${prefix}${commandName} ${command.usage}`, false)
                         .addField('Aliases', command.commands)
                     message.channel.send(helpEmbed)
                 }
