@@ -2,6 +2,7 @@ const mongo = require('../utils/mongo.js')
 const commandPrefixSchema = require('../schemas/command-prefix-schema.js')
 module.exports = {
     commands: 'setprefix',
+    permissions: ['ADMINISTRATOR', 'MANAGE_GUILD'],
     callback: async (message, args, text, client) => {
         const prefix = args[0]
 
