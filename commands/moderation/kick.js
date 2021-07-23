@@ -2,10 +2,10 @@ const kick = require('../../utils/kick')
 const stringToBool = require('../../utils/stringToBool')
 module.exports = {
     commands: 'kick',
+    permissions: ['KICK_MEMBERS'],
     callback: (message, args, text, client) => {
         const { member, mentions, guild } = message
-        if(member.hasPermission('ADMINISTRATOR') || member.hasPermission('KICK_MEMBERS'))
-        {   
+         
             const botInServer = message.guild.members.cache.get(client.user.id)
             if(!botInServer.hasPermission('ADMINISTRATOR') || !botInServer.hasPermission('KICK_MEMBERS'))
             { 
@@ -65,10 +65,5 @@ module.exports = {
                 return message.reply("Please specify the user to kick.")
  
             }
-        }
-        else
-        {
-            return message.reply("Insufficient permissions.")
-        }
     }
 }

@@ -1,11 +1,10 @@
 const ban = require('../../utils/ban')
 const stringToBool = require('../../utils/stringToBool')
 module.exports = {
+    permissions: ['BAN_MEMBERS'],
     commands: 'ban',
     callback: (message, args, text, client) => {
         const { member, mentions } = message
-        if(member.hasPermission('ADMINISTRATOR') || member.hasPermission('BAN_MEMBERS'))
-        {   
             const botInServer = message.guild.members.cache.get(client.user.id)
             if(!botInServer.hasPermission('ADMINISTRATOR') || !botInServer.hasPermission('BAN_MEMBERS'))
             { 
@@ -76,10 +75,5 @@ module.exports = {
                 return message.reply("Please specify the user to ban.")
  
             }
-        }
-        else
-        {
-            return message.reply("Insufficient permissions.")
-        }
     }
 }

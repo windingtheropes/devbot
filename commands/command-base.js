@@ -1,14 +1,14 @@
-// var globalPrefix
+var globalPrefix
 const mongo = require('../utils/mongo');
 const commandPrefixSchema = require('../schemas/command-prefix-schema')
 const guildPrefixes = {} // Guild {'guildId'}
 
-const globalPrefix = require('../config/config.json').prefix || process.env.DEVBOT_CANARY_PREFIX
-// try {
-//     globalPrefix = require('../config/config.json').prefix
-// } catch {
-//     globalPrefix = process.env.DEVBOT_CANARY_PREFIX
-// }
+
+try {
+    globalPrefix = require('../config/config.json').prefix
+} catch {
+    globalPrefix = process.env.DEVBOT_CANARY_PREFIX
+}
 
 const validatePermissions = (permissions) => {
     const validPermissions = [
@@ -118,7 +118,7 @@ module.exports.listen = (client) => {
               expectedArgs,
               minArgs = 0,
               maxArgs = null,
-              permissions = [],
+              permissions = null,
               permissionError = 'You do not have permission to execute this command.',
               dmsEnabled = false,
               dmsOnly = false,
@@ -131,12 +131,16 @@ module.exports.listen = (client) => {
           }
 
           //Check permissions
-         
-          for (const permission of permissions) {
-            if (!member.hasPermission(permission)) {
-              message.reply(permissionError)
-              return
-            }
+          
+          if(permissions)
+          {
+            for (const permission of permissions) {
+                if (!member.hasPermission(permission) && !member.hasPermission('ADMINISTRATOR')) {
+                    message.reply(permissionError)
+                    return
+                }
+                
+              }
           }
 
           //Make sure it makes logical sense
