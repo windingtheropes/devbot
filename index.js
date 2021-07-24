@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 
 const mongo = require('./utils/mongo')
-console = require('./utils/consoleBatchLog')
+
 
 //command base
 
@@ -20,7 +20,7 @@ client.startTime = +new Date
 
 client.on('ready', async () => {
   
-  console.batchLog([`devbot client is ready`, `Version ${version}`, `Created by windingtheropes\n`])
+  console.log(`devbot client is ready`, `\nCreated by windingtheropes\n`)
 
   client.user.setPresence({
     status: 'online',
