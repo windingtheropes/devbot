@@ -20,6 +20,10 @@ module.exports = {
             {   
                 if(command.description)
                 {
+                    var exampleUsageString =''
+                    command.exampleUsage.forEach(use => {
+                        exampleUsageString = `${exampleUsageString}\n${prefix}${commandName} ${use}`
+                    })
                     const helpEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
                         .setTitle('Command help')
@@ -27,10 +31,7 @@ module.exports = {
                         .setDescription(command.description)
                         .addField('Usage', `${prefix}${commandName} ${command.usage || ''}`, false)
                         .addField('Aliases', command.commands)
-                    const exampleUsageString = ''
-                    command.exampleUsage.forEach(use => {
-                        exampleUsageString = `${exampleUsageString}`
-                    })
+                        .addField('Example Usage', `${exampleUsageString || ''}`, false)
                     message.channel.send(helpEmbed)
                 }
                 else
