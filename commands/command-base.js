@@ -1,4 +1,10 @@
 var globalPrefix
+var operators
+try {
+    operators = require('../config/config.json').operators
+} catch {
+    operators = process.env.DEVBOT_OPERATORS.split(',')
+}
 const mongo = require('../utils/mongo');
 const commandPrefixSchema = require('../schemas/command-prefix-schema')
 const guildPrefixes = {} // Guild {'guildId'}
@@ -6,8 +12,11 @@ const guildPrefixes = {} // Guild {'guildId'}
 
 try {
     globalPrefix = require('../config/config.json').prefix
+    
+    
 } catch {
     globalPrefix = process.env.DEVBOT_PREFIX
+    
 }
 
 const validatePermissions = (permissions) => {
@@ -53,10 +62,12 @@ const validatePermissions = (permissions) => {
   }
 
 const allCommands = {}
-const commandsList = []
+const commandList = []
 module.exports = (options) => {
   let {
       commands,
+      miniDescription,
+      listed = true,
       permissions = []
   } = options
 
@@ -80,6 +91,7 @@ module.exports = (options) => {
         permissions
     }
   }
+  commandList.push([commands, miniDescription, listed])
   console.log(`Registered command ${commands}.`)
 }
 
@@ -113,12 +125,13 @@ module.exports.listen = (client) => {
           }
 
           let {
-              commandName, 
+              miniDescription, 
               description,
               usage,
               minArgs = 0,
               maxArgs = null,
               listed = true,
+              operatorOnly = false,
               permissions = null,
               permissionError = 'You do not have permission to execute this command.',
               dmsEnabled = false,
@@ -133,6 +146,12 @@ module.exports.listen = (client) => {
 
           //Check permissions
           
+          if(operatorOnly === true)
+          {
+            if (!operators.includes(message.author.id)) {
+              return message.reply("Insufficient permissions. Only bot operators can run this command.")
+            }
+          }
           if(permissions)
           {
             for (const permission of permissions) {
@@ -161,7 +180,7 @@ module.exports.listen = (client) => {
               return 
           }
 
-          callback(message, arguments, arguments.join(' '), client, prefix, allCommands)
+          callback(message, arguments, arguments.join(' '), client, prefix, allCommands, commandList)
          
 
       }
@@ -183,15 +202,16 @@ async function loadPrefixes(client){
 
                 const result = await commandPrefixSchema.findOne({_id: guildId})
 
-                if (result){
-
+                  if (result){
+                  
                     guildPrefixes[guildId] = result.prefix
     
-                } else {
+                  } else {
     
                     guildPrefixes[guildId] = globalPrefix
     
-                }
+                  }
+                
 
             }
         } finally {
