@@ -117,9 +117,22 @@ module.exports.listen = (client) => {
 
       // Remove the command which is the first index
       const name = arguments.shift().toLowerCase()
-      if (name.startsWith(prefix)) {
-          const command = allCommands[name.replace(prefix, '')]
-          const commandName = name.replace(prefix, '')
+      const botMention = `<@!${client.user.id}>`
+      if (name.startsWith(prefix) || name === botMention) {
+          let command
+          let commandName
+          if(name.startsWith(prefix))
+          {
+            command = allCommands[name.replace(prefix, '')]
+            commandName = name.replace(prefix, '')
+          }
+          if(name.startsWith(botMention))
+          {
+
+            commandName = arguments.shift() //mention is the first index, not a prefix, so remove it and then command
+            command = allCommands[commandName]
+          }
+          
           if (!command) {
               return
           }
