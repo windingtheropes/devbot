@@ -3,8 +3,9 @@ const discord = require('discord.js')
 module.exports = {
     minArgs: 1,
     miniDescription: 'Start a poll.',
-    description: 'Start a poll. You can choose from either a simple yesno poll, or a fully customizable multiple poll. Starting a yesno poll is quite straightforward, just add the question after the type. As for the multiple type, you must add `|` between argument sections. An argument section is the question, or an emoji deffinition. An emoiji deffintion includes both the emoji and its deffinition. You can add as many emoji deffinitions as there are emojis accessible by the bot. In usage, arguments wrapped in () are for use with the `multiple` type only. Do not include the brackets in the actual execution of the command.',
+    description: 'Start a poll. You can choose from either a simple yesno poll, or a fully customizable multiple poll. Starting a yesno poll is quite straightforward, just add the question after the type. As for custom, you must add `|` between argument sections. An argument section is the question, or an emoji deffinition. An emoiji deffintion includes both the emoji and its deffinition. You can add as many emoji deffinitions as there are emojis accessible by the bot. In usage, arguments wrapped in () are for use with the `custom` type only. Do not include the brackets in the actual execution of the command.',
     usage: '<type - yesno/multiple> (|) <message> (| <emoji> <description> [| <emoj> <description>]))',
+    exampleUsage: ['yesno Is the poll command cool?', 'custom | What is your favourite programming language? | :python_emoji: Python | :javascript_emoji: Javascript | :csharp_emoji: C#'],
     commands: 'poll',
     callback: (message, args, text, client) => {
         const type = args[0].toLowerCase()
@@ -28,7 +29,7 @@ module.exports = {
                     poll.react('👎')
                 })
                 break;
-            case 'multiple':
+            case 'custom':
                 const deffs = text.replace(args[0], '')
                 const deffArray = deffs.split(/[|]+/)
                 deffArray.shift()

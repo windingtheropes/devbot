@@ -68,11 +68,15 @@ module.exports = (options) => {
       commands,
       miniDescription,
       listed = true,
+      exampleUsage,
       permissions = []
   } = options
 
   if (typeof commands === 'string') {
       commands = [commands]
+  }
+  if (typeof exampleUsage === 'string') {
+    exampleUsage = [exampleUsage]
   }
 
 
@@ -141,6 +145,7 @@ module.exports.listen = (client) => {
               miniDescription, 
               description,
               usage,
+              exampleUsage = [],
               minArgs = 0,
               maxArgs = null,
               listed = true,
