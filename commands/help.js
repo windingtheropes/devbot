@@ -27,6 +27,10 @@ module.exports = {
                         .setDescription(command.description)
                         .addField('Usage', `${prefix}${commandName} ${command.usage || ''}`, false)
                         .addField('Aliases', command.commands)
+                    const exampleUsageString = ''
+                    command.exampleUsage.forEach(use => {
+                        exampleUsageString = `${exampleUsageString}`
+                    })
                     message.channel.send(helpEmbed)
                 }
                 else
