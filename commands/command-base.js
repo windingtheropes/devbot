@@ -119,12 +119,12 @@ module.exports.listen = (client) => {
       const name = arguments.shift().toLowerCase()
       if (name.startsWith(prefix)) {
           const command = allCommands[name.replace(prefix, '')]
-         
+          const commandName = name.replace(prefix, '')
           if (!command) {
               return
           }
-
           let {
+              commands,
               miniDescription, 
               description,
               usage,
@@ -132,7 +132,7 @@ module.exports.listen = (client) => {
               maxArgs = null,
               listed = true,
               operatorOnly = false,
-              permissions = null,
+              permissions = [],
               permissionError = 'You do not have permission to execute this command.',
               dmsEnabled = false,
               dmsOnly = false,
@@ -142,6 +142,16 @@ module.exports.listen = (client) => {
           //Don't reply to a message sent by the bot
           if (author === client.user) {
               return
+          }
+
+          if (
+            arguments.length < minArgs ||
+            (maxArgs !== null && arguments.length > maxArgs)
+          ) {
+            message.reply(
+              `Incorrect syntax! Use ${prefix}${commandName} ${usage}.`
+            )
+            return
           }
 
           //Check permissions

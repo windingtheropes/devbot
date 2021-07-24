@@ -92,7 +92,6 @@ function commandsImport()
 function listenersImport()
 {
   //dynamically import commands
-  const blacklist = ['wordLists']
   const readListeners = (dir) => {
     const files = fs.readdirSync(path.join(__dirname, dir))
     for (const file of files) {
