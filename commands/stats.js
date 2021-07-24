@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-const {version} = require('../version.json')
 
 Object = require('../utils/objectForEach')
 
@@ -101,7 +100,7 @@ module.exports = {
                 .setTitle('Stats')
                 .setAuthor('devbot')
                 .setDescription('Server, user, and bot stats.')
-                .setFooter(`version ${version}`);
+                .setFooter(`created by windingtheropes`);
                 Object.forEach(statistics, (stat) => {
                     statsEmbed.addField(stat.title, stat.value, false)
                 })

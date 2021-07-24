@@ -26,8 +26,8 @@ client.on('ready', async () => {
   client.user.setPresence({
     status: 'online',
     activity: {
-        name: `version ${version} — created by windingtheropes`,
-        type: 'PLAYING'
+      type: 'PLAYING',
+      name: `!help — created by windingtheropes`,
     }
   })
 
