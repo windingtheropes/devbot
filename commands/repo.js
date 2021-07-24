@@ -1,6 +1,6 @@
 module.exports = {
-    commands: ['gitrepo', 'repo'],
+    commands: ['gitrepo', 'repo', 'devbotrepo'],
     callback: (message) => {
-        message.reply('devbot source code is hosted at https://github.com/alacriware/devbot.')
+        message.reply('The devbot source code is hosted at https://github.com/alacriware/devbot.')
     }
 }
