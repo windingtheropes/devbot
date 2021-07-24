@@ -3,7 +3,6 @@ const fs = require('fs')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
-const {version} = require('./version.json')
 const mongo = require('./utils/mongo')
 console = require('./utils/consoleBatchLog')
 
