@@ -5,8 +5,11 @@ try {
     operators = process.env.DEVBOT_OPERATORS.split(',')
 }
 module.exports = {
+    operatorOnly: true,
+    listed: false,
     dmsOnly: true,
     commands: 'setstatus',
+    miniDescription: "Set the bot's status. For operators only.",
     description: "Used to set the bot's status and presence. For bot operators only. Use clear as the first argument to clear the bot's status.",
     usage: '[visibility - online/idle/dnd | clear] [activity - playing/listening/watching/streaming] [status]',
     callback: (message, args, text, client) => {
@@ -19,9 +22,7 @@ module.exports = {
         var visibility = 'online'
         var activity
         var status
-        if (!operators.includes(message.author.id)) {
-            return message.reply("Insufficient permissions.")
-        }
+        
         visibility = args[0].toLowerCase()
         if (!['online', 'dnd', 'idle'].includes(visibility)) {
             if(!visibility == 'clear')

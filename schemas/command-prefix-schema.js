@@ -5,7 +5,6 @@ const commandPrefixSchema = mongoose.Schema({
         type: String,
         required: true
     },
-
     prefix: {
         type: String,
         required: true

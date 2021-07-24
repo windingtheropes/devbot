@@ -3,6 +3,7 @@ const stringToBool = require('../../utils/stringToBool')
 module.exports = {
     commands: 'kick',
     permissions: ['KICK_MEMBERS'],
+    miniDescription: 'Kick a server member.',
     description: 'Kick a member of the server. Requires the user executing the command to have the kick members permission. Cannot kick another user with the kick members permission.',
     usage: '<usermention> [senddm - true/false] [reason]',
     callback: (message, args, text, client) => {
