@@ -1,7 +1,7 @@
 # changelog
 
-## 1.1.0[dev] (in progress)
-rewrite majority of commands and functionality
+## 2.0.0beta
+rewrite majority of commands and functionality to be more powerful and much more efficient.
 ## 1.0.1.1
 disable commands in direct messages
 ## 1.0.1
