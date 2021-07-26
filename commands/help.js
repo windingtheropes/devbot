@@ -24,6 +24,10 @@ module.exports = {
                     command.exampleUsage.forEach(use => {
                         exampleUsageString = `${exampleUsageString}\n${prefix}${commandName} ${use}`
                     })
+                    if(command.enabled === false)
+                    {
+                        return
+                    }
                     const helpEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
                         .setTitle('Command help')
@@ -32,10 +36,6 @@ module.exports = {
                         .addField('Usage', `${prefix}${commandName} ${command.usage || ''}`, false)
                         .addField('Aliases', command.commands)
                         .addField('Example Usage', `${exampleUsageString || ''}`, false)
-                    if(command.enabled == false)
-                    {
-                        helpEmbed.setFooter('This command is disabled.')
-                    }
                     message.channel.send(helpEmbed)
                 }
                 else
