@@ -161,7 +161,7 @@ module.exports.listen = (client) => {
 
           if(enabled === false)
           {
-            return message.reply("This command is disabled.")
+            return
           }
           //Don't reply to a message sent by the bot
           if (author === client.user) {

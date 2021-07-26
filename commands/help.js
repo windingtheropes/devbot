@@ -18,16 +18,16 @@ module.exports = {
             
             if(command)
             {   
+                if(command.enabled === false)
+                {
+                    
+                }
                 if(command.description)
                 {
                     var exampleUsageString =''
                     command.exampleUsage.forEach(use => {
                         exampleUsageString = `${exampleUsageString}\n${prefix}${commandName} ${use}`
                     })
-                    if(command.enabled === false)
-                    {
-                        return
-                    }
                     const helpEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
                         .setTitle('Command help')
