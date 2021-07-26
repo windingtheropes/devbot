@@ -32,6 +32,10 @@ module.exports = {
                         .addField('Usage', `${prefix}${commandName} ${command.usage || ''}`, false)
                         .addField('Aliases', command.commands)
                         .addField('Example Usage', `${exampleUsageString || ''}`, false)
+                    if(command.enabled == false)
+                    {
+                        helpEmbed.setFooter('This command is disabled.')
+                    }
                     message.channel.send(helpEmbed)
                 }
                 else
