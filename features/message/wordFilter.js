@@ -25,7 +25,7 @@ function loadWords() {
 }
 catch
 {
-    //no word lists or some other error that wont be handled 
+    //no word lists/another error
 }
 }
 
