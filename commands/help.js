@@ -18,6 +18,10 @@ module.exports = {
             
             if(command)
             {   
+                if(command.enabled === false)
+                {
+                    
+                }
                 if(command.description)
                 {
                     var exampleUsageString =''

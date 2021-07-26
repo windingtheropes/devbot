@@ -1,5 +1,4 @@
 const allMessageListeners = []
-  
   module.exports = (callback) => {
        allMessageListeners.push(callback)
        console.log("Registered new message listener.")
@@ -7,7 +6,6 @@ const allMessageListeners = []
   
   module.exports.listen = (client) => {
     client.on('message', (message) => {
-        
         allMessageListeners.forEach(callback => {
 
           //don't trigger the listener callback from a message that the bot sent
@@ -20,3 +18,4 @@ const allMessageListeners = []
   
     })
   }
+

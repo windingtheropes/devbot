@@ -26,7 +26,7 @@ client.on('ready', async () => {
     status: 'online',
     activity: {
       type: 'PLAYING',
-      name: `!help — created by windingtheropes`,
+      name: `!help — github.com/alacriware/devbot`,
     }
   })
 

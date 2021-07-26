@@ -68,6 +68,7 @@ module.exports = (options) => {
       commands,
       miniDescription,
       listed = true,
+      enabled,
       exampleUsage,
       permissions = []
   } = options
@@ -145,6 +146,7 @@ module.exports.listen = (client) => {
               miniDescription, 
               description,
               usage,
+              enabled = true,
               exampleUsage = [],
               minArgs = 0,
               maxArgs = null,
@@ -157,6 +159,10 @@ module.exports.listen = (client) => {
               callback,
           } = command  
 
+          if(enabled === false)
+          {
+            return
+          }
           //Don't reply to a message sent by the bot
           if (author === client.user) {
               return
