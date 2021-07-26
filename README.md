@@ -18,8 +18,6 @@ token: the bot token, get it from https://discord.com/developers/applications/AP
 prefix: the default bot prefix.\
 operators: users who have access to internal bot commands, like setstatus. Only give this permission to people you trust.\
 mongoPath: the path to your database. should be the same if local, otherwise, provide the connection path there.\
-### words/
-the words/ directory contains banned word lists, separated by commas.
 ```
 {
 "token":"BOT-TOKEN-GOES-HERE",
@@ -28,6 +26,9 @@ the words/ directory contains banned word lists, separated by commas.
 "mongoPath": "mongodb://path/goes/here"
 }
 ```
+### words/
+the words/ directory contains banned word lists, separated by commas.
+
 # devbot public
 devbot is publicly available as a Discord bot. [invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
 Devbot is still in early stages of development. Please report bugs and provide feedback on the [issues](https://github.com/windingtheropes/devbot/issues) page.
