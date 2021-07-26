@@ -137,7 +137,6 @@ module.exports.listen = (client) => {
             commandName = arguments.shift() //mention is the first index, not a prefix, so remove it and then command
             command = allCommands[commandName]
           }
-          
           if (!command) {
               return
           }
