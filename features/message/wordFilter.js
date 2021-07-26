@@ -25,6 +25,7 @@ catch
 }
 
 module.exports = {
+    enabled: false,
     callback: (message) => {
         const { content } = message
     bannedWords.forEach(word => {
