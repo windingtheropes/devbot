@@ -9,14 +9,13 @@ if you want to host devbot yourself, it's highly recommended that you use a stab
 node.js and npm are required to run devbot. download node.js [here](https://nodejs.org/en/).
 after downloading and extracting devbot a release or cloning the source code, navigate to the directory where you extracted/cloned the code and run `npm install`. this will install the required dependencies to run devbot.\
 run `node index.js` to start the bot.
-## config.json
-config.json is located in the src/ folder of devbot.
-### format
-the config.json file contains sensitive and variable bot information, as such, is ignored in commits and must be added manually by the user. 
-### fields
+## config/
+the config directory is located at the root of the devbot running directory.\
+the config folder contains sensitive and variable information and contents must be added manually by the user who is hosting the bot. 
+### config.json
 the config.json file contains the following:\
 token: the bot token, get it from https://discord.com/developers/applications/APP-ID-GOES-HERE/bot > Token > Copy\
-prefix: the bot prefix, currently a constant value, not server variable (to be changed in the future)\
+prefix: the default bot prefix.\
 operators: users who have access to internal bot commands, like setstatus. Only give this permission to people you trust.\
 mongoPath: the path to your database. should be the same if local, otherwise, provide the connection path there.\
 ```
@@ -24,10 +23,12 @@ mongoPath: the path to your database. should be the same if local, otherwise, pr
 "token":"BOT-TOKEN-GOES-HERE",
 "prefix":"BOT-PREFIX-GOES-HERE",
 "operators": ["USERIDHERE", "USERIDHERE"],
-"mongoPath": "mongodb://localhost:27017"
+"mongoPath": "mongodb://path/goes/here"
 }
 ```
+### words/
+the words/ directory contains banned word lists, separated by commas.
+
 # devbot public
 devbot is publicly available as a Discord bot. [invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
-Devbot is still in early stages of development. If devbot is unresponsive after the execution of a command, please start an issue and repeat the steps which got you to unresponsiveness so we can work on fixing the issue. view and create [issues](https://github.com/windingtheropes/devbot/issues).
-due to current hosting limitations, devbot will be offline 8 days a month.
+Devbot is still in early stages of development. Please report bugs and provide feedback on the [issues](https://github.com/windingtheropes/devbot/issues) page.
