@@ -25,7 +25,7 @@ mongoPath: the path to your mongo database.
 }
 ```
 ### words/
-the words/ directory contains banned word lists, separated by commas.
+the words/ directory contains banned word lists, words separated by commas.
 
 # devbot public
 devbot is publicly available as a Discord bot. [invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
