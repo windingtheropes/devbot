@@ -4,14 +4,10 @@ const bannedWords = []
 
 loadWords()
 function loadWords() {
-    const wordsPath = path.join(__dirname, '../../config/words')
     try
     {
-
+        const wordsPath = path.join(__dirname, '../../config/words')
         fs.readdir(wordsPath, (err, files) => {
-        if (err)
-          console.log(err);
-        else {
           files.forEach(file => {
             const data = fs.readFileSync(path.join(wordsPath, file), 'utf8')
             const words = data.split(',')
@@ -20,7 +16,6 @@ function loadWords() {
             })
 
           })
-        }
     })
 }
 catch
@@ -29,14 +24,17 @@ catch
 }
 }
 
-module.exports = (message) => {
-    const { content } = message
+module.exports = {
+    enabled: false,
+    callback: (message) => {
+        const { content } = message
     bannedWords.forEach(word => {
         if(content.includes(` ${word} `) || content.startsWith(` ${word}`) || content.endsWith(`${word} `) || content === word)
         {
             message.delete()
         }
     })
+    }
 }
 
 

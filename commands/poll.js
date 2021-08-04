@@ -9,13 +9,11 @@ module.exports = {
     commands: 'poll',
     callback: (message, args, text, client) => {
         const type = args[0].toLowerCase()
-        const question = ''
+        let question
         const pollEmbed = new discord.MessageEmbed()
 
         .setColor('#0099ff')
-        .setTitle('Poll')
-        .setAuthor('devbot')
-
+        .setFooter(`Poll by ${message.author.username}`)
         switch(type) 
         {
             case 'yesno':
@@ -37,13 +35,13 @@ module.exports = {
         }
         function yesno()
         {
-            question = text.replace(args[0], '')
+                question = text.replace(args[0], '').substring(1)
                 if(!question || question === '')
                 {
                     return question.reply("You must provide a question for the poll.")
                 }
                 pollEmbed
-                .setDescription(question)
+                .setTitle(question)
                 message.channel.send(pollEmbed).then(poll => {
                     poll.react('👍')
                     poll.react('👎')
@@ -56,7 +54,7 @@ module.exports = {
                 deffArray.shift()
                 const emojis = []
                 const deffinitions = []
-                const question = deffArray[0]
+                const question = deffArray[0].substring(1)
                 deffArray.shift()
                 if(deffArray.length > 20)
                 {
@@ -78,9 +76,8 @@ module.exports = {
                     optionsString = `${optionsString}\n${item[0]} ${item[1]}`
                 })
                 pollEmbed
-                .setDescription(question)
-                .addField('Options', optionsString, false)
-                message.channel.send(pollEmbed).then(embed => {
+                .setDescription(optionsString)
+                message.channel.send(`📊 **${question}**`,pollEmbed).then(embed => {
                     emojis.forEach(emoji => {
                         try
                         {
@@ -123,7 +120,7 @@ module.exports = {
                 deffArray.shift()
                 const emojis =[]
                 const deffinitions = []
-                const question = deffArray[0]
+                const question = deffArray[0].substring(1)
                 deffArray.shift()
                 if(deffArray.length > 20)
                 {
@@ -144,9 +141,8 @@ module.exports = {
                     optionsString = `${optionsString}\n${item[0]} ${item[1]}`
                 })
                 pollEmbed
-                .setDescription(question)
-                .addField('Options', optionsString, false)
-                message.channel.send(pollEmbed).then(embed => {
+                .setDescription(optionsString)
+                message.channel.send(`📊 **${question}**`, pollEmbed).then(embed => {
                     deffinitions.forEach(arr => {
                         embed.react(arr[0])
                     })
