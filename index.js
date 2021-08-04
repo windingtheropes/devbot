@@ -13,8 +13,13 @@ const commandBase = require(`./commands/${commandBaseFile}`)
 
 //listener base
 
-const listenerBaseFile = 'listener-base.js'
-const listenerBase = require(`./features/message/${listenerBaseFile}`)
+const messageListenerBaseFile = 'messageListener-base.js'
+const messageListenerBase = require(`./features/message/${messageListenerBaseFile}`)
+
+//user join base
+
+const userJoinListenerBaseFile = 'userJoinListener-base.js'
+const userJoinListenerBase = require(`./features/userJoin/${userJoinListenerBaseFile}`)
 
 client.startTime = +new Date
 
@@ -53,7 +58,11 @@ client.on('ready', async () => {
 
   //listeners
 
-  listenersImport()
+  messageListenersImport()
+
+    //listeners
+
+  userJoinListenersImport()
 
   //start the command message listener
 
@@ -61,7 +70,7 @@ client.on('ready', async () => {
 
   //start the secondary message listener
 
-  listenerBase.listen(client)
+  messageListenerBase.listen(client)
 
 })
 
@@ -88,7 +97,7 @@ function commandsImport()
 }
 
 
-function listenersImport()
+function messageListenersImport()
 {
   //dynamically import commands
   const readListeners = (dir) => {
@@ -98,14 +107,35 @@ function listenersImport()
 
         if (stat.isDirectory()) {
             readListeners(path.join(dir, file))
-        } else if (file !== listenerBaseFile) {
+        } else if (file !== messageListenerBaseFile) {
             const callback = require(path.join(__dirname, dir, file))
-            listenerBase(callback)
+            messageListenerBase(callback)
         }
     }
 }
 
   readListeners('features/message')
+}
+
+
+
+function userJoinListenersImport()
+{
+  const readListeners = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir))
+    for (const file of files) {
+        const stat = fs.lstatSync(path.join(__dirname, dir, file))
+
+        if (stat.isDirectory()) {
+            readListeners(path.join(dir, file))
+        } else if (file !== userJoinListenerBaseFile) {
+            const callback = require(path.join(__dirname, dir, file))
+            userJoinListenerBase(callback)
+        }
+    }
+}
+
+  readListeners('features/userJoin')
 }
 
 try
