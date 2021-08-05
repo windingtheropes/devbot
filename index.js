@@ -60,8 +60,6 @@ client.on('ready', async () => {
 
   messageListenersImport()
 
-    //listeners
-
   userJoinListenersImport()
 
   //start the command message listener
@@ -71,6 +69,10 @@ client.on('ready', async () => {
   //start the secondary message listener
 
   messageListenerBase.listen(client)
+
+  //start the user join listener
+
+  userJoinListenerBase.listen(client)
 
 })
 
