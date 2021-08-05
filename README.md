@@ -31,3 +31,5 @@ the words/ directory contains banned word lists, words separated by commas.
 devbot is publicly available as a Discord bot. [invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
 Devbot is still in early stages of development. Please report bugs and provide feedback on the [issues](https://github.com/windingtheropes/devbot/issues) page.
 
+# framework
+to accelerate development of devbot, a framework has been adapted. This framework includes a powerful command handler, and different feature handlers for listeners. The devbot framework will likely be released in the future. 
