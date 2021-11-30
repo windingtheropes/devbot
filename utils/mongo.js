@@ -15,6 +15,7 @@ module.exports = async() => {
         useFindAndModify: false,
         useNewUrlParser: true,
         useUnifiedTopology: true
+        
     })
     return mongoose
 }

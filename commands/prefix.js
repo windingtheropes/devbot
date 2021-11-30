@@ -26,12 +26,15 @@ module.exports = {
                         try {
                             const guildId = message.guild.id
 
-                            await commandPrefixSchema.findOneAndUpdate({
+                            await commandPrefixSchema.findOneAndUpdate(
+                        {
                                 _id: guildId
-                            }, {
+                            }, 
+                            {
                                 _id: guildId,
                                 prefix
-                            }, {
+                            }, 
+                            {
                                 upsert: true
                             })
 
