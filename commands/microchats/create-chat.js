@@ -37,14 +37,26 @@ module.exports = {
         message.guild.channels
             .create(chatName, {
                 type: 'text',
+                parent: categoryId,
                 permissionOverwrites: [
                     {
                       id: everyoneRole.id,
                       deny: ['VIEW_CHANNEL'],
                    },
+                   {
+                    id: message.author.id,
+                    allow: ['VIEW_CHANNEL'],
+                 },
                 ]
             }).then(channel => {
-                channel.setParent(categoryId)
+                //TODO: add the channel to the mongodb database for the server
+                const newChat = {
+                    "id": channel.id,
+                    "members": [message.author.id.toString()]
+                }
+                const serverData = microchatsSchema.findOne({_id: guildId})
+                serverData.chats.push(newChat)
+                serverData.save()
                 message.channel.send(`${message.author.username} created a new chat: <#${channel.id}>`);
             })
 
