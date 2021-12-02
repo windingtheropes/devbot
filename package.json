@@ -1,17 +1,17 @@
 {
-  "name": "devbot",
-  "version": "1.0.0",
-  "description": "devbot",
-  "main": "index.js",
-  "dependencies": {
-    "discord.js": "^12",
-    "mongoose": "^5.13.2"
-  },
-  "engines": {
-    "node": "16.9.0"
-  },
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
-}
+    "name": "devbot",
+    "version": "1.0.0",
+    "description": "devbot",
+    "main": "index.js",
+    "dependencies": {
+      "discord.js": "^12",
+      "mongoose": "^5.13.2"
+    },
+    "engines": {
+      "node": "16.9.0"
+    },
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
