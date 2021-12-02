@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const commandPrefixSchema = mongoose.Schema({
+const schema = mongoose.Schema({
     //Guild ID
     _id: {
         type: String,
@@ -15,7 +15,6 @@ const commandPrefixSchema = mongoose.Schema({
         type: Array,
         required: false
     }
-    // chats: [{"id":"1234", "members":["12345"]}]  
 })
 
-module.exports = mongoose.model('guild-microchats', commandPrefixSchema)
+module.exports = mongoose.model('guild-microchats', schema)
