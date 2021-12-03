@@ -8,54 +8,49 @@ module.exports = {
     commands: 'chat',
     callback: async (message, args, text, client) => {
         if(args.length < 1) return message.channel.send('Please specify a chat name.')
-        let chatName = args.join(' ');
+        var chatName = args.join(' ');
         if(chatName.length >= 32) return message.channel.send('Chat name must be 32 characters or less.')
-        let everyoneRole = message.guild.roles.cache.find(r => r.name === '@everyone');
+        var everyoneRole = message.guild.roles.cache.find(r => r.name === '@everyone');
         const guildId = message.guild.id
-    let categoryId
-
+        
+        await checkData(guildId, message, chatName)
         
             
 
-        const serverData = await microchatsSchema.findOne({_id: guildId})
-        if(!serverData)
-        {
-            message.guild.channels.create("Chats", {
-                type: 'category', permissionOverwrites: [{id: everyoneRole.id, deny: ['VIEW_CHANNEL']}]}).then(async cat => {
-                    const newServerData = new microchatsSchema({
-                        _id: guildId,
-                        categoryId: cat.id,
-                        chats: []
-                    })
-                    categoryId = cat.id
-                    await newServerData.save()
-                    
-
-                })
-        }
-        else
-        {
-        
-        }
-
-        
-        message.guild.channels
-            .create(chatName, {
-                type: 'text',
-                parent: categoryId,
-                lockPermissions: false
-            }).then(async channel =>{
-                const newChat = {
-                    "id": channel.id,
-                    "members": [message.author.id.toString()]
-                }
-                serverData.chats.push(newChat)
-                await serverData.save()
-                message.channel.send(`${message.author.username} created a new chat: <#${channel.id}>`);
-            })
-
-            
+       
             
           
     }
+}
+
+async function checkData(gid, message, chatName)
+{
+    const serverData = await microchatsSchema.findOne({_id: gid})
+    if(!serverData)
+    {
+        console.log("No data found for server " + gid)
+                // const category = await message.guild.channels.create("Chats", {
+                //     type: "category",
+                //     permissionOverwrites: [
+                //         {
+                //             id: message.guild.id,
+                //             deny: ['VIEW_CHANNEL']
+                //         },
+                //     ]})
+                // console.log(category.id)
+                const newServerData = new microchatsSchema({
+                    _id: gid,
+                    categoryId: '0',
+                    chats: []
+                })
+                newServerData.save()
+                console.log("Created new server data for server " + gid)
+        
+            }
+    else
+    {
+        console.log("Data found for server " + gid)
+        console.log(serverData)
+    }
+    return 
 }
