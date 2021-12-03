@@ -13,7 +13,7 @@ module.exports = {
         var everyoneRole = message.guild.roles.cache.find(r => r.name === '@everyone');
         const guildId = message.guild.id
         
-        await checkData(guildId, message, chatName)
+        checkData(guildId, message, chatName)
         
             
 
@@ -28,25 +28,41 @@ async function checkData(gid, message, chatName)
     const serverData = await microchatsSchema.findOne({_id: gid})
     if(!serverData)
     {
-        console.log("No data found for server " + gid)
-                // const category = await message.guild.channels.create("Chats", {
-                //     type: "category",
-                //     permissionOverwrites: [
-                //         {
-                //             id: message.guild.id,
-                //             deny: ['VIEW_CHANNEL']
-                //         },
-                //     ]})
-                // console.log(category.id)
-                const newServerData = new microchatsSchema({
-                    _id: gid,
-                    categoryId: '0',
-                    chats: []
-                })
-                newServerData.save()
-                console.log("Created new server data for server " + gid)
-        
-            }
+        //create a category then log the category in the database
+        const category = await message.guild.channels.create(`Chats`, { type: 'category', permissionOverwrites: [{id: gid, deny: ['VIEW_CHANNEL']}] })
+        const chat = await message.guild.channels.create(chatName, {type: 'text', parent:category.id})
+        const newServerData = new microchatsSchema({            
+            _id: gid,
+            categoryId: category.id,
+            chats: [{
+                name: chatName,
+                id: chat.id,
+                members: [],
+            }]
+        })
+
+        newServerData.save()
+        message.channel.send(`Created chat ${chatName}`)
+
+
+        // OLD CODE 
+        // const category = await message.guild.channels.create("Chats", {
+        //             type: "category",
+        //             permissionOverwrites: [
+        //                 {
+        //                     id: message.guild.id,
+        //                     deny: ['VIEW_CHANNEL']
+        //                 },
+        //             ]})
+        //         console.log(category.id)
+        //         const newServerData = new microchatsSchema({
+        //             _id: gid,
+        //             categoryId: '0',
+        //             chats: []
+        //         })
+        //         newServerData.save()
+        //         console.log("Created new server data for server " + gid)
+    }
     else
     {
         console.log("Data found for server " + gid)

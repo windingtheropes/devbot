@@ -12,8 +12,8 @@ const schema = mongoose.Schema({
     },
     //IDs of the chat channels
     chats: {
-        type: Array,
-        required: false
+        type:Array,
+        required: true
     }
 })
 
