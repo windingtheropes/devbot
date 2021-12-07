@@ -3,7 +3,7 @@ const fs = require('fs')
 const Discord = require('discord.js')
 
 const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
-
+const microchatsSchema = require('./schemas/microchats-schema.js')
 const mongo = require('./utils/mongo')
 
 
@@ -35,6 +35,7 @@ client.on('ready', async () => {
       name: `!help — github.com/alacriware/devbot`,
     }
   })
+
 
   await mongo().then(mongoose => {
     try {
@@ -74,6 +75,8 @@ client.on('ready', async () => {
   //start the user join listener
 
   userJoinListenerBase.listen(client)
+
+
 
 })
 

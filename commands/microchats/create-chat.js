@@ -40,33 +40,16 @@ async function checkData(gid, message, chatName)
                 members: [],
             }]
         })
-
         newServerData.save()
-        message.channel.send(`Created chat ${chatName}`)
-
-
-        // OLD CODE 
-        // const category = await message.guild.channels.create("Chats", {
-        //             type: "category",
-        //             permissionOverwrites: [
-        //                 {
-        //                     id: message.guild.id,
-        //                     deny: ['VIEW_CHANNEL']
-        //                 },
-        //             ]})
-        //         console.log(category.id)
-        //         const newServerData = new microchatsSchema({
-        //             _id: gid,
-        //             categoryId: '0',
-        //             chats: []
-        //         })
-        //         newServerData.save()
-        //         console.log("Created new server data for server " + gid)
     }
-    else
+    else 
     {
-        console.log("Data found for server " + gid)
-        console.log(serverData)
+        const chat = await message.guild.channels.create(chatName, {type: 'text', parent: serverData.categoryId, permissionOverwrites: [{id: message.author.id, allow: ['VIEW_CHANNEL']}, {id: gid, deny: ['VIEW_CHANNEL']}]})
+        microchatsSchema.findOneAndUpdate({_id: gid}, {$push: {chats: {name: chatName, id: chat.id, members: [ `${message.author.id}` ]}}}, {new: true}, (err, doc) => {
+            if(err) console.log(err)
+        })
     }
+        
+        message.channel.send(`Created chat ${chatName}`)
     return 
 }
