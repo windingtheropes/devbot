@@ -160,11 +160,11 @@ module.exports.listen = (client) => {
 
           if(enabled === false)
           {
-            return
+            return message.channel.send("This command is currently disabled, but it is available in the codebase, found at <https://github.com/alacriware/devbot>.")
           }
           //Don't reply to a message sent by the bot
           if (author === client.user) {
-              return
+            return
           }
 
           if (
