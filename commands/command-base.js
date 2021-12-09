@@ -66,10 +66,10 @@ const commandList = []
 module.exports = (options) => {
   let {
       commands,
-      miniDescription,
+      miniDescription = 'unavailable',
       listed = true,
       enabled,
-      exampleUsage,
+      exampleUsage = 'unavailable',
       permissions = []
   } = options
 
@@ -142,9 +142,9 @@ module.exports.listen = (client) => {
           }
           let {
               commands,
-              miniDescription, 
-              description,
-              usage,
+              miniDescription = 'unavailable', 
+              description = 'unavailable',
+              usage = 'unavailable',
               enabled = true,
               exampleUsage = [],
               minArgs = 0,
@@ -160,11 +160,11 @@ module.exports.listen = (client) => {
 
           if(enabled === false)
           {
-            return
+            return message.channel.send("This command is currently disabled, but it is available in the codebase, found at <https://github.com/alacriware/devbot>.")
           }
           //Don't reply to a message sent by the bot
           if (author === client.user) {
-              return
+            return
           }
 
           if (

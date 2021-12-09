@@ -10,11 +10,12 @@ catch
     mongoPath = process.env.DEVBOT_MONGOPATH
 }
 
-module.exports = async() => {
+module.exports = async () => {
     await mongoose.connect(mongoPath, {  
         useFindAndModify: false,
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        keepAlive: true,
     })
     return mongoose
 }

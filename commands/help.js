@@ -28,14 +28,18 @@ module.exports = {
                     command.exampleUsage.forEach(use => {
                         exampleUsageString = `${exampleUsageString}\n${prefix}${commandName} ${use}`
                     })
+                    if(exampleUsageString === '')
+                    {
+                        exampleUsageString = 'unavailable'
+                    }
                     const helpEmbed = new Discord.MessageEmbed()
                         .setColor('#0099ff')
                         .setTitle('Command help')
                         .setAuthor('devbot')
-                        .setDescription(command.description)
-                        .addField('Usage', `${prefix}${commandName} ${command.usage || ''}`, false)
-                        .addField('Aliases', command.commands)
-                        .addField('Example Usage', `${exampleUsageString || ''}`, false)
+                        .setDescription(command.description || "unavailable")
+                        .addField('Usage', `${prefix}${commandName} ${command.usage || 'unavailable'}`, false)
+                        .addField('Aliases', command.command || 'unavailable')
+                        .addField('Example Usage', `${exampleUsageString || 'unavailable'}`, false)
                     message.channel.send(helpEmbed)
                 }
                 else
