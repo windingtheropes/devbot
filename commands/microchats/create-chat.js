@@ -1,5 +1,3 @@
-const { Permissions } = require("discord.js");
-const mongo = require('../../utils/mongo')
 const microchatsSchema = require('../../schemas/microchats-schema')
 
 
@@ -14,11 +12,7 @@ module.exports = {
         var everyoneRole = message.guild.roles.cache.find(r => r.name === '@everyone');
         const guildId = message.guild.id
         checkData(guildId, message, chatName)
-        
-            
-
-       
-            
+ 
           
     }
 }

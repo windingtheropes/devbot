@@ -6,7 +6,7 @@ const client = new Discord.Client({ intents: ["GUILDS", "GUILD_MESSAGES"] })
 const microchatsSchema = require('./schemas/microchats-schema.js')
 const mongo = require('./utils/mongo')
 
-
+client.setMaxListeners(0);
 //command base
 
 const commandBaseFile = 'command-base.js'
@@ -21,6 +21,9 @@ const messageListenerBase = require(`./features/message/${messageListenerBaseFil
 
 const userJoinListenerBaseFile = 'userJoinListener-base.js'
 const userJoinListenerBase = require(`./features/userJoin/${userJoinListenerBaseFile}`)
+
+const vcStateChangeListenerBaseFile = 'vcStateChangeListener-base.js'
+const vcStateChangeListenerBase = require(`./features/vcStateChanged/${vcStateChangeListenerBaseFile}`)
 
 client.startTime = +new Date
 
@@ -37,9 +40,10 @@ client.on('ready', async () => {
   })
 
 
-  await mongo().then(mongoose => {
+  await mongo().then(async mongoose => {
     try {
-       console.log("Connected to mongo.")
+       await console.log("Connected to mongo.")
+       
      } 
      catch
      {
@@ -64,6 +68,8 @@ client.on('ready', async () => {
 
   userJoinListenersImport()
 
+  vcStateChangeListenersImport()
+
   //start the command message listener
 
   commandBase.listen(client)
@@ -75,6 +81,10 @@ client.on('ready', async () => {
   //start the user join listener
 
   userJoinListenerBase.listen(client)
+
+  vcStateChangeListenerBase.listen(client)
+
+
 
 
 
@@ -140,9 +150,28 @@ function userJoinListenersImport()
         }
     }
 }
-
   readListeners('features/userJoin')
 }
+
+
+function vcStateChangeListenersImport()
+{
+  const readListeners = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir))
+    for (const file of files) {
+        const stat = fs.lstatSync(path.join(__dirname, dir, file))
+
+        if (stat.isDirectory()) {
+            readListeners(path.join(dir, file))
+        } else if (file !== vcStateChangeListenerBaseFile) {
+            const callback = require(path.join(__dirname, dir, file))
+            vcStateChangeListenerBase(callback)
+        }
+    }
+}
+  readListeners('features/vcStateChanged')
+}
+
 
 try
 {
