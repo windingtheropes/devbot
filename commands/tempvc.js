@@ -1,7 +1,7 @@
 const tvcschema = require('../schemas/tempvoicechat-schema.js')
 const mongo = require('../utils/mongo.js')
 module.exports = {
-    commands: ['tvc'],
+    commands: ['tvc', 'tempvc'],
     minArgs: 2,
     description: 'Create a temporary voice chat. ',
     exampleUsage: ['tvc 0 temporary'],
@@ -28,7 +28,7 @@ module.exports = {
     //create a channel then log the channel id to the database
 
     const channel = await message.guild.channels.create(args.join(' '), {
-        type: 'voice',
+        type: 'GUILD_VOICE',
         userLimit: limit
     })
 
@@ -48,6 +48,7 @@ module.exports = {
                     {
                         upsert: true
                     })
+                    message.reply({content: `Created a temporary voice chat ${'`' + channel.name + '`'} ${+ limit > 0 ? `with a limit of ${limit} user${limit > 1 ? 's' : ''}` : ''}.`})
         return
             
         } finally {

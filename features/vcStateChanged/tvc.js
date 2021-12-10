@@ -3,14 +3,14 @@ const tvcschema = require('../../schemas/tempvoicechat-schema')
 module.exports = {
     callback: async (oldm, newm, client) => {
         
-        const guildId = oldm.guild.id
+        
         await mongo().then(async (mongoose) => {
             try {
                 const serverData = await tvcschema.findOne({_id: guildId})
         if(!serverData) return 
+        
             const guild = client.guilds.cache.get(guildId)
             const channel = guild.channels.cache.get(oldm.channel.id)
-            const members = channel.members
 
             if(!serverData.channels.find(c => c === channel.id)) return
 
