@@ -14,6 +14,7 @@ module.exports = {
            .setTitle(`${message.guild.name} information`)
            .addField('ID', message.guild.id, false)
            .addField('Creation Date', `${getTimePassed(Date.now() - message.guild.createdAt)} ago (${new Date(message.guild.createdAt).toUTCString()})`)
+           .addField('Member Count', `${message.guild.memberCount}`, false)
             return message.reply({embeds: [embed], allowedMentions: {repliedUser: false}})
           
 

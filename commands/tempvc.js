@@ -9,62 +9,63 @@ module.exports = {
     usage: '<user limit> <channel name>',
     callback: async (message, args, text, client) => {
         // !tempchat <limit> <name>
-        
-       const limit = args[0]
+
+        const limit = args[0]
         args.shift()
-        
-       if(!limit.typeof === 'number') {
-           return message.channel.send("Please enter a valid number of users or zero for unlimited.")
-       }
+        const name = args.join(' ')
 
-       if(limit > 100)
-       {
-           return message.channel.send("The limit cannot be greater than 100.")
-       }
+        if (!Number(limit)) {
+            return message.channel.send("Please enter a valid number of users or zero for unlimited.")
+        }
 
-       
+        if (limit > 100) {
+            return message.channel.send("The limit cannot be greater than 100.")
+        }
 
-       
-    //create a channel then log the channel id to the database
 
-    const channel = await message.guild.channels.create(args.join(' '), {
-        type: 'GUILD_VOICE',
-        userLimit: limit
-    })
 
-    const cid = channel.id
-    const gid = message.guild.id
-    
-    await mongo().then(async (mongoose) => {
-        try {
-            await tvcschema.findOneAndUpdate(
-                {
+
+        //create a channel then log the channel id to the database
+
+        const channel = await message.guild.channels.create(name, {
+            type: 'GUILD_VOICE',
+            userLimit: limit
+        })
+
+        const cid = channel.id
+        const gid = message.guild.id
+
+        await mongo().then(async (mongoose) => {
+            try {
+                await tvcschema.findOneAndUpdate(
+                    {
                         _id: gid
-                    }, 
-                    {$push: {
-                        channels: [cid]
-                    }
-                    }, 
+                    },
+                    {
+                        $push: {
+                            channels: [cid]
+                        }
+                    },
                     {
                         upsert: true
                     })
-                    message.reply({content: `Created a temporary voice chat ${'`' + channel.name + '`'} ${+ limit > 0 ? `with a limit of ${limit} user${limit > 1 ? 's' : ''}` : ''}.`})
-        return
-            
-        } finally {
-            mongoose.connection.close()
-        }
-    })
-        
+                message.reply({ content: `Created a temporary voice chat ${'`' + channel.name + '`'} ${+ limit > 0 ? `with a limit of ${limit} user${limit > 1 ? 's' : ''}` : ''}.` })
+                return
+
+            } finally {
+                mongoose.connection.close()
+            }
+        })
+
     }
-   
-    
 
 
 
 
 
-       
-       
-    
+
+
+
+
+
 }

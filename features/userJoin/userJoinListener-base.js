@@ -8,7 +8,6 @@ const allJoinListeners = []
     client.on('guildMemberAdd', (member) => {
         allJoinListeners.forEach(option => {
 
-          //don't trigger the listener callback from a message that the bot sent
           console.log(client.user)
           console.log(member)
 
