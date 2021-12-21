@@ -6,6 +6,7 @@ module.exports = {
     description: 'Ban a member of the server. Requires the user executing the command to have the ban members permission. Cannot ban another user with the ban members permission.',
     usage: '<usermention> [senddm - true/false] [delete x days of messages - 0/1/7] [reason]',
     commands: 'ban',
+    enabled: false,
     callback: (message, args, text, client) => {
         const { member, mentions } = message
         const botInServer = message.guild.members.cache.get(client.user.id)
@@ -46,8 +47,8 @@ module.exports = {
                 }
                 text = text.replace(args[0], '').replace(args[1], '').replace(args[2], '').substring(2)
                 if (text) {
-                    if (text.length > 512) {
-                        return message.reply("Reason must be 512 character or shorter.")
+                    if (text.length >= 512) {
+                        return message.reply("Reason must be 512 characters or shorter.")
                     }
                     reason = text
                 }

@@ -1,0 +1,11 @@
+{
+    "generic":{
+        "error": "There was an error."
+    },
+    "command": {
+        "whois": {
+            "uncached": "The user {0} is not cached. Using the `whois` command with a mention should cache the specified user.",
+            "not-found": "User not found."
+        }
+    }
+}
