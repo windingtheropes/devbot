@@ -5,10 +5,11 @@ Object = require('../utils/objectForEach')
 
 module.exports = {
     commands: ['stats'],
+    enabled: false,
     miniDescription: 'Bot, server and user stats.',
     description: 'Bot, server and user stats. To get a specific statistic, you can specify it as the first argument.',
     usage: '[statistic]',
-    callback: (command, args, text, client) => {
+    callback: async (command, args, text, client) => {
         
     var embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
@@ -102,10 +103,11 @@ module.exports = {
                 .setDescription('Server, user, and bot stats.')
                 .setFooter(`created by windingtheropes`);
                 Object.forEach(statistics, (stat) => {
+                    
                     statsEmbed.addField(stat.title, stat.value, false)
                 })
             
-            command.channel.send(statsEmbed);
+            await command.channel.send({embeds: [statsEmbed]});
     }      
     },
 }

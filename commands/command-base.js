@@ -101,7 +101,7 @@ module.exports = (options) => {
 }
 
 module.exports.listen = (client) => {
-  client.on('message', async (message) => {
+  client.on('messageCreate', async (message) => {
       var loadedPrefix
       const { member, content, guild, author } = message 
     

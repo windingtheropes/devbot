@@ -1,0 +1,71 @@
+const tvcschema = require('../schemas/tempvoicechat-schema.js')
+const mongo = require('../utils/mongo.js')
+module.exports = {
+    commands: ['tvc', 'tempvc'],
+    minArgs: 2,
+    description: 'Create a temporary voice chat. ',
+    exampleUsage: ['tvc 0 temporary'],
+    miniDescription: 'Create a temporary voice chat.',
+    usage: '<user limit> <channel name>',
+    callback: async (message, args, text, client) => {
+        // !tempchat <limit> <name>
+
+        const limit = args[0]
+        args.shift()
+        const name = args.join(' ')
+
+        if (!Number(limit)) {
+            return message.channel.send("Please enter a valid number of users or zero for unlimited.")
+        }
+
+        if (limit > 100) {
+            return message.channel.send("The limit cannot be greater than 100.")
+        }
+
+
+
+
+        //create a channel then log the channel id to the database
+
+        const channel = await message.guild.channels.create(name, {
+            type: 'GUILD_VOICE',
+            userLimit: limit
+        })
+
+        const cid = channel.id
+        const gid = message.guild.id
+
+        await mongo().then(async (mongoose) => {
+            try {
+                await tvcschema.findOneAndUpdate(
+                    {
+                        _id: gid
+                    },
+                    {
+                        $push: {
+                            channels: [cid]
+                        }
+                    },
+                    {
+                        upsert: true
+                    })
+                message.reply({ content: `Created a temporary voice chat ${'`' + channel.name + '`'} ${+ limit > 0 ? `with a limit of ${limit} user${limit > 1 ? 's' : ''}` : ''}.` })
+                return
+
+            } finally {
+                mongoose.connection.close()
+            }
+        })
+
+    }
+
+
+
+
+
+
+
+
+
+
+}

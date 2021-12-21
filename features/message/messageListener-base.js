@@ -5,7 +5,7 @@ const allMessageListeners = []
   }
   
   module.exports.listen = (client) => {
-    client.on('message', (message) => {
+    client.on('messageCreate', (message) => {
         allMessageListeners.forEach(option => {
 
           //don't trigger the listener callback from a message that the bot sent
