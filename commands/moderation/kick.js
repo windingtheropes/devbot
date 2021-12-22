@@ -6,12 +6,12 @@ module.exports = {
     miniDescription: 'Kick a server member.',
     description: 'Kick a member of the server. Requires the user executing the command to have the kick members permission. Cannot kick another user with the kick members permission.',
     usage: '<usermention> [senddm - true/false] [reason]',
-    enabled: false,
+    minArgs: 2,
     callback: (message, args, text, client) => {
         const { member, mentions, guild } = message
          
             const botInServer = message.guild.members.cache.get(client.user.id)
-            if(!botInServer.hasPermission('ADMINISTRATOR') || !botInServer.hasPermission('KICK_MEMBERS'))
+            if(!botInServer.permissions.has('ADMINISTRATOR') || !botInServer.permissions.has('KICK_MEMBERS'))
             { 
                 return message.reply("I do not have permission to kick members.")
             }
@@ -54,13 +54,22 @@ module.exports = {
                 }
                    
                 const targetMember = message.guild.members.cache.get(targetId)
+                if(!targetMember)
+                {
+                    return message.reply("Member not found.")
+                }
 
-                if(targetMember.hasPermission('ADMINISTRATOR') || targetMember.hasPermission('KICK_MEMBERS'))
+                if(targetMember.permissions.has('ADMINISTRATOR') || targetMember.permissions.has('KICK_MEMBERS'))
                 {
                      return message.reply("You cannot ban a user who has kick permissions or admin.")
                 }
-                
-                kick(message.channel.guild, targetMember, sendMessage, reason)
+                try
+                { 
+                    kick(message.channel.guild, targetMember, sendMessage, reason)
+                }
+                 catch{
+                     return message.reply("There was an erorr.")
+                 }
                
                 return message.reply(`Kicked ${userToKickMention} for ${(reason || 'no reason')}.`)
             }

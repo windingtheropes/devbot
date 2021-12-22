@@ -6,11 +6,11 @@ module.exports = {
     description: 'Ban a member of the server. Requires the user executing the command to have the ban members permission. Cannot ban another user with the ban members permission.',
     usage: '<usermention> [senddm - true/false] [delete x days of messages - 0/1/7] [reason]',
     commands: 'ban',
-    enabled: false,
+    minArgs: 4,
     callback: (message, args, text, client) => {
         const { member, mentions } = message
         const botInServer = message.guild.members.cache.get(client.user.id)
-        if (!botInServer.hasPermission('ADMINISTRATOR') || !botInServer.hasPermission('BAN_MEMBERS')) {
+        if (!botInServer.permissions.has('ADMINISTRATOR') || !botInServer.permissions.has('BAN_MEMBERS')) {
             return message.reply("I do not have permission to ban members.")
         }
         const target = args[0]
@@ -33,7 +33,7 @@ module.exports = {
             if (args[2]) {
                 switch (args[2]) {
                     case '0':
-                        message.reply("Will not delete any messages from user.")
+                        
                         break;
                     case '1':
                         days = 1
@@ -42,7 +42,7 @@ module.exports = {
                         days = 7
                         break;
                     default:
-                        message.reply("Will not delete any messages from user.")
+                        
                         break;
                 }
                 text = text.replace(args[0], '').replace(args[1], '').replace(args[2], '').substring(2)
@@ -55,12 +55,21 @@ module.exports = {
             }
 
             const targetMember = message.guild.members.cache.get(targetId)
-
-            if (targetMember.hasPermission('ADMINISTRATOR') || targetMember.hasPermission('BAN_MEMBERS')) {
+            if(!targetMember)
+            {
+                return message.reply("Member not found.")
+            }
+            if (targetMember.permissions.has('ADMINISTRATOR') || targetMember.permissions.has('BAN_MEMBERS')) {
                 return message.reply("You cannot ban a user who has ban permissions or admin.")
             }
 
-            ban(message.channel.guild, targetMember, sendMessage, { reason: reason, days: days })
+           try
+           { 
+               ban(message.channel.guild, targetMember, sendMessage, { reason: reason, days: days })
+            }
+            catch{
+                return message.reply("There was an erorr.")
+            }
 
             return message.reply(`Banned ${userToBanMention} for ${(reason || 'no reason')} and deleted ${(days || 0)} days' worth of messages from this user.`)
         }

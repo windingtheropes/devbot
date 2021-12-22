@@ -188,7 +188,7 @@ module.exports.listen = (client) => {
           if(permissions)
           {
             for (const permission of permissions) {
-                if (!member.hasPermission(permission) && !member.hasPermission('ADMINISTRATOR')) {
+                if (!member.permissions.has(permission) && !member.permissions.has('ADMINISTRATOR')) {
                     message.reply(permissionError)
                     return
                 }
