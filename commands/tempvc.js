@@ -3,8 +3,8 @@ const mongo = require('../utils/mongo.js')
 module.exports = {
     commands: ['tvc', 'tempvc'],
     minArgs: 2,
-    description: 'Create a temporary voice chat. ',
-    exampleUsage: ['tvc 0 temporary'],
+    description: 'Create a temporary voice chat. As soon as the voice chat is empty, it will be deleted. You can set the user limit and channel name consecutively, use 0 for no limit.',
+    exampleUsage: ['0 temporary'],
     miniDescription: 'Create a temporary voice chat.',
     usage: '<user limit> <channel name>',
     callback: async (message, args, text, client) => {

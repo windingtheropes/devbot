@@ -3,7 +3,7 @@ const getTimePassed = require('../utils/getTimeFromTimestamp')
 module.exports = {
     name: "whois",
     miniDescription: 'Get information about a user.',
-    description: 'Get information about a user.',
+    description: 'Get detaileed information about a user. The query can be a user mention, a user ID, or a username. If no arguments are provided, the user who sent the command will be used.',
     usage: '[query]',
     commands: ['whois'],
     callback: (message, args, text, client, prefix) => {

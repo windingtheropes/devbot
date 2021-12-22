@@ -5,7 +5,7 @@ const getTimePassed = require('../utils/getTimeFromTimestamp')
 module.exports = {
     name: "channelinfo",
     miniDescription: 'Get information about a channel.',
-    description: 'Get information about a channel.',
+    description: 'Get information about a channel. The query can be a channel ID or a channel mention. If the query is not passed, information for the current channel will be returned.',
     usage: '<query>',
     commands: ['channelinfo'],
     callback: async (message, args, text, client) => {

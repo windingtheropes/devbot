@@ -6,6 +6,7 @@ module.exports = {
     miniDescription: 'Kick a server member.',
     description: 'Kick a member of the server. Requires the user executing the command to have the kick members permission. Cannot kick another user with the kick members permission.',
     usage: '<usermention> [senddm - true/false] [reason]',
+    enabled: false,
     callback: (message, args, text, client) => {
         const { member, mentions, guild } = message
          
@@ -44,7 +45,7 @@ module.exports = {
                     text = text.replace(args[0], '').replace(args[1], '').substring(2)
                     if(text)
                     {
-                        if(text.length > 512)
+                        if(text.length >= 512)
                         {
                             return message.reply("Reason must be 512 character or shorter.")
                         }
