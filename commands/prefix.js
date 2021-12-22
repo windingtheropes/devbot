@@ -12,7 +12,7 @@ module.exports = {
         const { member } = message
         if (args[0]) {
             if (args[0].toLowerCase() === 'set') {
-                if (member.hasPermission('ADMINISTRATOR') || member.hasPermission('MANAGE_SERVER')) {
+                if (member.permissions.has('ADMINISTRATOR') || member.permissions.has('MANAGE_SERVER')) {
                     const prefix = args[1]
 
                     if (prefix === '' || prefix === null || prefix === undefined) {
