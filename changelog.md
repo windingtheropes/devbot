@@ -11,3 +11,6 @@ since this command was created earlier in the development of devbot 2.0, it will
 ## 2.1.1.4 - prefix command patch
 ### fixed the prefix command to work with discord.js v13
 -fixed prefix set to use permissions.has instead of hasPermission
+## 2.1.1.5
+-remove permission requirement from prefix set
+-fix prefix set so it doesn't throw a topology closed error when trying to set
