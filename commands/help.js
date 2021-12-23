@@ -57,7 +57,7 @@ module.exports = {
             }
             else
             {
-                message.channel.send('Could not find a command with alias `' + `${commandName}.` + '`')
+                message.channel.send('Could not find a command with alias `' + `${commandName}` + '`')
             }
         }
         else
