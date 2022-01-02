@@ -7,7 +7,7 @@ try {
 }
 catch
 {
-    mongoPath = process.env.DEVBOT_MONGOPATH
+    mongoPath = process.env.MONGOPATH
 }
 
 module.exports = async () => {

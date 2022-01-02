@@ -179,5 +179,5 @@ try
 }
 catch
 {
-  client.login(process.env.DEVBOT_TOKEN)
+  client.login(process.env.TOKEN)
 }
