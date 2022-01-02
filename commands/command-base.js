@@ -3,7 +3,7 @@ var operators
 try {
     operators = require('../config/config.json').operators
 } catch {
-    operators = process.env.DEVBOT_OPERATORS.split(',')
+    operators = process.env.OPERATORS.split(',')
 }
 const mongo = require('../utils/mongo');
 const commandPrefixSchema = require('../schemas/command-prefix-schema')
@@ -15,7 +15,7 @@ try {
     
     
 } catch {
-    globalPrefix = process.env.DEVBOT_PREFIX
+    globalPrefix = process.env.PREFIX
     
 }
 

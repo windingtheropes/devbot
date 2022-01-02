@@ -2,7 +2,7 @@ var operators
 try {
     operators = require('../../config/config.json').operators
 } catch {
-    operators = process.env.DEVBOT_OPERATORS.split(',')
+    operators = process.env.OPERATORS.split(',')
 }
 module.exports = {
     operatorOnly: true,

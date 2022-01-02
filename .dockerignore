@@ -22,3 +22,4 @@
 **/values.dev.yaml
 README.md
 config/
+docker-compose.yml
