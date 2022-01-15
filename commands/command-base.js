@@ -73,6 +73,11 @@ module.exports = (options) => {
       permissions = []
   } = options
 
+  if(!commands || commands.length === 0) 
+  {
+    return console.log("Invalid command format.")
+  }
+
   if (typeof commands === 'string') {
       commands = [commands]
   }
@@ -142,9 +147,9 @@ module.exports.listen = (client) => {
           }
           let {
               commands,
-              miniDescription = 'unavailable', 
-              description = 'unavailable',
-              usage = 'unavailable',
+              miniDescription, 
+              description,
+              usage,
               enabled = true,
               exampleUsage = [],
               minArgs = 0,
