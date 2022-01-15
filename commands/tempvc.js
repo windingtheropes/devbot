@@ -12,7 +12,6 @@ module.exports = {
 
         var name
         var limit = 0
-        console.log(typeof args[0])
         if (parseInt(args[0])) {
             limit = args[0]
             args.shift()
@@ -56,7 +55,7 @@ module.exports = {
                 return
 
             } finally {
-                mongoose.connection.close()
+               
             }
         })
 
