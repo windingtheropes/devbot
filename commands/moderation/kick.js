@@ -1,6 +1,7 @@
 const kick = require('../../utils/kick')
 const stringToBool = require('../../utils/stringToBool')
 module.exports = {
+    enabled: false,
     commands: 'kick',
     permissions: ['KICK_MEMBERS'],
     miniDescription: 'Kick a server member.',
