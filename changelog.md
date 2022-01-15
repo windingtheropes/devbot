@@ -1,4 +1,18 @@
 # devbot changelog
+## 2.1.2
+### bugfixes and qol changes, added messagecounter
+-fixed the help command so commands without properties won't break the help command anymore
+-disabled the ban and kick commands
+-updated the temporary voicechat command to optionally take a limit, otherwise just accepting the name of the channel
+
+## 2.1.1.5
+-remove permission requirement from prefix set
+-fix prefix set so it doesn't throw a topology closed error when trying to set
+
+## 2.1.1.4 - prefix command patch
+### fixed the prefix command to work with discord.js v13
+-fixed prefix set to use permissions.has instead of hasPermission
+
 ## 2.1.1.3 - kick and ban hotfix followup
 ### fixed the kick and ban commands, as well as the client, to work with discord.js v13
 -added the GUILD_BANS intent
@@ -8,9 +22,4 @@
 -wrap the final kick/ban function in a try statement and if it fails return a generic error
 ### notes
 since this command was created earlier in the development of devbot 2.0, it will probably have to be rewritten at some point due to messy code and inefficiencies, if not removed alltogether.
-## 2.1.1.4 - prefix command patch
-### fixed the prefix command to work with discord.js v13
--fixed prefix set to use permissions.has instead of hasPermission
-## 2.1.1.5
--remove permission requirement from prefix set
--fix prefix set so it doesn't throw a topology closed error when trying to set
+
