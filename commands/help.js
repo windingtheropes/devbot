@@ -18,12 +18,17 @@ module.exports = {
                     exampleUsage = `${exampleUsage || ''}\n${prefix}${query} ${example}`
                 })
             }
+            
+            exampleUsage = exampleUsage || 'undefined'
+            command.description = command.description || 'undefined'
+            command.usage = command.usage || 'undefined'
 
             const embed = new Discord.MessageEmbed()
                 .setTitle(`${query}${command.name ? ` - ${command.name}` : ''}`)
                 .setDescription(command.description)
                 .addField('Usage', `${prefix}${query} ${command.usage}`, true)
                 if (command.exampleUsage) { embed.addField('Example Usage', exampleUsage, true) }
+                
             message.reply({ embeds: [embed] })
         }
         else {
