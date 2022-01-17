@@ -15,4 +15,4 @@ const messageCountSchema = mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('message-counts', messageCountSchema)
+module.exports = mongoose.model('user-guild-metrics', messageCountSchema)
