@@ -1,4 +1,4 @@
-const messageCountSchema = require('../../schemas/message-count-schema')
+const usermetricsSchema = require('../../schemas/usermetrics-schema')
 const mongo = require('../../utils/mongo')
 module.exports = {
     callback: async (message, client) => {
@@ -10,7 +10,7 @@ module.exports = {
         await mongo().then(async mongoose => {
             try {
 
-                await messageCountSchema
+                await usermetricsSchema
                     .findOneAndUpdate(
                         {
                             userId: author.id, guildId: guild.id

@@ -1,4 +1,13 @@
 # devbot changelog
+## 2.1.3
+### added rng command, added disablecommand, messagecount
+-added the rng command, enter two numbers and get a random result between them
+-added disablecommand for operators, it can be used to temporarily disable bot commands if an unexpected issue arises
+-added messagecount feature and rank command. the rank command is currently disabled, but messages will actively be counted from this patch forward.
+-added command IDs
+-added version file and version command
+-updated github.com/alacriware/devbot to github.com/windingtheropes/devbot everywhere
+
 ## 2.1.2
 ### bugfixes and qol changes, added messagecounter
 -fixed the help command so commands without properties won't break the help command anymore

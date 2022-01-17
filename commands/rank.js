@@ -1,7 +1,9 @@
-const messageCountSchema = require('../schemas/message-count-schema')
+const messageCountSchema = require('../schemas/usermetrics-schema')
 const mongo = require('../utils/mongo')
 
 module.exports = {
+    id: 'RANK',
+    enabled:false,
     commands: 'rank',
     callback: async (message, args, text, client, prefix) => {
 

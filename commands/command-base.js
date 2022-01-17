@@ -1,5 +1,6 @@
 var globalPrefix
 var operators
+const crypto = require('crypto')
 try {
     operators = require('../config/config.json').operators
 } catch {
@@ -7,6 +8,8 @@ try {
 }
 const mongo = require('../utils/mongo');
 const commandPrefixSchema = require('../schemas/command-prefix-schema')
+const disabledCommands = require('../schemas/disabled-commands-schema')
+const { MessageActionRow } = require('discord.js')
 const guildPrefixes = {} // Guild {'guildId'}
 
 
@@ -66,13 +69,12 @@ const commandList = []
 module.exports = (options) => {
   let {
       commands,
-      miniDescription = 'unavailable',
+      miniDescription,
       listed = true,
       enabled,
-      exampleUsage = 'unavailable',
-      permissions = []
+      exampleUsage,
+      permissions = [],
   } = options
-
   if(!commands || commands.length === 0) 
   {
     return console.log("Invalid command format.")
@@ -98,7 +100,8 @@ module.exports = (options) => {
     allCommands[command] = {
         ...options,
         commands,
-        permissions
+        permissions,
+        id: commands[0].toUpperCase() 
     }
   }
   commandList.push([commands, miniDescription, listed])
@@ -154,18 +157,25 @@ module.exports.listen = (client) => {
               exampleUsage = [],
               minArgs = 0,
               maxArgs = null,
-              listed = true,
               operatorOnly = false,
               permissions = [],
               permissionError = 'You do not have permission to execute this command.',
               dmsEnabled = false,
               dmsOnly = false,
               callback,
+              id
           } = command  
+          
+         const tempDisabled = await isCommandDisabled(id)
+         if(tempDisabled == true)
+          {
+            return message.reply("This command is temporarily disabled due to an issue.")
+          }
+       
 
           if(enabled === false)
           {
-            return message.channel.send("This command is currently disabled, but it is available in the codebase, found at <https://github.com/alacriware/devbot>.")
+            return message.channel.send("This command is currently disabled, but it is available in the codebase, found at <https://github.com/windingtheropes/devbot>.")
           }
           //Don't reply to a message sent by the bot
           if (author === client.user) {
@@ -181,7 +191,6 @@ module.exports.listen = (client) => {
             )
             return
           }
-
           //Check permissions
           
           if(operatorOnly === true)
@@ -219,7 +228,7 @@ module.exports.listen = (client) => {
           }
 
           callback(message, arguments, arguments.join(' '), client, prefix, allCommands, commandList)
-         
+        
 
       }
 
@@ -230,6 +239,25 @@ module.exports.listen = (client) => {
 }
 
 module.exports.loadPrefixes = loadPrefixes
+
+
+async function isCommandDisabled(id)
+{
+  var res = false
+  await mongo().then(async (mongoose) => {
+    try{
+      const data = await disabledCommands.findOne({_id: id})
+      if(data && data.disabled == true) 
+      {
+        res = true
+      }
+    }
+    finally{
+
+    }
+  })
+  return res
+}
 
 async function loadPrefixes(client){
     await mongo().then(async mongoose => {
