@@ -23,16 +23,23 @@ module.exports = {
         if (command) {
             await mongo().then(async mongoose => {
                 try {
-                    disabledCommandsSchema.findOneAndUpdate(
-                        {
-                            _id: command.id
-                        },
-                        {
-                            disabled: option
-                        },
-                        {
-                            upsert: true
-                        }).exec()
+                    if(option == true)
+                    {
+                        disabledCommandsSchema.findOneAndUpdate(
+                            {
+                                _id: command.id
+                            },
+                            {
+                                disabled: option
+                            },
+                            {
+                                upsert: true
+                            }).exec()
+                    }
+                    else
+                    {
+                        disabledCommandsSchema.deleteOne({_id: command.id}).exec()
+                    }
                     return message.reply(`Command ${option ? 'disabled' : 'enabled'}`)
                 }
                 finally {

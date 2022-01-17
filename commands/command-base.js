@@ -166,15 +166,16 @@ module.exports.listen = (client) => {
               id
           } = command  
           
-        const data = await disabledCommands.findOne({_id: id})
-        if(data && data.disabled == true) 
-        {
-          return message.reply("This command is temporarily disabled due to an issue.")
-        }
+         const tempDisabled = await isCommandDisabled(id)
+         if(tempDisabled == true)
+          {
+            return message.reply("This command is temporarily disabled due to an issue.")
+          }
+       
 
           if(enabled === false)
           {
-            return message.channel.send("This command is currently disabled, but it is available in the codebase, found at <https://github.com/alacriware/devbot>.")
+            return message.channel.send("This command is currently disabled, but it is available in the codebase, found at <https://github.com/windingtheropes/devbot>.")
           }
           //Don't reply to a message sent by the bot
           if (author === client.user) {
@@ -240,6 +241,23 @@ module.exports.listen = (client) => {
 module.exports.loadPrefixes = loadPrefixes
 
 
+async function isCommandDisabled(id)
+{
+  var res = false
+  await mongo().then(async (mongoose) => {
+    try{
+      const data = await disabledCommands.findOne({_id: id})
+      if(data && data.disabled == true) 
+      {
+        res = true
+      }
+    }
+    finally{
+
+    }
+  })
+  return res
+}
 
 async function loadPrefixes(client){
     await mongo().then(async mongoose => {

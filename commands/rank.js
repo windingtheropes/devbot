@@ -3,6 +3,7 @@ const mongo = require('../utils/mongo')
 
 module.exports = {
     id: 'RANK',
+    enabled:false,
     commands: 'rank',
     callback: async (message, args, text, client, prefix) => {
 
