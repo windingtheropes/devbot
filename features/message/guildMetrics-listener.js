@@ -1,6 +1,7 @@
 const usermetricsSchema = require('../../schemas/usermetrics-schema')
 const mongo = require('../../utils/mongo')
 module.exports = {
+    enabled: false,
     callback: async (message, client) => {
 
         const { author, guild } = message
