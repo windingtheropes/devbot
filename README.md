@@ -21,6 +21,19 @@ services:
 
 Change out the example text for their respective values then run `docker-compose up -r` or `docker compose up -r` and give it a few seconds to start up.
 
+# deploying with nodejs
+Devbot can also be deployed on nodejs, by cloning the source code and running index.js with the process manager of your choice. 
+
+In this case, the configuration is stored in /config/config.json and should be formatted as follows.
+```
+{
+    "token": "",
+    "mongoPath": "",
+    "prefix": "",
+    "operators": [""],
+    "feedbackChannel": ""
+}
+```
 
 # devbot public
 Devbot is publicly available as a Discord bot. [Invite](https://discord.com/api/oauth2/authorize?client_id=732280990323441704&permissions=8&scope=bot) devbot to your discord server today!
