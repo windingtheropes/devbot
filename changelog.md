@@ -1,4 +1,7 @@
 # devbot changelog
+## 2.1.4.1
+feedback command hotfix
+
 ## 2.1.4
 ### added listdisabledcommands and cleardisabledcommands
 -listdisabledcommands and clear disabledcommands: an easy way to tell what commands are disabled, and an easy way to re-enable them all at once. listdisabledcommands is available to anyone.
