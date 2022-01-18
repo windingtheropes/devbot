@@ -1,4 +1,9 @@
 # devbot changelog
+## 2.1.4
+### added listdisabledcommands and cleardisabledcommands
+-listdisabledcommands and clear disabledcommands: an easy way to tell what commands are disabled, and an easy way to re-enable them all at once. listdisabledcommands is available to anyone.
+-added feedback command, added feedbackChannel option in config.json and FEEDBACKCHANNEL environment variable, a channel, that the bot can access, where you want feedback to be sent to 
+
 ## 2.1.3
 ### added rng command, added disablecommand, messagecount
 -added the rng command, enter two numbers and get a random result between them
