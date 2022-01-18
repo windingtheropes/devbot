@@ -16,6 +16,7 @@ services:
       - MONGOPATH=URLGOESHERE
       - PREFIX=DEFAULTPREFIX
       - OPERATORS=OPERATOR1,OPERATOR2
+      - FEEDBACKCHANNEL=CHANNELID
 ```
 
 Change out the example text for their respective values then run `docker-compose up -r` or `docker compose up -r` and give it a few seconds to start up.

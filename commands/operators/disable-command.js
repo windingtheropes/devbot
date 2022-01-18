@@ -40,7 +40,7 @@ module.exports = {
                     {
                         disabledCommandsSchema.deleteOne({_id: command.id}).exec()
                     }
-                    return message.reply(`Command ${option ? 'disabled' : 'enabled'}`)
+                    return message.reply(`The ${'`'+command.id+'`'} command was ${option ? 'disabled' : 're-enabled'}.`)
                 }
                 finally {
 
