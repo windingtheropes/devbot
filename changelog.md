@@ -1,4 +1,7 @@
 # devbot changelog
+## 2.1.4.3
+disable feedback command
+
 ## 2.1.4.2
 prefix database hotfix
 

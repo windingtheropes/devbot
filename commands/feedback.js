@@ -7,6 +7,7 @@ try {
 }
 module.exports = {
     commands: ['suggest', 'feedback'],
+    enabled: false,
     minArgs: 1,
     callback: (message, args, text, client) => {
         if(!feedbackChannel) return
@@ -19,6 +20,6 @@ module.exports = {
         .setTitle(`Feedback from ${message.author.tag} (${message.author.id})`)
         .setThumbnail(avatarURL)
         .setDescription(feedback)
-        client.channels.cache.get(feedbackChannel).send({embeds: [embed]})
+        client.guilds.fetch('739521173116682281').channels.fetch(feedbackChannel).send({embeds: [embed]})
     }   
 }
