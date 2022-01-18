@@ -281,7 +281,7 @@ async function loadPrefixes(client){
 
             }
         } finally {
-            mongoose.connection.close()
+            // mongoose.connection.close()
         }
     })
 }
