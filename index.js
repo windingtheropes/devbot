@@ -17,6 +17,11 @@ const commandBase = require(`./commands/${commandBaseFile}`)
 const messageListenerBaseFile = 'messageListener-base.js'
 const messageListenerBase = require(`./features/message/${messageListenerBaseFile}`)
 
+//listener base
+
+const pinListenerBaseFile = 'channelPinsUpdate-listener-base.js'
+const pinListenerBase = require(`./features/pinsUpdate/${pinListenerBaseFile}`)
+
 //user join base
 
 const userJoinListenerBaseFile = 'userJoinListener-base.js'
@@ -70,6 +75,8 @@ client.on('ready', async () => {
 
   vcStateChangeListenersImport()
 
+  pinsListenerImport()
+
   //start the command message listener
 
   commandBase.listen(client)
@@ -84,6 +91,7 @@ client.on('ready', async () => {
 
   vcStateChangeListenerBase.listen(client)
 
+  pinListenerBase.listen(client)
 
 
 
@@ -110,6 +118,28 @@ function commandsImport()
 }
 
   readCommands('commands')
+}
+
+function pinsListenerImport()
+{
+  //dynamically import commands
+
+  const readCommands = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir))
+
+    for (const file of files) {
+        const stat = fs.lstatSync(path.join(__dirname, dir, file))
+
+        if (stat.isDirectory()) {
+            readCommands(path.join(dir, file))
+        } else if (file !== pinListenerBaseFile) {
+            const option = require(path.join(__dirname, dir, file))
+            pinListenerBase(option)
+        }
+    }
+}
+
+  readCommands('features/pinsUpdate')
 }
 
 
