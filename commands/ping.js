@@ -3,6 +3,6 @@ module.exports = {
     miniDescription: 'Get bot ping.',
     description: "Get the bot's latency to the Discord API.",
     callback: (message, arguments, text, client) => {
-        message.channel.send(`:ping_pong: Pong!\n**Discord API Latency:** ${client.ws.ping}ms`)
+        message.channel.send(`:ping_pong: Pong!\n**Discord API Latency:** ${client.ws.ping}ms`) 
     },
 }
