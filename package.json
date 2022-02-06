@@ -1,0 +1,28 @@
+{
+  "name": "devbot",
+  "version": "3.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/windingtheropes/devbot.git"
+  },
+  "author": "windingtheropes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/windingtheropes/devbot/issues"
+  },
+  "homepage": "https://github.com/windingtheropes/devbot#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
+}
