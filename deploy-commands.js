@@ -16,6 +16,6 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
-rest.put(Routes.applicationGuildCommands(process.env.clientId, process.env.guildId), {body: commands})
+rest.put(Routes.applicationGuildCommands(process.env.clientId, process.env.guildId), { body: commands })
     .then(() => console.log('Successfully registered application slash commands.'))
-    .catch(console.error)
+    .catch(console.error);
