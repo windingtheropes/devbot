@@ -19,27 +19,34 @@ module.exports = {
         else {
             const user = query
             const guildUser = client.guilds.cache.get(interaction.guild.id).members.cache.get(query.id)
+
             getInfo(user, guildUser)
         }
     
 
         async function getInfo(user, guildUser) {
             if (!user || !guildUser) {
-                return await interaction.reply({ content: `Could not find user. The bot must share a server with the requested user.`})
+                return await interaction.reply({ content: `Could not find user.`, ephemeral: true})
             }   
-            const presence = guildUser.presence.clientStatus
+            const pres = guildUser.presence
+            var clientStatus
+            if(pres)
+            {
+                clientStatus = guildUser.presence.clientStatus
+            }
 
-            var presenceString = `${presence.desktop ? `Desktop: ${presence.desktop}` : ''}${presence.web ? `\nWeb: ${presence.web}` : ''}${presence.mobile ? `\nMobile: ${presence.mobile}` : ''}`
+            var presenceString = `${!clientStatus ? 'offline' : `${clientStatus.desktop ? `Desktop: ${clientStatus.desktop}` : ''}${clientStatus.web ? `\nWeb: ${clientStatus.web}` : ''}${clientStatus.mobile ? `\nMobile: ${clientStatus.mobile}` : ''}`}`
             if(!presenceString) presenceString = 'offline'
             const embed = new MessageEmbed()
                 .setColor('#0099ff')
+                .setAuthor({name: user.username, iconURL: user.displayAvatarURL({dynamic:true})})
                 .setTitle(`whois ${user.username}`)
                 if(guildUser.displayName != user.username){embed.addField('Server Display Name', guildUser.displayName)}
                 embed
                 .setDescription(`${user.tag} (<@!${user.id}>)`)
-                .setThumbnail(user.avatarURL())
+                .setThumbnail(user.displayAvatarURL({dynamic:true}))
                 .addField('Presence', presenceString)
-                .addField('Avatar URL', user.avatarURL())
+                .addField('Avatar URL', user.displayAvatarURL({dynamic:true}))
                 .addField('Account Creation Date', `${getTimePassed(Date.now() - user.createdAt)} ago (${new Date(user.createdAt).toUTCString()})`)
                 .addField(`Joined ${interaction.guild.name}`, `${getTimePassed(Date.now() - guildUser.joinedAt)} ago (${new Date(guildUser.joinedAt).toUTCString()})`)
                 .setFooter({text: `User ID: ${user.id}`})
