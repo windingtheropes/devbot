@@ -1,4 +1,4 @@
-![devbot logo](https://user-images.githubusercontent.com/17016045/117669802-4b723d00-b175-11eb-9661-a6eb2f4e6e7d.png)
+![devbot logo](https://cdn.discordapp.com/attachments/871521127753715782/941119888863395950/EXPORT_DEVBOT_BLUE_4X.png)
 # devbot 
 Devbot is a multipurpose Discord bot with various features. It is written entirely in javascript. See the update changelog at [CHANGELOG.md](https://github.com/alacriware/devbot/blob/canary/CHANGELOG.md).
 
