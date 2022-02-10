@@ -1,5 +1,3 @@
-<img src="https://cdn.discordapp.com/attachments/622036340229275658/941121363068993586/EXPORT_DEVBOT_BLUE_TRANSPARENT_4X.png" alt="drawing/>
-
 # devbot 
 Devbot is a multipurpose Discord bot with various features. It is written entirely in javascript. See the update changelog at [CHANGELOG.md](https://github.com/alacriware/devbot/blob/canary/CHANGELOG.md).
 
