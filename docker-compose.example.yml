@@ -1,0 +1,9 @@
+version: "3"
+services:
+  devbot:
+    image: windingtherope/devbot:latest
+    environment: 
+      - TOKEN=TOKENGOESHERE
+      - MONGOPATH=URLGOESHERE
+      - clientId=BOTCLIENTID
+  

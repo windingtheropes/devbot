@@ -32,7 +32,7 @@ module.exports.listen = async (client) => {
                 return interaction.reply({ content: 'You do not have permissison to run this command.', ephemeral: true })
             }
         }
-    
+
         try {
             await command.execute(interaction, client)
         } catch (error) {
