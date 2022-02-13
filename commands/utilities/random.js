@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const math = require('mathjs')
-const getRandom = require('../utils/getRandom.js')
+const getRandom = require('../../utils/getRandom.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('random')

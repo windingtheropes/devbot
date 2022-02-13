@@ -16,7 +16,7 @@ module.exports.listen = async (client) => {
 
         if(permissions)
         {
-            if(typeof permissions === 'string')
+            if(typeof permissions != 'array')
             {
                 permissions = [permissions]
             }

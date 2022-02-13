@@ -21,11 +21,8 @@ module.exports = {
         const name = await interaction.options.getString('name')
         const limit = await interaction.options.getNumber('limit') || 0
         if (limit > 100) {
-            return interaction.reply("The limit cannot be greater than 100.")
+            return interaction.reply({content: "The limit cannot be greater than 100.", ephemeral: true})
         }
-
-
-
 
         //create a channel then log the channel id to the database
 

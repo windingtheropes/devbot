@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders')
 const { MessageEmbed } = require('discord.js')
-const getTimePassed = require('../utils/getTimeFromTimestamp')
+const getTimePassed = require('../../utils/getTimeFromTimestamp')
 
 module.exports = {
     data: new SlashCommandBuilder()
