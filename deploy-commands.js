@@ -8,15 +8,7 @@ const path = require('path')
 dotenv.config()
 
 const commands = []
-// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-// for (const file of commandFiles) {
-// 	const command = require(`./commands/${file}`);
-// 	commands.push(command.data.toJSON());
-// }
-
-
-  
     const readCommands = (dir) => {
       const files = fs.readdirSync(path.join(__dirname, dir));
   
@@ -36,6 +28,6 @@ const commands = []
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
-rest.put(Routes.applicationGuildCommands(process.env.clientId, process.env.guildId), { body: commands })
+rest.put(Routes.applicationCommands(process.env.clientId), { body: commands })
     .then(() => console.log('Successfully registered application slash commands.'))
     .catch(console.error);

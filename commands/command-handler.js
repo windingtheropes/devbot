@@ -9,8 +9,15 @@ module.exports.listen = async (client) => {
         if(!command) return;
 
         let {
+            enabled = true,
+            guildsOnly = true,
             permissions
         } = command
+
+        if(!interaction.guild && guildsOnly)  
+        {
+            return interaction.reply({ content: 'This command is only available in guilds.', ephemeral: true })
+        }
 
         const guildMember = await interaction.guild.members.fetch({ user: interaction.user.id, force: true })
 

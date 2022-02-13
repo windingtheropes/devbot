@@ -22,7 +22,7 @@ module.exports = {
         }
 
 
-        if(!(channel.type === 'GUILD_PRIVATE_THREAD' || channel.type == 'GUILD_TEXT' || channel.type == 'GUILD_NEWS' || channel.type == 'GUILD_NEWS_THREAD' || channel.type == 'GUILD_PUBLIC_THREAD'))
+        if(!(channel.type == 'GUILD_TEXT' || channel.type == 'GUILD_NEWS'))
         {
             return interaction.reply({content: 'The channel type is not supported.', ephemeral: true})
         }   
