@@ -9,25 +9,28 @@ dotenv.config()
 
 const commands = []
 
-    const readCommands = (dir) => {
-      const files = fs.readdirSync(path.join(__dirname, dir));
-  
-      for (const file of files) {
-        const stat = fs.lstatSync(path.join(__dirname, dir, file))
-  
-        if (stat.isDirectory()) {
-          readCommands(path.join(dir, file))
-        } else if (file !== 'command-handler.js' && file.endsWith('.js')) {
-          const command = require(path.join(__dirname, dir, file))
-          commands.push(command.data.toJSON());
-        }
+function loadCommands() {
+  const readCommands = (dir) => {
+    const files = fs.readdirSync(path.join(__dirname, dir));
+
+    for (const file of files) {
+      const stat = fs.lstatSync(path.join(__dirname, dir, file))
+
+      if (stat.isDirectory()) {
+        readCommands(path.join(dir, file))
+      } else if (file !== 'command-handler.js' && file.endsWith('.js')) {
+        const command = require(path.join(__dirname, dir, file))
+        commands.push(command.data.toJSON());
+
       }
     }
-  
-    readCommands('commands')
+  }
+  readCommands('commands')
+}
+loadCommands()
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
 
 rest.put(Routes.applicationCommands(process.env.clientId), { body: commands })
-    .then(() => console.log('Successfully registered application slash commands.'))
-    .catch(console.error);
+  .then(() => console.log('Successfully registered application slash commands.'))
+  .catch(console.error);
