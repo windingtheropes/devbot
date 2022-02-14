@@ -49,6 +49,7 @@ module.exports = {
             const channel = interaction.options.getChannel('channel')
             const joinEnabled = interaction.options.getBoolean('enabled')
             const message = interaction.options.getString('message')
+
             await mongo().then(async (mongoose) => {
                 try {
                     if(joinEnabled && message && channel)
@@ -66,7 +67,7 @@ module.exports = {
                     else
                     {
                         await welcomeSchema.findOneAndUpdate({_id: interaction.guild.id}, {
-                            joinMsgEnabled: joinEnabled,
+                            joinMsgEnabled: false,
                         }, 
                         {
                             upsert: true
@@ -84,6 +85,7 @@ module.exports = {
             const channel = interaction.options.getChannel('channel')
             const leaveEnabled = interaction.options.getBoolean('enabled')
             const message = interaction.options.getString('message')
+
             await mongo().then(async (mongoose) => {
                 try {
                     if(leaveEnabled && message && channel)
@@ -104,7 +106,7 @@ module.exports = {
                             leaveMsgEnabled: leaveEnabled,
                         }, 
                         {
-                            upsert: true
+                            upsert: false
                         }
                         )
                     }
