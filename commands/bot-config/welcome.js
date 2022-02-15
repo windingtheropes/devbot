@@ -108,7 +108,7 @@ module.exports = {
                             leaveMsgEnabled: leaveEnabled,
                         }, 
                         {
-                            upsert: false
+                            upsert: true
                         }
                         )
                     }
