@@ -6,8 +6,6 @@ const fs = require('fs');
 const mongo = require('./utils/mongo')
 const path = require('path');
 
-// utils
-
 // configs
 dotenv.config()
 

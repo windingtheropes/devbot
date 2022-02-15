@@ -19,11 +19,11 @@ module.exports = {
                 .addStringOption(option => 
                     option.setName('message')
                         .setDescription('The message to send when a user joins.')
-                        )
+                        ) 
                 .addChannelOption(option => 
                     option.setName('channel')
                         .setDescription('The channel to send messages in.')
-                        )  
+                        )
             )
         .addSubcommand(subcommand => 
             subcommand.setName('leave')
@@ -40,15 +40,16 @@ module.exports = {
                 .addChannelOption(option => 
                     option.setName('channel')
                         .setDescription('The channel to send messages in.')
-                        )       
+                        )
             )
         ,
     async execute(interaction) {
         if(interaction.options.getSubcommand() === 'join')
-        {
-            const channel = interaction.options.getChannel('channel')
-            const joinEnabled = interaction.options.getBoolean('enabled')
-            const message = interaction.options.getString('message')
+        {           
+
+            const channel = await interaction.options.getChannel('channel')
+            const joinEnabled = await interaction.options.getBoolean('enabled')
+            const message = await interaction.options.getString('message')
 
             await mongo().then(async (mongoose) => {
                 try {
@@ -82,9 +83,10 @@ module.exports = {
         }
         else if(interaction.options.getSubcommand() === 'leave')
         {
-            const channel = interaction.options.getChannel('channel')
-            const leaveEnabled = interaction.options.getBoolean('enabled')
-            const message = interaction.options.getString('message')
+
+            const channel = await interaction.options.getChannel('channel')
+            const leaveEnabled = await interaction.options.getBoolean('enabled')
+            const message = await interaction.options.getString('message')
 
             await mongo().then(async (mongoose) => {
                 try {
