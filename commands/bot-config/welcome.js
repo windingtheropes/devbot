@@ -20,10 +20,6 @@ module.exports = {
                     option.setName('message')
                         .setDescription('The message to send when a user joins.')
                         ) 
-                .addChannelOption(option => 
-                    option.setName('channel')
-                        .setDescription('The channel to send messages in.')
-                        )
             )
         .addSubcommand(subcommand => 
             subcommand.setName('leave')
@@ -37,11 +33,16 @@ module.exports = {
                     option.setName('message')
                         .setDescription('The message to send when a user leaves.')
                         )
-                .addChannelOption(option => 
-                    option.setName('channel')
-                        .setDescription('The channel to send messages in.')
-                        )
             )
+            .addSubcommand(subcommand => 
+                subcommand.setName('channel')
+                    .setDescription('Set the channel to send messages in.')
+                    .addChannelOption(option => 
+                        option.setName('channel')
+                            .setDescription('The channel to send messages in.')
+                            .setRequired(true)
+            
+            ))
         ,
     async execute(interaction) {
         if(interaction.options.getSubcommand() === 'join')
@@ -53,12 +54,17 @@ module.exports = {
 
             await mongo().then(async (mongoose) => {
                 try {
-                    if(joinEnabled && message && channel)
+                    const serverData = await welcomeSchema.findOne({_id: interaction.guild.id})
+                    if(!serverData || !serverData.channelId)
+                    {
+                        return interaction.reply({content: 'You must specify a channel to send messages in using /welcome channel.', ephemeral: true})
+                    }
+
+                    if(joinEnabled && message)
                     {
                         await welcomeSchema.findOneAndUpdate({_id: interaction.guild.id}, {
                             joinMsgEnabled: joinEnabled,
                             joinMsg: message,
-                            channelId: channel.id
                         }, 
                         {
                             upsert: true
@@ -89,13 +95,19 @@ module.exports = {
             const message = await interaction.options.getString('message')
 
             await mongo().then(async (mongoose) => {
+
                 try {
-                    if(leaveEnabled && message && channel)
+                    const serverData = await welcomeSchema.findOne({_id: interaction.guild.id})
+                    if(!serverData || !serverData.channelId)
+                    {
+                        return interaction.reply({content: 'You must specify a channel to send messages in using /welcome channel.', ephemeral: true})
+                    }
+
+                    if(leaveEnabled && message)
                     {
                         await welcomeSchema.findOneAndUpdate({_id: interaction.guild.id}, {
                             leaveMsgEnabled: leaveEnabled,
                             leaveMsg: message,
-                            channelId: channel.id
                         }, 
                         {
                             upsert: true
@@ -115,6 +127,33 @@ module.exports = {
                     
                 } finally {
                     return interaction.reply({content: `${leaveEnabled ? 'Enabled' : 'Disabled'} leave messages${message ? ` and set the message to '${message}'` : '.'}`, ephemeral: true})
+                }
+            })
+        }
+        else if(interaction.options.getSubcommand() === 'channel')
+        {
+            const channel = await interaction.options.getChannel('channel')
+
+            await mongo().then(async (mongoose) => {
+
+                try {
+                    if(channel && channel.type === 'GUILD_TEXT')
+                    {
+                        await welcomeSchema.findOneAndUpdate({_id: interaction.guild.id}, {
+                            channelId: channel.id
+                        }, 
+                        {
+                            upsert: true
+                        }
+                        )
+                    }
+                    else
+                    {
+                        return interaction.reply({content: 'You must specify a valid text channel.'})
+                    }
+                    
+                } finally {
+                    return interaction.reply({content: `Set the welcome message channel to <#${channel.id}>.`, ephemeral: true})
                 }
             })
         }
