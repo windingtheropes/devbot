@@ -37,6 +37,8 @@ const client = new Client({
 })
 
 client.on('ready', async () => {
+  console.log(`devbot is at ${(client.guilds.cache.size / 75)*100}% (${client.guilds.cache.size}/75) of servers to reach verification eligibility.`)
+  
   console.log(`devbot version ${version}\nCreated by windingtheropes${prerelease ? '\nPre-release version; expect bugs and instabilities.\n' : '\n'}`)
   await mongo().then(async mongoose => {
     try {
