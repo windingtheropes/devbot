@@ -1,5 +1,5 @@
 const allListeners = []
-  module.exports = (callback) => {
+  module.exports.import = (callback) => {
        allListeners.push(callback)
        console.log("Registered new pin update listener.")
   }

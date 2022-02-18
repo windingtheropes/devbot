@@ -1,5 +1,5 @@
 const allListeners = []
-  module.exports = (options) => {
+  module.exports.import = (options) => {
        allListeners.push(options)
        console.log("Registered new message listener.")
   }
