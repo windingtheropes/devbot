@@ -34,15 +34,13 @@ module.exports = {
         const cid = channel.id
         const gid = interaction.guild.id
 
-        await mongo().then(async (mongoose) => {
-            try {
                 await tvcschema.findOneAndUpdate(
                     {
                         _id: gid
                     },
                     {
                         $push: {
-                            channels: [cid]
+                            channels: cid
                         }
                     },
                     {
@@ -50,11 +48,5 @@ module.exports = {
                     })
                 interaction.reply({ content: `Created a temporary voice chat ${'`' + channel.name + '`'} ${+ limit > 0 ? `with a limit of ${limit} user${limit > 1 ? 's' : ''}` : ''}.` })
                 return
-
-            } finally {
-               
-            }
-        })
-
     }
 }

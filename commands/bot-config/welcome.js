@@ -52,8 +52,7 @@ module.exports = {
             const joinEnabled = await interaction.options.getBoolean('enabled')
             const message = await interaction.options.getString('message')
 
-            await mongo().then(async (mongoose) => {
-                try {
+            
                     const serverData = await welcomeSchema.findOne({_id: interaction.guild.id})
                     if(!serverData || !serverData.channelId)
                     {
@@ -82,10 +81,10 @@ module.exports = {
                         )
                     }
                     
-                } finally {
+               
                     return interaction.reply({content: `${joinEnabled ? 'Enabled' : 'Disabled'} join messages${message ? ` and set the message to '${message}'` : '.'}`, ephemeral: true})
-                }
-            })
+               
+           
         }
         else if(interaction.options.getSubcommand() === 'leave')
         {
@@ -94,9 +93,7 @@ module.exports = {
             const leaveEnabled = await interaction.options.getBoolean('enabled')
             const message = await interaction.options.getString('message')
 
-            await mongo().then(async (mongoose) => {
-
-                try {
+           
                     const serverData = await welcomeSchema.findOne({_id: interaction.guild.id})
                     if(!serverData || !serverData.channelId)
                     {
@@ -125,18 +122,16 @@ module.exports = {
                         )
                     }
                     
-                } finally {
+               
                     return interaction.reply({content: `${leaveEnabled ? 'Enabled' : 'Disabled'} leave messages${message ? ` and set the message to '${message}'` : '.'}`, ephemeral: true})
-                }
-            })
+             
         }
         else if(interaction.options.getSubcommand() === 'channel')
         {
             const channel = await interaction.options.getChannel('channel')
 
-            await mongo().then(async (mongoose) => {
-
-                try {
+           
+                
                     if(channel && channel.type === 'GUILD_TEXT')
                     {
                         await welcomeSchema.findOneAndUpdate({_id: interaction.guild.id}, {
@@ -152,10 +147,9 @@ module.exports = {
                         return interaction.reply({content: 'You must specify a valid text channel.'})
                     }
                     
-                } finally {
+               
                     return interaction.reply({content: `Set the welcome message channel to <#${channel.id}>.`, ephemeral: true})
-                }
-            })
+            
         }
 
     }

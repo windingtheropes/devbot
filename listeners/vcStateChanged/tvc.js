@@ -3,8 +3,6 @@ const tvcschema = require('../../schemas/tempvoicechat-schema')
 module.exports = {
     callback: async (oldm, newm, client) => {
         if(!oldm || !oldm.channel) return // only want leave events
-        await mongo().then(async (mongoose) => {
-            try {
                 const guildId = oldm.guild.id
                 const serverData = await tvcschema.findOne({_id: guildId})
         if(!serverData) return
@@ -27,12 +25,6 @@ module.exports = {
             }
             
             return serverData.save()
-                
-            } finally {
-
-            }
-        })
-
-        
+            
     }
 }
