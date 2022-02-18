@@ -12,17 +12,18 @@ dotenv.config()
 // vars
 const commandBase = require('./commands/command-handler.js')
 
-const messageListenerBaseFile = 'messageListener-base.js'
-const messageListenerBase = require(`./features/message/${messageListenerBaseFile}`)
+const listenerBase = require('./listeners/listener-base.js')
+// const messageListenerBaseFile = 'messageListener-base.js'
+// const messageListenerBase = require(`./features/message/${messageListenerBaseFile}`)
 
-const pinListenerBaseFile = 'channelPinsUpdate-listener-base.js'
-const pinListenerBase = require(`./features/pinsUpdate/${pinListenerBaseFile}`)
+// const pinListenerBaseFile = 'channelPinsUpdate-listener-base.js'
+// const pinListenerBase = require(`./features/pinsUpdate/${pinListenerBaseFile}`)
 
-const userJoinListenerBaseFile = 'userJoinListener-base.js'
-const userJoinListenerBase = require(`./features/userJoin/${userJoinListenerBaseFile}`)
+// const userJoinListenerBaseFile = 'userJoinListener-base.js'
+// const userJoinListenerBase = require(`./features/userJoin/${userJoinListenerBaseFile}`)
 
-const vcStateChangeListenerBaseFile = 'vcStateChangeListener-base.js'
-const vcStateChangeListenerBase = require(`./features/vcStateChanged/${vcStateChangeListenerBaseFile}`)
+// const vcStateChangeListenerBaseFile = 'vcStateChangeListener-base.js'
+// const vcStateChangeListenerBase = require(`./features/vcStateChanged/${vcStateChangeListenerBaseFile}`)
 
 
 const client = new Client({
@@ -37,8 +38,8 @@ const client = new Client({
 })
 
 client.on('ready', async () => {
-  console.log(`devbot is at ${(client.guilds.cache.size / 75)*100}% (${client.guilds.cache.size}/75) of servers to reach verification eligibility.`)
-  
+  console.log(`devbot is at ${(client.guilds.cache.size / 75) * 100}% (${client.guilds.cache.size}/75) of servers to reach verification eligibility.`)
+
   console.log(`devbot version ${version}\nCreated by windingtheropes${prerelease ? '\nPre-release version; expect bugs and instabilities.\n' : '\n'}`)
   await mongo().then(async mongoose => {
     try {
@@ -54,20 +55,12 @@ client.on('ready', async () => {
   })
 
   // start command listener
-  commandBase.listen(client)
   commandsImport()
+  commandBase.listen(client)
 
   // import other listeners
-  messageListenersImport()
-  userJoinListenersImport()
-  vcStateChangeListenersImport()
-  pinsListenerImport()
-
-  // start other listeners
-  messageListenerBase.listen(client)
-  userJoinListenerBase.listen(client)
-  vcStateChangeListenerBase.listen(client)
-  pinListenerBase.listen(client)
+  listenerBase.import()
+  listenerBase.listen(client)
 
 })
 
@@ -90,80 +83,6 @@ function commandsImport() {
   }
 
   readCommands('commands')
-}
-
-function pinsListenerImport() {
-  //dynamically import commands
-
-  const readCommands = (dir) => {
-    const files = fs.readdirSync(path.join(__dirname, dir))
-
-    for (const file of files) {
-      const stat = fs.lstatSync(path.join(__dirname, dir, file))
-
-      if (stat.isDirectory()) {
-        readCommands(path.join(dir, file))
-      } else if (file !== pinListenerBaseFile) {
-        const option = require(path.join(__dirname, dir, file))
-        pinListenerBase(option)
-      }
-    }
-  }
-
-  readCommands('features/pinsUpdate')
-}
-
-function messageListenersImport() {
-  //dynamically import commands
-  const readListeners = (dir) => {
-    const files = fs.readdirSync(path.join(__dirname, dir))
-    for (const file of files) {
-      const stat = fs.lstatSync(path.join(__dirname, dir, file))
-
-      if (stat.isDirectory()) {
-        readListeners(path.join(dir, file))
-      } else if (file !== messageListenerBaseFile) {
-        const callback = require(path.join(__dirname, dir, file))
-        messageListenerBase(callback)
-      }
-    }
-  }
-
-  readListeners('features/message')
-}
-
-function userJoinListenersImport() {
-  const readListeners = (dir) => {
-    const files = fs.readdirSync(path.join(__dirname, dir))
-    for (const file of files) {
-      const stat = fs.lstatSync(path.join(__dirname, dir, file))
-
-      if (stat.isDirectory()) {
-        readListeners(path.join(dir, file))
-      } else if (file !== userJoinListenerBaseFile) {
-        const callback = require(path.join(__dirname, dir, file))
-        userJoinListenerBase(callback)
-      }
-    }
-  }
-  readListeners('features/userJoin')
-}
-
-function vcStateChangeListenersImport() {
-  const readListeners = (dir) => {
-    const files = fs.readdirSync(path.join(__dirname, dir))
-    for (const file of files) {
-      const stat = fs.lstatSync(path.join(__dirname, dir, file))
-
-      if (stat.isDirectory()) {
-        readListeners(path.join(dir, file))
-      } else if (file !== vcStateChangeListenerBaseFile) {
-        const callback = require(path.join(__dirname, dir, file))
-        vcStateChangeListenerBase(callback)
-      }
-    }
-  }
-  readListeners('features/vcStateChanged')
 }
 
 client.login(process.env.TOKEN)
