@@ -1,20 +1,34 @@
 {
-    "name": "devbot",
-    "version": "1.0.0",
-    "description": "devbot",
-    "main": "index.js",
-    "dependencies": {
-        "@discordjs/rest": "^0.3.0",
-        "@discordjs/voice": "^0.7.5",
-        "discord-api-types": "^0.26.1",
-        "discord.js": "^13.3.1",
-        "mongoose": "^5.13.2"
-    },
-    "engines": {
-        "node": "16.9.0"
-    },
-    "scripts": {},
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+  "name": "devbot",
+  "version": "3.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm install && node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/windingtheropes/devbot.git"
+  },
+  "author": "windingtheropes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/windingtheropes/devbot/issues"
+  },
+  "homepage": "https://github.com/windingtheropes/devbot#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "@discordjs/voice": "^0.8.0",
+    "discord-api-types": "^0.26.1",
+    "discord-webhook-node": "^1.1.8",
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "express.js": "^1.0.0",
+    "mathjs": "^10.1.1",
+    "mongoose": "^6.2.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
 }
