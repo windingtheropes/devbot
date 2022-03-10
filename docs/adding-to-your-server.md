@@ -10,27 +10,29 @@ If you have access to a server which devbot is already in, you can click on its 
 
 #### 1. Click on devbot's profile and press Add to Server
 
-![](.gitbook/assets/image.png)
+![](<img/devbot-profile.png>)
 
 #### 2. Choose a server and press continue
 
-![](<.gitbook/assets/image (1).png>)
+![](<img/devbot-select-server.png>)
 
 #### 3. Scroll down and press Authorize
 
-![](<.gitbook/assets/image (2).png>)
+![](<img/devbot-authorize.png>)
 
 ### Using the invite link
 
 Since Discord's bot discovery is not entirely rolled out, finding devbot in the first place might be troublesome. You can invite the devbot release stream of your choice using one of the links below:
 
-Release: [https://discord.com/oauth2/authorize?client\_id=732280990323441704\&permissions=1633094593655\&scope=bot](https://discord.com/oauth2/authorize?client\_id=732280990323441704\&permissions=1633094593655\&scope=bot)
+[Release](https://discord.com/oauth2/authorize?client\_id=732280990323441704\&permissions=1633094593655\&scope=bot)
 
-Beta: [https://discord.com/api/oauth2/authorize?client\_id=941088206152147005\&permissions=1633094593655\&scope=bot](https://discord.com/api/oauth2/authorize?client\_id=941088206152147005\&permissions=1633094593655\&scope=bot)
+[Beta](https://discord.com/api/oauth2/authorize?client\_id=941088206152147005\&permissions=1633094593655\&scope=bot)
+
+[Canary](https://discord.com/api/oauth2/authorize?client\_id=839106868470480906\&permissions=1633094593655\&scope=bot)
 
 !!! note
 
-    It's currently not reccomended to use devbot beta, as there is no stable hosting for it at this time.
+    It's currently not reccomended to use devbot beta or canary, as there is no stable hosting for either of them this time.
 
 
 Devbot should now be in your server, and you can move on to the more interesting part - using it! 
