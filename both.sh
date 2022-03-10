@@ -1,2 +1,0 @@
-./commit.sh
-./deploy.sh
