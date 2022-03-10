@@ -7,6 +7,3 @@ Devbot's official GitHub repository can be found at [https://github.com/windingt
 Devbot's official support server can be found at [https://discord.gg/VHdTt3KUZQ](https://discord.gg/VHdTt3KUZQ).
 
 If you find a bug, have feedback, or want to suggest a feature, please don't hesitate to submit an issue on GitHub, or report it in our Discord server.
-
-hi
-
