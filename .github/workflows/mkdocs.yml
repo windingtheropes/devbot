@@ -2,9 +2,9 @@ name: mkdocs
 
 on:
   push:
-    branches: [docs]
+    branches: [ docs ]
   pull_request:
-    branches: [docs]
+    branches: [ docs ]
 
 jobs:
   build:
