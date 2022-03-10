@@ -1,3 +1,2 @@
 site_name: Devbot Documentation
 theme: material
-uses: mhausenblas/mkdocs-deploy-gh-pages@1.24
