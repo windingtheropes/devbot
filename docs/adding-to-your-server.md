@@ -28,10 +28,9 @@ Release: [https://discord.com/oauth2/authorize?client\_id=732280990323441704\&pe
 
 Beta: [https://discord.com/api/oauth2/authorize?client\_id=941088206152147005\&permissions=1633094593655\&scope=bot](https://discord.com/api/oauth2/authorize?client\_id=941088206152147005\&permissions=1633094593655\&scope=bot)
 
-{% hint style="info" %}
-devbot Beta currently has no stable hosting solution and hence it's not suggested to add to your server, as uptime will be low
-{% endhint %}
+!!! note
 
+    It's currently not reccomended to use devbot beta, as there is no stable hosting for it at this time.
 
 
 Devbot should now be in your server, and you can move on to the more interesting part - using it!
