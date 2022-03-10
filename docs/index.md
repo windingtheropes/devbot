@@ -1,17 +1,12 @@
-# Welcome to MkDocs
+# devbot Official Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to the official devbot documentation! Here you will find in-depth information about everything devbot has to offer, including more advanced features.&#x20;
 
-## Commands
+Devbot's official GitHub repository can be found at [https://github.com/windingtheropes/devbot](https://github.com/windingtheropes/devbot).
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Devbot's official support server can be found at [https://discord.gg/VHdTt3KUZQ](https://discord.gg/VHdTt3KUZQ).
 
-## Project layout
+If you find a bug, have feedback, or want to suggest a feature, please don't hesitate to submit an issue on GitHub, or report it in our Discord server.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+
