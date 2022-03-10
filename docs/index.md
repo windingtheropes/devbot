@@ -1,4 +1,4 @@
-# devbot Official Documentation
+# Devbot Official Documentation
 
 Welcome to the official devbot documentation! Here you will find in-depth information about everything devbot has to offer, including more advanced features.&#x20;
 
