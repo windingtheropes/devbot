@@ -33,4 +33,4 @@ Beta: [https://discord.com/api/oauth2/authorize?client\_id=941088206152147005\&p
     It's currently not reccomended to use devbot beta, as there is no stable hosting for it at this time.
 
 
-Devbot should now be in your server, and you can move on to the more interesting part - using it!
+Devbot should now be in your server, and you can move on to the more interesting part - using it! w
