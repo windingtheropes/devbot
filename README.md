@@ -1,6 +1,7 @@
 [![mkdocs](https://github.com/windingtheropes/devbot/actions/workflows/main.yml/badge.svg)](https://github.com/windingtheropes/devbot/actions/workflows/main.yml)
 [![Deploy Beta Commands](https://github.com/windingtheropes/devbot/actions/workflows/deploy-beta-commands.yml/badge.svg)](https://github.com/windingtheropes/devbot/actions/workflows/deploy-beta-commands.yml)
 [![Deploy Canary Commands](https://github.com/windingtheropes/devbot/actions/workflows/deploy-canary-commands.yml/badge.svg)](https://github.com/windingtheropes/devbot/actions/workflows/deploy-canary-commands.yml)
+[![Deploy Release Commands](https://github.com/windingtheropes/devbot/actions/workflows/deploy-release-commands%20copy.yml/badge.svg)](https://github.com/windingtheropes/devbot/actions/workflows/deploy-release-commands%20copy.yml)
 # devbot 
 Devbot is a multipurpose Discord bot with various features. It is written entirely in javascript. See the update changelog at [CHANGELOG.md](https://github.com/alacriware/devbot/blob/canary/CHANGELOG.md).
 
