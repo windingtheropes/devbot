@@ -1,4 +1,5 @@
 [![mkdocs](https://github.com/windingtheropes/devbot/actions/workflows/main.yml/badge.svg)](https://github.com/windingtheropes/devbot/actions/workflows/main.yml)
+[![Docker Latest](https://github.com/windingtheropes/devbot/actions/workflows/docker-latest-image.yml/badge.svg)](https://github.com/windingtheropes/devbot/actions/workflows/docker-latest-image.yml)
 # devbot 
 Devbot is a multipurpose Discord bot with various features. It is written entirely in javascript. See the update changelog at [CHANGELOG.md](https://github.com/alacriware/devbot/blob/canary/CHANGELOG.md).
 
