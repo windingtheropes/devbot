@@ -5,3 +5,6 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  
+nav:
+    - Introduction: 'index.md'
