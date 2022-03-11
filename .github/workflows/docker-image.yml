@@ -21,7 +21,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag windingtheropes/devbot:release
+      run: docker build . --file Dockerfile --tag windingtheropes/devbot:latest
       
     - name: Docker Push
-      run: docker push windingtherope/devbot:release
+      run: docker push ${{secrets.DOCKER_USER}}/devbot
