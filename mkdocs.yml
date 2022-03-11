@@ -9,3 +9,4 @@ markdown_extensions:
 nav:
     - Introduction: 'index.md'
     - Adding to Your Server: 'adding-to-your-server.md'
+      - Custom Commands: 'custom-commands/introduction-to-custom-commands.md'
