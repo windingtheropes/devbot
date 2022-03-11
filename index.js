@@ -60,13 +60,6 @@ client.on('ready', async () => {
      }
    })
 
-   client.guilds.cache.forEach(guild => {
-     const channel = guild.channels.cache.find(c => c.name === 'general') || guild.channels.cache.find(c => c.name === 'commands')
-     channel.send("Hey there! Dev Bot has recently been updated to version 3.00, with tons of new commands and features. In order to get all of these new features, like slash commands, you'll need to approve some new permissions.\nIt's as simple as clicking on my profile, clicking add to server, choosing this server, and pressing Authorize. If you have any other questions, feel free to ask them in our support server: https://discord.gg/VHdTt3KUZQ.")
-
-     
-   })
-
    commandBase.loadPrefixes(client)
 
   //dynamic imports
