@@ -1,7 +1,7 @@
 # Action Objects
 An action object's outcome relies entirely on its assigned type, along with other things. On this page we'll look over the different action types and how to use them.
 
-Types are split into two classes, bridges and methods. Bridges, such as ()[#and]
+Types are split into two classes, bridges and methods. Bridges, such as (hi)[#and]
 ## message
 
 ### and
