@@ -21,4 +21,4 @@ Example:
 ]
 ```
 ## equals
-The **equals** bridge can be used to check whether or not two [variables](custom-commands/variables.md) are equal. If the variables are equal, it will execute `action`. Otherwise, it will execute `actionElse`.
+The **equals** bridge can be used to check whether or not two [variables](variables.md) are equal. If the variables are equal, it will execute `action`. Otherwise, it will execute `actionElse`.
