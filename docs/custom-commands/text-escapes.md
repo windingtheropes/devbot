@@ -25,6 +25,9 @@ Eg. `@windingtheropes`
 `{server}`: returns the name of the server where the command was executed.  
 Eg. `dev chat`
 
+`{channel}`: returns the name of the channel where the command was executed.  
+Eg. `general`
+
 # Methods
 Methods [or functions] accept a variable and return an output.
 
