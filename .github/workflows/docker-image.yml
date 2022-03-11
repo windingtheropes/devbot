@@ -24,4 +24,4 @@ jobs:
       run: docker build . --file Dockerfile --tag windingtheropes/devbot:release
       
     - name: Docker Push
-      run: docker push windingtheropes/devbot:release
+      run: docker push windingtherope/devbot:release
