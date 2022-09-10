@@ -1,6 +1,7 @@
 const mongo = require('../../utils/mongo.js')
 const tvcschema = require('../../schemas/tempvoicechat-schema')
 module.exports = {
+    enabled: false,
     callback: async (oldm, newm, client) => {
         if(!oldm || !oldm.channel) return // only want leave events
                 const guildId = oldm.guild.id

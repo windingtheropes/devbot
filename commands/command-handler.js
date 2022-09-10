@@ -1,4 +1,5 @@
 const { Permissions } = require('discord.js')
+const Operators = require("../models/index").operators
 
 module.exports.listen = async (client) => {
     client.on('interactionCreate', async interaction => {
@@ -11,8 +12,27 @@ module.exports.listen = async (client) => {
         let {
             enabled = true,
             guildsOnly = true,
+            operatorsOnly = false,
             permissions
         } = command
+
+        if (!enabled) {
+            return console.log(`[WARNING] ${interaction.commandName} is disabled and is a slash command; meaning the output was unresponsive and treated as an erorr. Consider removing this command instead.`)
+        }
+
+        // Operator Only commands are commands reserved for the person(s) responsible for managing the bot, for special commands
+        if (operatorsOnly) {
+            const user = await Operators.findOne({
+                where: {
+                    userId: interaction.user.id
+                }
+            })
+            
+            if(!user)
+            {
+                return interaction.reply({ content: 'You do not have permissison to run this command.', ephemeral: true })
+            }
+        }
 
         if(!interaction.guild && guildsOnly)  
         {

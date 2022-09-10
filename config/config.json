@@ -1,7 +1,0 @@
-{
-    "token": "OTA0MTA1Mzc5Nzc1MDEyODc0.YX2rwA.E75tPb0fVwIizF0lNiciIN8iYk0", 
-    "mongoPath": "mongodb://localhost:27017/devbot",
-    "prefix": "?",
-    "operators": ["501741260537856025"],
-    "feedbackChannel": "932997444332036178"
-}
