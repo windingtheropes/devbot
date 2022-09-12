@@ -1,21 +1,11 @@
-const welcomeSchema = require('../../schemas/welcomemessage-schema')
-const mongo = require('../../utils/mongo')
+const {greeter} = require("../../models/index")
 module.exports = {
     type: 'leave',
     callback: async (member) => {
+        const serverData = await greeter.findOne({ where: { guildId: member.guild.id } })
+        if (!serverData.leaveMessageEnabled) return
 
-        await mongo().then(async (mongoose) => {
-            try {
-
-                const serverData = await welcomeSchema.findOne({ _id: member.guild.id })
-                if (!serverData.leaveMsgEnabled) return
-
-                const parsed = serverData.leaveMsg.replace(/{user}/g, member.user.username).replace(/{mention}/g, `<@!${member.user.id}>`).replace(/{server}/g, member.guild.name)
-                member.guild.channels.cache.get(serverData.channelId).send(parsed)
-
-            } finally {
-            }
-        })
-
+        const formatted = serverData.leaveMessage.replace(/{user}/g, member.user.username).replace(/{mention}/g, `<@!${member.user.id}>`).replace(/{server}/g, member.guild.name)
+        member.guild.channels.cache.get(serverData.channelId).send(formatted)
     }
 }

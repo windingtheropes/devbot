@@ -1,7 +1,9 @@
 const config = require("../config/db.config");
 const Sequelize = require("sequelize");
 const operatorModel = require("../models/operators.model")
-const userMessageModel = require("../models/userMessages.model")
+const userMessageModel = require("./usermessages.model")
+const tempvcModel = require("../models/tempvc.model")
+const greeterModel = require("../models/greeter.model")
 
 const sequelize = new Sequelize(
     config.DB, 
@@ -26,5 +28,7 @@ db.sequelize = sequelize;
 
 db.operators = operatorModel(sequelize, Sequelize);
 db.userMessages = userMessageModel(sequelize, Sequelize);
+db.tempvc = tempvcModel(sequelize, Sequelize);
+db.greeter = greeterModel(sequelize, Sequelize);
 
 module.exports = db;

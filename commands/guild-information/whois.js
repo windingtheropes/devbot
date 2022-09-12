@@ -45,10 +45,13 @@ module.exports = {
                 embed
                 .setDescription(`${user.tag} (<@!${user.id}>)`)
                 .setThumbnail(user.displayAvatarURL({dynamic:true}))
-                .addField('Presence', presenceString)
-                .addField('Avatar URL', user.displayAvatarURL({dynamic:true}))
-                .addField('Account Creation Date', `${getTimePassed(Date.now() - user.createdAt)} ago (${new Date(user.createdAt).toUTCString()})`)
-                .addField(`Joined ${interaction.guild.name}`, `${getTimePassed(Date.now() - guildUser.joinedAt)} ago (${new Date(guildUser.joinedAt).toUTCString()})`)
+                .addFields(
+                    {name: 'Presence', value: presenceString},
+                    {name: 'Avatar URL', value: user.displayAvatarURL({dynamic:true})},
+                    {name: 'Account Creation Date', value: `${getTimePassed(Date.now() - user.createdAt)} ago (${new Date(user.createdAt).toUTCString()})`},
+                    {name: `Joined ${interaction.guild.name}`, value:  `${getTimePassed(Date.now() - guildUser.joinedAt)} ago (${new Date(guildUser.joinedAt).toUTCString()})`}
+                    )
+               
                 .setFooter({text: `User ID: ${user.id}`})
               
             return await interaction.reply({ embeds: [embed] })
