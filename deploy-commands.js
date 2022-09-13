@@ -19,6 +19,7 @@ function loadCommands() {
         readCommands(path.join(dir, file))
       } else if (file !== 'command-handler.js' && file.endsWith('.js')) {
         const command = require(path.join(__dirname, dir, file))
+        if(command.enabled == false) continue
         commands.push(command.data.toJSON());
 
       }
@@ -29,6 +30,10 @@ function loadCommands() {
 loadCommands()
 
 const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+
+rest.put(Routes.applicationCommands(process.env.clientId), { body: [] })
+	.then(() => console.log('Successfully deleted all application commands.'))
+	.catch(console.error);
 
 rest.put(Routes.applicationCommands(process.env.clientId), { body: commands })
   .then(() => console.log('Successfully registered application slash commands.'))

@@ -1,3 +1,5 @@
+const { add } = require("mathjs");
+
 module.exports = (sequelize, Sequelize) => {
     const greeter = sequelize.define("greeter", {
         guildId: {
@@ -17,6 +19,16 @@ module.exports = (sequelize, Sequelize) => {
         },
         leaveMessage: {
             type: Sequelize.STRING,
+        },
+        joinRoles: {
+            type: Sequelize.STRING,
+            get() {
+                return this.getDataValue('joinRoles').split(';')
+            },
+            set(val)
+            {
+                this.setDataValue('joinRoles',val.join(';'))
+            }
         }
     }, {
         timestamps: false

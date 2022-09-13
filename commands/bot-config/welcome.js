@@ -92,7 +92,7 @@ module.exports = {
         else if (interaction.options.getSubcommand() === 'channel') {
             const channel = await interaction.options.getChannel('channel')
             const serverData = await greeter.findOne({ where: { guildId: interaction.guild.id } }) || await greeter.create({guildId: interaction.guild.id})
-    
+            
             if (channel && channel.type === 'GUILD_TEXT') {
                 serverData.channelId = channel.id
                 serverData.save()
