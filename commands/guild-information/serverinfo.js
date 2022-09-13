@@ -17,7 +17,7 @@ module.exports = {
         .addField('Owner', `${owner.user.tag}`, true)
         .addField('User ID', `${owner.user.id}`, true)
         .addField('Server ID', interaction.guild.id, false)
-        .addField('Creation Date', `${getTimePassed(Date.now() - interaction.guild.createdAt)} ago (${new Date(interaction.guild.createdAt).toUTCString()})`)
+        .addField('Creation Date', `${new Date(interaction.guild.createdAt).toUTCString()}`)
         .addField('Member Count', `${interaction.guild.memberCount}`, false)
          return interaction.reply({embeds: [embed]})
     }

@@ -48,8 +48,8 @@ module.exports = {
                 .addFields(
                     {name: 'Presence', value: presenceString},
                     {name: 'Avatar URL', value: user.displayAvatarURL({dynamic:true})},
-                    {name: 'Account Creation Date', value: `${getTimePassed(Date.now() - user.createdAt)} ago (${new Date(user.createdAt).toUTCString()})`},
-                    {name: `Joined ${interaction.guild.name}`, value:  `${getTimePassed(Date.now() - guildUser.joinedAt)} ago (${new Date(guildUser.joinedAt).toUTCString()})`}
+                    {name: 'Account Creation Date', value: `${new Date(user.createdAt).toUTCString()}`},
+                    {name: `Joined ${interaction.guild.name}`, value:  `${new Date(guildUser.joinedAt).toUTCString()}`}
                     )
                
                 .setFooter({text: `User ID: ${user.id}`})

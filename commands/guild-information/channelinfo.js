@@ -21,7 +21,7 @@ module.exports = {
         .addField('Type', query.type)
         .addField('Channel ID', `${query.id}`, true)
         .addField('Server ID', interaction.guild.id, false)
-        .addField('Creation Date', `${getTimePassed(Date.now() - query.createdAt)} ago (${new Date(query.createdAt).toUTCString()})`)
+        .addField('Creation Date', `${new Date(query.createdAt).toUTCString()}`)
          return interaction.reply({embeds: [embed]})
     }
 }
