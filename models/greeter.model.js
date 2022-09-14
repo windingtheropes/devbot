@@ -20,6 +20,9 @@ module.exports = (sequelize, Sequelize) => {
         leaveMessage: {
             type: Sequelize.STRING,
         },
+        joinRolesEnabled: {
+            type: Sequelize.BOOLEAN,
+        },
         joinRoles: {
             type: Sequelize.STRING,
             get() {
