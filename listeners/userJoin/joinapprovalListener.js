@@ -3,8 +3,9 @@ const {MessageEmbed} = require('discord.js')
 
 module.exports = {
     type: 'join',
+    joinApproval: true,
     enabled: false,
-    callback: async (member, client) => {
+    callback: async (member, client, next) => {
         const guild = member.guild;
 
         const serverData = await joinapproval.findOne({where:{guildId: guild.id}})

@@ -5,6 +5,7 @@ const userMessageModel = require("./usermessages.model")
 const tempvcModel = require("../models/tempvc.model")
 const greeterModel = require("../models/greeter.model")
 const joinapprovalModel = require("../models/joinapproval.model")
+const autorolesModel = require("../models/autoroles.model")
 
 const sequelize = new Sequelize(
     config.DB, 
@@ -32,5 +33,6 @@ db.userMessages = userMessageModel(sequelize, Sequelize);
 db.tempvc = tempvcModel(sequelize, Sequelize);
 db.greeter = greeterModel(sequelize, Sequelize);
 db.joinapproval = joinapprovalModel(sequelize, Sequelize);
+db.autoroles = autorolesModel(sequelize, Sequelize)
 
 module.exports = db;

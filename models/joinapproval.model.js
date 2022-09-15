@@ -8,6 +8,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         timeout: {
             type: Sequelize.INTEGER, // Timeout in seconds before kick
+            defaultValue: 300
         },
         channelId: {
             type: Sequelize.STRING,
