@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/windingtheropes/devbot#readme",
   "dependencies": {
+    "@discordjs/builders": "^1.2.0",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.10.3",
     "dotenv": "^16.0.0",
