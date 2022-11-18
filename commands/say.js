@@ -35,22 +35,20 @@ module.exports = {
         const webhook = await (async () => {
             if(!channel)
             {
-                return await interaction.channel.createWebhook(name, {
-                    avatar: avatar || "",
-                })
+                return await interaction.channel.createWebhook({ name: "Devbot Say Command" })
             }
             else {
-                return await channel.createWebhook(name,{
-                    avatar: avatar || "",
-                    reason: "/say command"
-                })
+                return await channel.createWebhook({ name: "Devbot Say Command" })
             }
         })()
 
-        await webhook.send({ content: message })
+        await webhook.send({ 
+            username: name, 
+            avatarURL: avatar || "", 
+            content: message
+        })
         await interaction.reply({ content: `Sent '${message}' in <#${channel.id}>.`, ephemeral: true })
 
         await webhook.delete()
-        // channel.send(message)
     }
 }
