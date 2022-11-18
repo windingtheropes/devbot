@@ -32,10 +32,10 @@ module.exports = {
         )
     ,
     async execute(interaction) {
-        const me = interaction.guild.me
-        if(!me.permissions.has("ADMINISTRATOR") || !me.permissions.has("MANAGE_ROLES"))
+        const me = await interaction.guild.members.me
+        if(!me.permissions.has(PermissionFlagsBits.ManageRoles))
         {
-            return interaction.reply({content: "Devbot does not have permission to manage roles.", ephemeral: true})
+            return interaction.reply({content: "The bot does not have permission to manage roles.", ephemeral: true})
         }
 
         const serverData = await (async () => {
@@ -73,7 +73,7 @@ module.exports = {
         else if (interaction.options.getSubcommand() == "add") {
             const role = interaction.options.getRole("role")
 
-            if(!canManageRole(role, me)) return interaction.reply({ content: `Devbot does not have permission to manage the role ${'`'}${role.name}${'`'}. Any role you wish for devbot to manage must be below its highest role.`, ephemeral: true })
+            if(!canManageRole(role, me)) return interaction.reply({ content: `The bot does not have permission to manage the role ${'`'}${role.name}${'`'}. Any role you wish for it to manage must be below its highest role.`, ephemeral: true })
 
             const roles = serverData.roles
 

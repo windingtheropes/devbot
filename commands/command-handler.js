@@ -6,7 +6,9 @@ module.exports.listen = async (client) => {
         if (!interaction.isCommand()) return;
     
         const command = client.commands.get(interaction.commandName)
-    
+        const options = {
+            ephemeral: true
+        }
         if(!command) return;
 
         let {
@@ -61,7 +63,10 @@ module.exports.listen = async (client) => {
         }
 
         try {
-            await command.execute(interaction, client)
+            if(interaction.options.getBoolean('ephemeral') == false) {
+                options.ephemeral = false
+            }
+            await command.execute(interaction, options, client)
         } catch (error) {
             console.error(error);
             await interaction.reply({ content: 'There was an error while executing the command.', ephemeral: true })

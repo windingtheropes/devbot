@@ -1,8 +1,9 @@
-const { SlashCommandBuilder, Permissions, MessageEmbed } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits, MessageEmbed } = require('discord.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('poll')
         .setDescription('Start a poll.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .addSubcommand(subcommand => 
             subcommand
             .setName('yesno')

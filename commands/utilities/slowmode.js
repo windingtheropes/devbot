@@ -1,10 +1,10 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('discord.js')
 
 module.exports = {
-    permissions: PermissionFlagsBits.ManageChannels,
     data: new SlashCommandBuilder()
         .setName('slowmode')
         .setDescription('Configure slowmode in the current channel')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
         .addIntegerOption(option => 
             option.setName('disable')
                 .setDescription("Disable slowmode in the selected channel.")
@@ -35,7 +35,7 @@ module.exports = {
                 .addChoices({name: "Yes", value: 1})
                 .setRequired(false))
                 ,
-    async execute(interaction, client) {
+    async execute(interaction, options, client) {
         const channel = (() => {
             if(interaction.options.getChannel('channel')) {
                 return interaction.options.getChannel('channel')

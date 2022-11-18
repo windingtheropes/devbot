@@ -6,7 +6,7 @@ module.exports = {
    data: new SlashCommandBuilder()
         .setName('rank')
         .setDescription('Top users by messages sent.'),
-    async execute(interaction, client) {
+    async execute(interaction, options, client) {
         const serverData = await userMessages.findAll({where: {guildId: interaction.guild.id}, order: [['messages', 'DESC']], raw:true})
         const guild = client.guilds.cache.get(interaction.guild.id)
         var content = getLb(guild, serverData)

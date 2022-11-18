@@ -1,9 +1,9 @@
 const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
 module.exports = {
-    permissions: PermissionFlagsBits.ManageMessages,
     data: new SlashCommandBuilder()
         .setName('say')
         .setDescription('Says what you say.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .addStringOption(option =>
             option.setName('name')
                 .setDescription('The name to send the message under.')
@@ -22,7 +22,7 @@ module.exports = {
             option.setName('channel')
                 .setDescription('The channel to send the message in.')
         ),
-    async execute(interaction, client) {
+    async execute(interaction) {
         const message = interaction.options.getString('message')
         const channel = interaction.options.getChannel('channel') || interaction.channel
         const name = interaction.options.getString('name')

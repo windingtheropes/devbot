@@ -1,4 +1,4 @@
-const db = require('../models/index.js');
+import db from '../models/index.js';
 
 module.exports = () => {
     db.sequelize.sync().then(() => { // {force:true} wioll clear db every start

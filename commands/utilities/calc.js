@@ -8,7 +8,7 @@ module.exports = {
             option.setName('expression')
                 .setDescription("The expression to evaluate.")
                 .setRequired(false)),
-    async execute(interaction, client) {
+    async execute(interaction) {
         const exp = interaction.options.getString('expression')
         interaction.reply(`(${exp}) = ${math.evaluate(exp).toString()}`)
     }

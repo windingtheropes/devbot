@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js')
-const { MessageEmbed } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js')
 // const getTimePassed = require('../../utils/getTimeFromTimestamp')
 
 module.exports = {
@@ -10,7 +9,7 @@ module.exports = {
             option.setName('query')
                 .setDescription("The user you'd like to get information about.")
                 .setRequired(false)),
-    async execute(interaction, client) {
+    async execute(interaction, options, client) {
         
         const query = interaction.options.getUser('query')
         if (!query) {
@@ -37,21 +36,20 @@ module.exports = {
 
             var presenceString = `${!clientStatus ? 'offline' : `${clientStatus.desktop ? `Desktop: ${clientStatus.desktop}` : ''}${clientStatus.web ? `\nWeb: ${clientStatus.web}` : ''}${clientStatus.mobile ? `\nMobile: ${clientStatus.mobile}` : ''}`}`
             if(!presenceString) presenceString = 'offline'
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor('#0099ff')
                 .setAuthor({name: user.username, iconURL: user.displayAvatarURL({dynamic:true})})
                 .setTitle(`whois ${user.username}`)
-                if(guildUser.displayName != user.username){embed.addField('Server Display Name', guildUser.displayName)}
+                if(guildUser.displayName != user.username){embed.addFields({name: 'Server Display Name', value: guildUser.displayName})}
                 embed
                 .setDescription(`${user.tag} (<@!${user.id}>)`)
                 .setThumbnail(user.displayAvatarURL({dynamic:true}))
-                .addFields(
+                .addFields([
                     {name: 'Presence', value: presenceString},
                     {name: 'Avatar URL', value: user.displayAvatarURL({dynamic:true})},
                     {name: 'Account Creation Date', value: `${new Date(user.createdAt).toUTCString()}`},
                     {name: `Joined ${interaction.guild.name}`, value:  `${new Date(guildUser.joinedAt).toUTCString()}`}
-                    )
-               
+                ])
                 .setFooter({text: `User ID: ${user.id}`})
               
             return await interaction.reply({ embeds: [embed] })

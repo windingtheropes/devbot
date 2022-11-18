@@ -1,24 +1,21 @@
 module.exports = {
     enabled: false,
     callback: async (message) => {
-        //testing functionality for webhooks and messages
-        // this will probably be used in the future in some form for censoring messages and a pin archive.
-        if(message.author.bot) return
-        const { Client, Intents, WebhookClient } = require("discord.js");
-        const oldMessage = message
+        // Working message resending with webhooks.
+        // Keep in mind: this creates and recreates a webhook every time, easy to get limited and also slow down the process.
+        // Ideally should have one webhook for all devbot webhook functionality.
+        if (message.author.bot) return
+        
+        const {content, username} = message
         const avatarURL = message.author.avatarURL()
         await message.delete()
 
-        message.channel.createWebhook('resend', {
+        const wh = await message.channel.createWebhook({
+            name: 'Devbot Message Resend'
         })
-            .then(async webhook => {
-                await webhook.send({
-                    content: oldMessage.content,
-                    username: oldMessage.author.username,
-                    avatarURL: avatarURL,
-                })
-                await webhook.delete()
-            })
-            .catch(console.error);
+        
+        await wh.send({content, username, avatarURL})
+        await wh.delete()
+
     }
 }

@@ -1,9 +1,10 @@
-const { SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
 const { tempvc } = require("../models/index")
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('tempvc')
         .setDescription('Creates a temporary voice chat.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageServer)
         .addStringOption(option =>
             option.setName('name')
                 .setDescription('The channel name.')
