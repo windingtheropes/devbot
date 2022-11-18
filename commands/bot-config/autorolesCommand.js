@@ -30,6 +30,12 @@ module.exports = {
             subcommand.setName('clear')
                 .setDescription('Clear all autoroles.')
         )
+        .addSubcommand(subcommand => 
+            subcommand.setName("enabled")
+                .setDescription("Whether or not to enable autoroles.")
+                .addBooleanOption(opt => 
+                    opt.setName("enable")
+                        .setDescription("Enable or disable autoroles.")))
     ,
     async execute(interaction) {
         const me = await interaction.guild.members.me
