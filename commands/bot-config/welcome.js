@@ -1,4 +1,4 @@
-const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
+const { PermissionFlagsBits, SlashCommandBuilder, ChannelType } = require('discord.js')
 const { greeter } = require('../../models')
 module.exports = {
     permissions: PermissionFlagsBits.ManageGuild,
@@ -92,7 +92,7 @@ module.exports = {
             const channel = await interaction.options.getChannel('channel')
             const serverData = await greeter.findOne({ where: { guildId: interaction.guild.id } }) || await greeter.create({guildId: interaction.guild.id})
             
-            if (channel && channel.type === 'GUILD_TEXT') {
+            if (channel && channel.type === ChannelType.GuildText) {
                 serverData.channelId = channel.id
                 serverData.save()
             }
