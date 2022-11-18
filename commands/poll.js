@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
-const { Permissions, MessageEmbed } =  require('discord.js')
+const { SlashCommandBuilder, Permissions, MessageEmbed } = require('discord.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('poll')

@@ -1,8 +1,7 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
-const { Permissions } = require('discord.js')
+const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
 const { greeter } = require('../../models')
 module.exports = {
-    permissions: Permissions.FLAGS.MANAGE_GUILD,
+    permissions: PermissionFlagsBits.ManageGuild,
     data: new SlashCommandBuilder()
         .setName('welcome')
         .setDescription('Configure welcome messages in your server.')

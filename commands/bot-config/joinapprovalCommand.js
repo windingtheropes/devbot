@@ -1,9 +1,8 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
-const { Permissions } = require('discord.js')
+const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
 const { joinapproval } = require('../../models')
 module.exports = {
     enabled: false,
-    permissions: Permissions.FLAGS.MANAGE_GUILD,
+    permissions: PermissionFlagsBits.ManageGuild,
     data: new SlashCommandBuilder()
         .setName('joinapproval')
         .setDescription('Configure join approval in your server.')

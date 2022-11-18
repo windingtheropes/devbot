@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
+const { SlashCommandBuilder } = require('discord.js')
 const { tempvc } = require("../models/index")
 module.exports = {
     data: new SlashCommandBuilder()

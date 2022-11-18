@@ -1,10 +1,10 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
-const { Permissions } = require('discord.js')
+const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
 const { autoroles } = require('../../models')
 const {canManageRole} = require("../../utils/devbot")
 
 module.exports = {
-    permissions: Permissions.FLAGS.MANAGE_GUILD,
+    permissions: PermissionFlagsBits.ManageGuild,
+    // permissions: Permissions.FLAGS.MANAGE_GUILD,
     data: new SlashCommandBuilder()
         .setName('autoroles')
         .setDescription('Configure automatically giving roles to members upon joining the server.')

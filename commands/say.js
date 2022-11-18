@@ -1,7 +1,6 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
-const { Permissions, WebhookClient } = require('discord.js')
+const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
 module.exports = {
-    permissions: Permissions.FLAGS.MANAGE_MESSAGES,
+    permissions: PermissionFlagsBits.ManageMessages,
     data: new SlashCommandBuilder()
         .setName('say')
         .setDescription('Says what you say.')

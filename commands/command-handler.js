@@ -1,4 +1,4 @@
-const { Permissions } = require('discord.js')
+// const { PermissionFlagsBits } = require('discord.js')
 const Operators = require("../models/index").operators
 
 module.exports.listen = async (client) => {

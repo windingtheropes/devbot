@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders')
+const { SlashCommandBuilder, MessageEmbed } = require('discord.js')
 const userMessages = require("../models/index").userMessages
-const { MessageEmbed } = require('discord.js')
 
 module.exports = {
    enabled: false,
