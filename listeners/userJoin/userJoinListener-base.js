@@ -59,7 +59,7 @@ module.exports.listen = (client) => {
 }
 
   client.on('guildMemberAdd', (member) => {
-    runJoinListeners()
+    runJoinListeners(member)
     // ||
     // || JOIN APPROVAL INTERCEPT FUNCTIONALITY
     // || JOIN APPROVAL IS A PAUSED, LIKELY CANCELLED FEATURE, BUT THIS IS LEFT HERE JUST IN CASE.
@@ -89,6 +89,6 @@ module.exports.listen = (client) => {
     })
 
     client.on('guildMemberRemove', (member) => {
-      runLeaveListeners()
+      runLeaveListeners(member)
     })
   }
