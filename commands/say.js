@@ -1,4 +1,4 @@
-const { PermissionFlagsBits, SlashCommandBuilder } = require('discord.js')
+const { PermissionFlagsBits, SlashCommandBuilder, ChannelType } = require('discord.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('say')
@@ -28,7 +28,7 @@ module.exports = {
         const name = interaction.options.getString('name')
         const avatar = interaction.options.getString('avatar')
 
-        if (!(channel.type == 'GUILD_TEXT' || channel.type == 'GUILD_NEWS')) {
+        if (!(channel.type == ChannelType.GuildText || channel.type == ChannelType.GuildAnnouncement)) {
             return interaction.reply({ content: 'The channel type is not supported.', ephemeral: true })
         }
 
