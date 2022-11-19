@@ -5,4 +5,3 @@ RUN npm install --quiet
 COPY . .
 
 CMD ["node", "index.js"]
-

@@ -1,154 +1,186 @@
-// ?poll yesno question goes here
-const discord = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits, MessageEmbed } = require('discord.js')
 module.exports = {
-    minArgs: 1,
-    miniDescription: 'Start a poll.',
-    description: 'Start a poll. You can choose from either a yesno poll, a simple poll with up to 20 options, or a fully custom poll with custom emojis. Starting a yesno poll is quite straightforward, just add the question after the type. As for custom and simple, you must add `|` between argument sections. An argument section is the question, an emoji deffinition, or in the simple poll case; an poll option. An emoji deffintion includes both the emoji and its deffinition. For custom polls, you can add up to 20 options and their corresponding emojis [that are accesible by the bot]. In usage, arguments wrapped in () are for use with the `custom` and `simple` types only. Arguments wrapped in {} are for use with the `custom` type only. Do not include the brackets in the actual execution of the command.',
-    usage: '<type - yesno/custom/simple> (|) <message> (| {<emoji>} <description/option> [| {<emoj>} <description/option>]))',
-    exampleUsage: ['yesno Is the poll command cool?', 'custom | What is your favourite programming language? | :python_emoji: Python | :javascript_emoji: Javascript | :csharp_emoji: C#', 'simple | choose a range of numbers | 0-10 | 10-20 | 20-30 | 30-40 | 40-50 | 50-60 | 60-70 | 70-80 | 80-90 | 90-100'],
-    commands: 'poll',
-    callback: (message, args, text, client) => {
-        const type = args[0].toLowerCase()
-        let question
-        const pollEmbed = new discord.MessageEmbed()
+    data: new SlashCommandBuilder()
+        .setName('poll')
+        .setDescription('Start a poll.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+        .addSubcommand(subcommand => 
+            subcommand
+            .setName('yesno')
+            .setDescription('A simple poll with only the answers yes and no.')
+            .addStringOption(option => 
+                option.setName('question')
+                    .setDescription('The poll question.')
+                    .setRequired(true)
+            )
+        )
+        .addSubcommand(subcommand => 
+            subcommand.setName('long')
+            .setDescription('A more advanced poll with more options.')
 
-        .setColor('#0099ff')
-        .setFooter(`Poll by ${message.author.username}`)
-        switch(type) 
+            .addStringOption(option => 
+                option.setName('question')
+                    .setDescription('The poll question.')
+                    .setRequired(true)
+            )
+            .addStringOption(option => 
+                option.setName('option_1')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(true)
+            )
+            .addStringOption(option => 
+                option.setName('option_2')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(true)
+            )
+            .addStringOption(option => 
+                option.setName('option_3')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_4')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_5')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_6')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_7')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_8')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_9')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_10')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_11')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_12')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_13')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_14')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_15')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_16')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_17')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_18')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+            .addStringOption(option => 
+                option.setName('option_19')
+                    .setDescription('A poll opton. Add an :emoji: to the front for a custom reaction. Ex: :emoji: option')
+                    .setRequired(false)
+            )
+        ),
+    async execute(interaction) {
+        const alpha = [
+            '🇦',
+            '🇧',
+            '🇨',
+            '🇩',
+            '🇪',
+            '🇫',
+            '🇬',
+            '🇭',
+            '🇮',
+            '🇯',
+            '🇰',
+            '🇱',
+            '🇲',
+            '🇳',
+            '🇴',
+            '🇵',
+            '🇶',
+            '🇷',
+            '🇸',
+            '🇹',
+        ]
+        const question = await interaction.options.getString('question')
+        const pollEmbed = new MessageEmbed()
+            .setAuthor({name: interaction.user.username, iconURL: interaction.user.avatarURL()})
+        if(await interaction.options.getSubcommand() === 'yesno')
         {
-            case 'yesno':
-                yesno()
-                message.delete()
-                break;
-            case 'custom':
-                custom()
-                message.delete()
-                break;
-            case 'simple':
-                simple()
-                message.delete()
-                break;  
-            default:
-                message.reply("Type not recognized.")
-                break;
-            
+            const message = await interaction.reply({  content: `📊 **${question}**`, embeds: [pollEmbed], fetchReply: true });
+            message.react('👍');
+            message.react('👎');
         }
-        function yesno()
-        {
-                question = text.replace(args[0], '').substring(1)
-                if(!question || question === '')
-                {
-                    return question.reply("You must provide a question for the poll.")
-                }
-                pollEmbed
-                .setTitle(question)
-                message.channel.send(pollEmbed).then(poll => {
-                    poll.react('👍')
-                    poll.react('👎')
-                })
-        }
-        function custom()
-        {
-            const deffs = text.replace(args[0], '')
-                const deffArray = deffs.split(/[|]+/)
-                deffArray.shift()
-                const emojis = []
-                const deffinitions = []
-                const question = deffArray[0].substring(1)
-                deffArray.shift()
-                if(deffArray.length > 20)
-                {
-                    return message.reply(`There cannot be more than 20 options.`)
-                }
-                deffArray.forEach(deff => {
-                    const words = deff.split(/[ ]+/)
-                    words.shift()
-                    
+        if(await interaction.options.getSubcommand() === 'long')
+        {   
+            var pollString
+            const pollData = []
+            for(var i = 1; i <= 20; i++)
+            {
+                const option = interaction.options.getString(`option_${i}`)
+                if(!option) break
+                const words = option.split(' ')
+                if(words[0].startsWith(':') && words[0].endsWith(':') || words[0].startsWith('<:') && words[0].endsWith('>'))
+                {   
                     const emoji = words[0]
-                    const  deffinition = deff.replace(emoji, '').substring(2)
-                    
-                    deffinitions.push([emoji, deffinition])
-                    emojis.push(emoji)
+                    const newOption = option.replace(`${emoji} `, '')
+                    pollData.push([emoji, newOption])
+                }
+                else
+                {
+                    pollData.push([alpha[i-1], option])
+                }
+                pollString = `${!pollString ? `${pollData[i-1][0]} ${pollData[i-1][1]}` : `${pollString}\n${pollData[i-1][0]} ${pollData[i-1][1]}`}`
+            }
+            pollEmbed.addField('Options', pollString)
+            const message = await interaction.reply({ content: `📊 **${question}**`, embeds: [pollEmbed], fetchReply: true });
+            pollData.forEach(opt => {
+                message.react(opt[0]).catch(err => {
+                    return interaction.followUp({ content: 'There was an erorr.', ephemeral: true})
                 })
-                
-                optionsString = ''
-                deffinitions.forEach(item => {
-                    optionsString = `${optionsString}\n${item[0]} ${item[1]}`
-                })
-                pollEmbed
-                .setDescription(optionsString)
-                message.channel.send(`📊 **${question}**`,pollEmbed).then(embed => {
-                    emojis.forEach(emoji => {
-                        try
-                        {
-                            embed.react(emoji)
-                        }
-                        catch
-                        {
-                            message.reply('There was an error reacting to the message. Make sure every emoji exists and that it is accessible by the bot.')
-                        }
-                    })
-                })
+            })
         }
 
-        function simple()
-        {
-            const alpha = [
-                '🇦',
-                '🇧',
-                '🇨',
-                '🇩',
-                '🇪',
-                '🇫',
-                '🇬',
-                '🇭',
-                '🇮',
-                '🇯',
-                '🇰',
-                '🇱',
-                '🇲',
-                '🇳',
-                '🇴',
-                '🇵',
-                '🇶',
-                '🇷',
-                '🇸',
-                '🇹'
-            ]
-                const deffs = text.replace(args[0], '')
-                const deffArray = deffs.split(/[|]+/)
-                deffArray.shift()
-                const emojis =[]
-                const deffinitions = []
-                const question = deffArray[0].substring(1)
-                deffArray.shift()
-                if(deffArray.length > 20)
-                {
-                    return message.reply(`There cannot be more than 20 options.`)
-                }
-                for(let i=0; i<alpha.length; i++)
-                {
-                    const deffinition = deffArray[i]
-                    const emoji = alpha[i]
-                    
-                    if(emoji && deffinition)
-                    {
-                        deffinitions.push([emoji, deffinition])
-                    }
-                }
-                optionsString = ''
-                deffinitions.forEach(item => {
-                    optionsString = `${optionsString}\n${item[0]} ${item[1]}`
-                })
-                pollEmbed
-                .setDescription(optionsString)
-                message.channel.send(`📊 **${question}**`, pollEmbed).then(embed => {
-                    deffinitions.forEach(arr => {
-                        embed.react(arr[0])
-                    })
-                })
-        }
-       
+        
     }
 }
-

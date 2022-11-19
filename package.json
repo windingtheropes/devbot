@@ -1,20 +1,27 @@
 {
-    "name": "devbot",
-    "version": "1.0.0",
-    "description": "devbot",
-    "main": "index.js",
-    "dependencies": {
-        "@discordjs/rest": "^0.3.0",
-        "@discordjs/voice": "^0.7.5",
-        "discord-api-types": "^0.26.1",
-        "discord.js": "^13.3.1",
-        "mongoose": "^5.13.2"
-    },
-    "engines": {
-        "node": "16.9.0"
-    },
-    "scripts": {},
-    "keywords": [],
-    "author": "",
-    "license": "ISC"
+  "name": "devbot",
+  "version": "3.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm install && node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/windingtheropes/devbot.git"
+  },
+  "author": "windingtheropes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/windingtheropes/devbot/issues"
+  },
+  "homepage": "https://github.com/windingtheropes/devbot#readme",
+  "dependencies": {
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.0",
+    "mariadb": "^3.0.2",
+    "mathjs": "^10.1.1",
+    "sequelize": "^6.21.5"
+  }
 }
