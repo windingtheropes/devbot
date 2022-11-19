@@ -5,6 +5,6 @@ module.exports = {
         .setName('version')
         .setDescription('Gets the bot version.'),
     async execute(interaction) {
-        await interaction.reply({ content: `Devbot version ${version}.\n${prerelease ? '**This is a pre-release version; expect bugs and instabilities.**' : ''}`})
+        await interaction.reply({ content: `Devbot version ${'`'}${version}${'`'}.\n${prerelease ? '**This is a pre-release version; expect bugs and instabilities.**' : ''}`, ephemeral: true})
     }
 }
