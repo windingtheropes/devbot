@@ -16,8 +16,7 @@ module.exports.listen = async (client) => {
         let {
             enabled = true,
             guildsOnly = true,
-            operatorsOnly = false,
-            permissions
+            operatorsOnly = false
         } = command
 
         if (!enabled) {
@@ -34,40 +33,21 @@ module.exports.listen = async (client) => {
             
             if(!user)
             {
-                return interaction.reply({ content: 'You do not have permissison to run this command.', ephemeral: true })
+                return interaction.reply({ content: "You don't have permission to run this command.", ephemeral: true })
             }
         }
 
         if(!interaction.guild && guildsOnly)  
         {
-            return interaction.reply({ content: 'This command is only available in guilds.', ephemeral: true })
+            return interaction.reply({ content: 'This command is only available in servers.', ephemeral: true })
         }
 
-        const guildMember = await interaction.guild.members.fetch({ user: interaction.user.id, force: true })
-
-        if(permissions)
-        {
-            if(typeof permissions != 'array')
-            {
-                permissions = [permissions]
-            }
-            var pint = 0
-            permissions.forEach(permission => {
-                if(guildMember.permissions.has(permission))
-                {
-                    pint++
-                }
-            })
-            if(pint === 0)
-            {
-                return interaction.reply({ content: 'You do not have permissison to run this command.', ephemeral: true })
-            }
-        }
+        // const guildMember = await interaction.guild.members.fetch({ user: interaction.user.id, force: true })
 
         try {
-            if(interaction.options.getBoolean('ephemeral') == false) {
-                options.ephemeral = false
-            }
+            // if(interaction.options.getBoolean('ephemeral') == false) {
+            //     options.ephemeral = false
+            // }
             await command.execute(interaction, options, client)
         } catch (error) {
             console.error(error);
