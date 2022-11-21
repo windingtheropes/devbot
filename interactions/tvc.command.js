@@ -18,16 +18,14 @@ module.exports = {
                 .setDescription("Parent category."))
     ,
     async execute(interaction) {
-        // !tempchat <limit> <name>
-
-        // The requested parent category
-        const p = await interaction.options.getChannel('parent')
+        const {guild} = interaction
         // Make sure the requested parent is a category, and exists, otherwise just make the channel under the current category
-        const pid = (() => {
-            if(!p) return interaction.channel.parentId
+        const parent = await (async () => {
+            const p = await interaction.options.getChannel('parent')
+            if(!p) return interaction.channel
             if(p) {
-                if(p.type === 'GUILD_CATEGORY') return p.id
-                else return interaction.channel.parentId
+                if(p.type === 'GUILD_CATEGORY') return p
+                else return interaction.channel
             }
         })()
         
@@ -42,15 +40,12 @@ module.exports = {
             name,
             type: ChannelType.GuildVoice,
             userLimit: limit,
-            parent: pid
+            parent: parent.id
         })
 
-        const cid = channel.id
-        const gid = interaction.guild.id
-
         await tempvc.upsert({
-            guildId: gid,
-            channelId: cid
+            guildId: guild.id,
+            channelId: channel.id
         });
 
         interaction.reply({ content: `Created temporary voice chat ${'`' + channel.name + '`'}${limit > 0 ? ` with a limit of ${limit} user${limit > 1 ? 's' : ''}` : ''}` })
