@@ -1,8 +1,10 @@
+const { Events } = require("discord.js");
+
 // const { PermissionFlagsBits } = require('discord.js')
 const Operators = require("../models/index").operators
 
 module.exports.listen = async (client) => {
-    client.on('interactionCreate', async interaction => {
+    client.on(Events.InteractionCreate, async interaction => {
         if (!interaction.isCommand()) return;
     
         const command = client.commands.get(interaction.commandName)

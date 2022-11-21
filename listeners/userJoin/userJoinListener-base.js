@@ -1,5 +1,6 @@
-const {joinapproval} = require("../../models/index")
-const { joinApproval } = require("./joinapprovalListener")
+const { Events } = require("discord.js")
+// const {joinapproval} = require("../../models/index")
+// const { joinApproval } = require("./joinapprovalListener")
 
 const allListeners = []
 module.exports.import = (callback) => {
@@ -58,8 +59,8 @@ module.exports.listen = (client) => {
   })
 }
 
-  client.on('guildMemberAdd', (member) => {
-    runJoinListeners(member)
+  client.on(Events.GuildMemberAdd, (member) => {
+      runJoinListeners(member)
     // ||
     // || JOIN APPROVAL INTERCEPT FUNCTIONALITY
     // || JOIN APPROVAL IS A PAUSED, LIKELY CANCELLED FEATURE, BUT THIS IS LEFT HERE JUST IN CASE.
@@ -88,7 +89,7 @@ module.exports.listen = (client) => {
     // }
     })
 
-    client.on('guildMemberRemove', (member) => {
+    client.on(Events.GuildMemberRemove, (member) => {
       runLeaveListeners(member)
     })
   }

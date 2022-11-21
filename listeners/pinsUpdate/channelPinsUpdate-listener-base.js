@@ -1,3 +1,5 @@
+const { Events } = require("discord.js")
+
 const allListeners = []
   module.exports.import = (callback) => {
        allListeners.push(callback)
@@ -13,7 +15,7 @@ const allListeners = []
     {
       console.log('Listening for pin updates.')
     }
-    client.on('channelPinsUpdate', (channel, time) => {
+    client.on(Events.ChannelPinsUpdate, (channel, time) => {
         allListeners.forEach(option => {
             let {
                 callback,
