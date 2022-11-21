@@ -1,3 +1,5 @@
+const { Events } = require("discord.js")
+
 const allListeners = []
   module.exports.import = (options) => {
        allListeners.push(options)
@@ -13,7 +15,7 @@ const allListeners = []
     {
       console.log('Listening for messages.')
     }
-    client.on('messageCreate', (message) => {
+    client.on(Events.MessageCreate, (message) => {
         allListeners.forEach(option => {
 
           //don't trigger the listener callback from a message that the bot sent
