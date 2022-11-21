@@ -44,6 +44,13 @@ client.on('ready', async () => {
   listenerBase.listen(client)
 })
 
+function equalsOneOf(value, refArray) {
+  for (const r of refArray) {
+    if(value == r) return true
+  }
+  return false
+}
+
 function commandsImport() {
   client.commands = new Collection();
 
@@ -56,6 +63,15 @@ function commandsImport() {
       if (stat.isDirectory()) {
         readCommands(path.join(dir, file))
       } else if (file !== 'interaction-handler.js' && file.endsWith('.js')) {
+        
+        const fileparts = (() => {
+          let p = file.split('.')
+          p.pop()
+          return p
+        })()
+
+        if(!equalsOneOf(fileparts.pop(), ['ctx', 'command'])) continue
+        
         const command = require(path.join(__dirname, dir, file))
         client.commands.set(command.data.name, command);
       }
