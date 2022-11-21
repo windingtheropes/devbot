@@ -11,8 +11,8 @@ DB=devbot
 DB_USER=dbuser
 DB_PASSWORD=dbpass
 TOKEN=BOTTOKEN
-operators=000000,000000
-clientId=111111
+operators=0,0
+clientId=0
 ```
 
 # devbot public
