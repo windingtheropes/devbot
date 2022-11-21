@@ -10,7 +10,7 @@ const dbInit = require("./config/db.init.dev")
 dotenv.config()
 
 // Listeners
-const commandBase = require('./commands/command-handler.js')
+const commandBase = require('./interactions/interaction-handler.js')
 const listenerBase = require('./listeners/listener-base.js')
 
 const client = new Client({
@@ -55,14 +55,14 @@ function commandsImport() {
 
       if (stat.isDirectory()) {
         readCommands(path.join(dir, file))
-      } else if (file !== 'command-handler.js' && file.endsWith('.js')) {
+      } else if (file !== 'interaction-handler.js' && file.endsWith('.js')) {
         const command = require(path.join(__dirname, dir, file))
         client.commands.set(command.data.name, command);
       }
     }
   }
 
-  readCommands('commands')
+  readCommands('interactions')
 }
 
 client.login(process.env.TOKEN)
