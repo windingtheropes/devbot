@@ -36,7 +36,8 @@ module.exports = {
         }
 
         //create a channel then log the channel id to the database
-        const channel = await interaction.guild.channels.create(name, {
+        const channel = await interaction.guild.channels.create({
+            name,
             type: ChannelType.GuildVoice,
             userLimit: limit,
             parent: parent.id
