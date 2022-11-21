@@ -1,3 +1,5 @@
+const { Events } = require("discord.js")
+
 const allListeners = []
   module.exports.import = (callback) => {
        allListeners.push(callback)
@@ -13,7 +15,7 @@ const allListeners = []
     {
       console.log('Listening for voice channel state changes.')
     }
-    client.on('voiceStateUpdate', (oldm, newm) => {
+    client.on(Events.VoiceStateUpdate, (oldm, newm) => {
         allListeners.forEach(option => {
          
           let { 
