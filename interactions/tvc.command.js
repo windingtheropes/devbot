@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js')
+const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require('discord.js')
 const { tempvc } = require("../models/index")
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,8 +38,9 @@ module.exports = {
         }
 
         //create a channel then log the channel id to the database
-        const channel = await interaction.guild.channels.create(name, {
-            type: 'GUILD_VOICE',
+        const channel = await interaction.guild.channels.create({
+            name,
+            type: ChannelType.GuildVoice,
             userLimit: limit,
             parent: pid
         })
