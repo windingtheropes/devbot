@@ -5,7 +5,12 @@ const fs = require('fs')
 const path = require('path')
 
 dotenv.config()
-
+function equalsOneOf(value, refArray) {
+  for (const r of refArray) {
+    if(value == r) return true
+  }
+  return false
+}
 function deployInteractions(opt) {
   const flush = (() => {
     if(!opt) return false
@@ -21,7 +26,15 @@ function deployInteractions(opt) {
   
       for (const file of files) {
         const stat = fs.lstatSync(path.join(__dirname, dir, file))
-  
+        
+        const fileparts = (() => {
+          let p = file.split('.')
+          p.pop()
+          return p
+        })()
+
+        if(!equalsOneOf(fileparts.pop(), ['ctx', 'command'])) continue
+        
         if (stat.isDirectory()) {
           readCommands(path.join(dir, file))
         } else if (file !== 'interaction-handler.js' && file.endsWith('.js')) {
