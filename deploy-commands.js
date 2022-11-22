@@ -27,21 +27,22 @@ function deployInteractions(opt) {
       for (const file of files) {
         const stat = fs.lstatSync(path.join(__dirname, dir, file))
         
-        const fileparts = (() => {
-          let p = file.split('.')
-          p.pop()
-          return p
-        })()
-
-        if(!equalsOneOf(fileparts.pop(), ['ctx', 'command'])) continue
-        
         if (stat.isDirectory()) {
           readCommands(path.join(dir, file))
         } else if (file !== 'interaction-handler.js' && file.endsWith('.js')) {
+
+          const fileparts = (() => {
+            let p = file.split('.')
+            p.pop()
+            return p
+          })()
+
+          if(!equalsOneOf(fileparts.pop(), ['ctx', 'command'])) continue
+
           const command = require(path.join(__dirname, dir, file))
           if(command.enabled == false) continue
           commands.push(command.data.toJSON());
-  
+          
         }
       }
     }
