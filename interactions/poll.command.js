@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, PermissionFlagsBits, MessageEmbed } = require('discord.js')
+
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js')
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('poll')
@@ -143,7 +144,7 @@ module.exports = {
             '🇹',
         ]
         const question = await interaction.options.getString('question')
-        const pollEmbed = new MessageEmbed()
+        const pollEmbed = new EmbedBuilder()
             .setAuthor({name: interaction.user.username, iconURL: interaction.user.avatarURL()})
         if(await interaction.options.getSubcommand() === 'yesno')
         {
@@ -172,7 +173,7 @@ module.exports = {
                 }
                 pollString = `${!pollString ? `${pollData[i-1][0]} ${pollData[i-1][1]}` : `${pollString}\n${pollData[i-1][0]} ${pollData[i-1][1]}`}`
             }
-            pollEmbed.addField('Options', pollString)
+            pollEmbed.addFields({name: 'Options', value: pollString})
             const message = await interaction.reply({ content: `📊 **${question}**`, embeds: [pollEmbed], fetchReply: true });
             pollData.forEach(opt => {
                 message.react(opt[0]).catch(err => {
