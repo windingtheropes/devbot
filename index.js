@@ -43,7 +43,6 @@ client.on('ready', async () => {
   listenerBase.import()
   listenerBase.listen(client)
 })
-
 function equalsOneOf(value, refArray) {
   for (const r of refArray) {
     if(value == r) return true

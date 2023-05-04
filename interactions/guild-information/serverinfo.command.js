@@ -4,9 +4,13 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('serverinfo')
         .setDescription('Gets information about the current guild.'),
-    async execute(interaction) {
+    async execute(interaction, options, client) {
         const owner = await interaction.guild.fetchOwner()
-           
+        
+        const serverMembers = await interaction.guild.members.fetch({force:true})
+        const guildUserCount = serverMembers.filter(m => !m.user.bot).map(m => m).length
+        const guildBotCount = serverMembers.filter(m => m.user.bot).map(m => m).length
+
         const embed = new EmbedBuilder()
         .setColor('#0099ff')
         .setTitle(`${interaction.guild.name} information`)
@@ -17,7 +21,8 @@ module.exports = {
         {name: 'User ID', value: `${owner.user.id}`},
         {name: 'Server ID', value: interaction.guild.id},
         {name: 'Creation Date', value: `${new Date(interaction.guild.createdAt).toUTCString()}`},
-        {name: 'Member Count', value: `${interaction.guild.memberCount}`}
+        {name: 'User Count', value: `${guildUserCount}`},
+        {name: 'Bot Count', value: `${guildBotCount}`}
         ])
         
         return interaction.reply({embeds: [embed]})
